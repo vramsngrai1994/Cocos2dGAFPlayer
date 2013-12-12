@@ -11,7 +11,7 @@ Howto:
    * Other Linker Flags: -ObjC -lz;
    * add a shaders folder to the project.
    
-see Examples/HelloChris projecr
+Please see a demo from Examples/Demo.xcodeproj
    
 Download from Github
 --------------------
