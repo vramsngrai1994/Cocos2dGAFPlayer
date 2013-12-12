@@ -1,0 +1,4 @@
+[submodule "Externals/cocos2d"]
+	path = Externals/cocos2d
+	url = git://github.com/cocos2d/cocos2d-iphone.git
+	branch = release-2.1
