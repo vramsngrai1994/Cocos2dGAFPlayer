@@ -15,6 +15,6 @@ static NSString* const kGAFgaussianBlurShaderUniformTexelHeightOffset = @"u_texe
 static CGFloat   const kGAFgaussianKernelSize = 5;
 static CGFloat   const kGAFgaussianTextureAtlasWidth = 1024;
 static CGFloat   const kGAFgaussianTextureAtlasHeight = 1024;
-static CGFloat   const kGAFgaussianBlurredSizeNoiseIgnored = 0.5f;
-static CGFloat   const kGAFgaussianBlurredFrameNoiseIgnored = 10.0f;
+static CGFloat   const kGAFgaussianBlurredSizeNoiseIgnored = 0.3f;
+static CGFloat   const kGAFgaussianBlurredFrameNoiseIgnored = 1.0f;
 

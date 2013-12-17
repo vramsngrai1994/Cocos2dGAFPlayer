@@ -193,7 +193,7 @@
 		257F006F1784512A00D89D29 /* SampleAnimations */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SampleAnimations; path = Resources/SampleAnimations; sourceTree = "<group>"; };
 		257F00731784513600D89D29 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseNormal.png; path = Resources/CloseNormal.png; sourceTree = "<group>"; };
 		257F00741784513600D89D29 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseSelected.png; path = Resources/CloseSelected.png; sourceTree = "<group>"; };
-		257FFEBE178450C800D89D29 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		257FFEBE178450C800D89D29 /* Demo_develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_develop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		257FFEC1178450C800D89D29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		257FFEC3178450C800D89D29 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		257FFEC5178450C800D89D29 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -280,7 +280,7 @@
 		257FFEBF178450C800D89D29 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				257FFEBE178450C800D89D29 /* Demo.app */,
+				257FFEBE178450C800D89D29 /* Demo_develop.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,7 +408,7 @@
 			);
 			name = Demo;
 			productName = HelloChris;
-			productReference = 257FFEBE178450C800D89D29 /* Demo.app */;
+			productReference = 257FFEBE178450C800D89D29 /* Demo_develop.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -670,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Sergeev (XQ8V99Q65T)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -685,7 +686,8 @@
 					"-ObjC",
 					"-lz",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)_develop";
+				PROVISIONING_PROFILE = "388549BD-2DC4-4492-BBEC-0EBFC0C2FF7E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -694,6 +696,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Sergeev (XQ8V99Q65T)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Prefix.pch";
@@ -708,7 +711,8 @@
 					"-ObjC",
 					"-lz",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)_develop";
+				PROVISIONING_PROFILE = "388549BD-2DC4-4492-BBEC-0EBFC0C2FF7E";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
