@@ -670,7 +670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Sergeev (XQ8V99Q65T)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -687,7 +687,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)_develop";
-				PROVISIONING_PROFILE = "388549BD-2DC4-4492-BBEC-0EBFC0C2FF7E";
+				PROVISIONING_PROFILE = "5BBE2F54-4A6B-4F02-95B6-9DF30288A1F0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -696,7 +696,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Sergeev (XQ8V99Q65T)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Prefix.pch";
@@ -712,7 +712,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)_develop";
-				PROVISIONING_PROFILE = "388549BD-2DC4-4492-BBEC-0EBFC0C2FF7E";
+				PROVISIONING_PROFILE = "5BBE2F54-4A6B-4F02-95B6-9DF30288A1F0";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

@@ -61,10 +61,10 @@
 		[self addChild:pMenu z:10000];		
 		_anim_index = 0;
         
-        _jsons = @[ @"SampleAnimations/fire/fire.json",
-                    @"SampleAnimations/blur/blur.json",
-                    @"SampleAnimations/coin/coin.json",
-                    @"SampleAnimations/food_table/food_table.json"
+        _jsons = @[@"SampleAnimations/blur/blur.json",
+                   @"SampleAnimations/fire/fire.json",
+                   @"SampleAnimations/coin/coin.json",
+                   @"SampleAnimations/food_table/food_table.json"
                   ];
         
 		[self addObjectsToScene:1];

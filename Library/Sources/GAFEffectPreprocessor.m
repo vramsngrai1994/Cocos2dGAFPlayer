@@ -11,20 +11,6 @@
 #import "GAFEffectPreprocessor.h"
 #import "GAFCustomAtlasPreprocessor.h"
 
-bool GAF_CGRectEqualToRect(CGRect rect1, CGRect rect2, CGFloat noise)
-{
-    return fabsf(rect1.origin.x - rect2.origin.x) < noise &&
-    fabsf(rect1.origin.y - rect2.origin.y) < noise &&
-    fabsf(rect1.size.width - rect2.size.width) < noise &&
-    fabsf(rect1.size.height - rect2.size.height) < noise;
-};
-
-bool GAF_CGSizeEqualToSize(CGSize size1, CGSize size2, CGFloat noise)
-{
-    return fabsf(size1.width - size2.width) < noise &&
-    fabsf(size1.height - size2.height) < noise;
-};
-
 @interface GAFCachedBlurredTexture : NSObject
 
 @property(nonatomic, assign) CGRect precomputedFrame;
@@ -131,7 +117,7 @@ bool GAF_CGSizeEqualToSize(CGSize size1, CGSize size2, CGFloat noise)
         
         _frameBuffer = [CCRenderTexture renderTextureWithWidth:kGAFgaussianTextureAtlasWidth
                                                         height:kGAFgaussianTextureAtlasHeight
-                                                   pixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+                                                   pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         _cachedBlurredTextures = [NSMutableArray new];
         _customAtlasPreprocessor = [GAFCustomAtlasPreprocessor new];
         
@@ -182,10 +168,10 @@ bool GAF_CGSizeEqualToSize(CGSize size1, CGSize size2, CGFloat noise)
     
     CCRenderTexture *accessoryFrameBuffer_01 = [CCRenderTexture renderTextureWithWidth:blurredTextureSize.width
                                                                                 height:blurredTextureSize.height
-                                                                           pixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+                                                                           pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     CCRenderTexture *accessoryFrameBuffer_02 = [CCRenderTexture renderTextureWithWidth:blurredTextureSize.width
                                                                                 height:blurredTextureSize.height
-                                                                           pixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+                                                                           pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     
     {
         CCSprite *sprite = [CCSprite spriteWithTexture:sourceTexture rect:sourceFrame];

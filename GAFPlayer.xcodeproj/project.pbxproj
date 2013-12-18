@@ -26,7 +26,6 @@
 		A5555A0A182A545600420A21 /* GAFAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E1182A545600420A21 /* GAFAsset.m */; };
 		A5555A0B182A545600420A21 /* GAFAssetExtendedDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E3182A545600420A21 /* GAFAssetExtendedDataObject.m */; };
 		A5555A0C182A545600420A21 /* GAFFilterData.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E5182A545600420A21 /* GAFFilterData.m */; };
-		A5555A0D182A545600420A21 /* GAFHelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E7182A545600420A21 /* GAFHelperMethods.m */; };
 		A5555A0E182A545600420A21 /* GAFNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E9182A545600420A21 /* GAFNode.m */; };
 		A5555A0F182A545600420A21 /* GAFShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559EB182A545600420A21 /* GAFShaderManager.m */; };
 		A5555A10182A545600420A21 /* GAFSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559ED182A545600420A21 /* GAFSprite.m */; };
@@ -142,8 +141,6 @@
 		A55559E3182A545600420A21 /* GAFAssetExtendedDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFAssetExtendedDataObject.m; sourceTree = "<group>"; };
 		A55559E4182A545600420A21 /* GAFFilterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFFilterData.h; sourceTree = "<group>"; };
 		A55559E5182A545600420A21 /* GAFFilterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFFilterData.m; sourceTree = "<group>"; };
-		A55559E6182A545600420A21 /* GAFHelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFHelperMethods.h; sourceTree = "<group>"; };
-		A55559E7182A545600420A21 /* GAFHelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFHelperMethods.m; sourceTree = "<group>"; };
 		A55559E8182A545600420A21 /* GAFNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFNode.h; sourceTree = "<group>"; };
 		A55559E9182A545600420A21 /* GAFNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFNode.m; sourceTree = "<group>"; };
 		A55559EA182A545600420A21 /* GAFShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFShaderManager.h; sourceTree = "<group>"; };
@@ -323,8 +320,6 @@
 				A55559E3182A545600420A21 /* GAFAssetExtendedDataObject.m */,
 				A55559E4182A545600420A21 /* GAFFilterData.h */,
 				A55559E5182A545600420A21 /* GAFFilterData.m */,
-				A55559E6182A545600420A21 /* GAFHelperMethods.h */,
-				A55559E7182A545600420A21 /* GAFHelperMethods.m */,
 				A55559E8182A545600420A21 /* GAFNode.h */,
 				A55559E9182A545600420A21 /* GAFNode.m */,
 				A55559EA182A545600420A21 /* GAFShaderManager.h */,
@@ -474,7 +469,6 @@
 				A5555A80182A87FA00420A21 /* pcShader_PositionTexture_alphaFilter.fs in Sources */,
 				A5555A11182A545600420A21 /* GAFSpriteWithAlpha.m in Sources */,
 				A5555A06182A545600420A21 /* NSString+GAFExtensions.m in Sources */,
-				A5555A0D182A545600420A21 /* GAFHelperMethods.m in Sources */,
 				A5555A14182A545600420A21 /* GAFSubobjectState.m in Sources */,
 				A5555A0E182A545600420A21 /* GAFNode.m in Sources */,
 				A499946118609DAC003DA222 /* GAFCustomAtlasPreprocessor.m in Sources */,

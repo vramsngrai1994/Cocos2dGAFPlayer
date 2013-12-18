@@ -12,7 +12,7 @@ static NSString* const kGAFgaussianBlurFSName = @"gaf_ShaderGaussianBlur.fs";
 
 static NSString* const kGAFgaussianBlurShaderUniformTexelWidthOffset = @"u_texelWidthOffset";
 static NSString* const kGAFgaussianBlurShaderUniformTexelHeightOffset = @"u_texelHeightOffset";
-static CGFloat   const kGAFgaussianKernelSize = 5;
+static CGFloat   const kGAFgaussianKernelSize = 9;
 static CGFloat   const kGAFgaussianTextureAtlasWidth = 1024;
 static CGFloat   const kGAFgaussianTextureAtlasHeight = 1024;
 static CGFloat   const kGAFgaussianBlurredSizeNoiseIgnored = 0.3f;
