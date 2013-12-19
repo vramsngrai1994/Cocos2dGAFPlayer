@@ -20,45 +20,55 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Constants
 
-static NSString * const kAnimationFrameCountKey = @"animationFrameCount";
-static NSString * const kAnimationConfigFramesKey = @"animationConfigFrames";
-static NSString * const kAnimationObjectsKey = @"animationObjects";
-static NSString * const kAnimationMasksKey = @"animationMasks";
-static NSString * const kAnimationNamedPartsKey = @"namedParts";
-static NSString * const kTextureAtlasKey = @"textureAtlas";
-static NSString * const kAnimationSequencesKey = @"animationSequences";
-static NSString * const kVersionKey = @"version";
+static NSString * const kAnimationFrameCountKey             = @"animationFrameCount";
+static NSString * const kAnimationConfigFramesKey           = @"animationConfigFrames";
+static NSString * const kAnimationObjectsKey                = @"animationObjects";
+static NSString * const kAnimationMasksKey                  = @"animationMasks";
+static NSString * const kAnimationNamedPartsKey             = @"namedParts";
+static NSString * const kTextureAtlasKey                    = @"textureAtlas";
+static NSString * const kAnimationSequencesKey              = @"animationSequences";
+static NSString * const kVersionKey                         = @"version";
 
-static NSString * const kFrameNumberKey = @"frameNumber";
-static NSString * const kFrameStateKey = @"state";
+static NSString * const kFrameNumberKey                     = @"frameNumber";
+static NSString * const kFrameStateKey                      = @"state";
 
-static NSString * const kPCAnimationSequenceIdKey = @"id";
+static NSString * const kPCAnimationSequenceIdKey           = @"id";
 static NSString * const kPCAnimationSequenceStartFrameNoKey = @"startFrameNo";
-static NSString * const kPCAnimationSequenceEndFrameNoKey = @"endFrameNo";
+static NSString * const kPCAnimationSequenceEndFrameNoKey   = @"endFrameNo";
 
-static NSString * const kAtlasScaleKey = @"scale";
-static NSString * const kAtlasInfoKey  = @"atlases";
+static NSString * const kAtlasScaleKey                      = @"scale";
+static NSString * const kAtlasInfoKey                       = @"atlases";
+static NSString * const kBoundingBoxKey                     = @"boundingBox";
+static NSString * const kPivotPointKey                      = @"pivotPoint";
+
+static NSString * const kXKey                               = @"x";
+static NSString * const kYKey                               = @"y";
+static NSString * const kWidthKey                           = @"width";
+static NSString * const kHeightKey                          = @"height";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private interface
 
 @interface GAFAsset ()
 
-@property (nonatomic, assign) NSUInteger majorVersion;
-@property (nonatomic, assign) NSUInteger minorVersion;
+@property (nonatomic, assign) NSUInteger          majorVersion;
+@property (nonatomic, assign) NSUInteger          minorVersion;
 
-@property (nonatomic, retain) GAFTextureAtlas *textureAtlas;
-@property (nonatomic, assign) CGFloat usedAtlasContentScaleFactor;
+@property (nonatomic, retain) GAFTextureAtlas     *textureAtlas;
+@property (nonatomic, assign) CGFloat             usedAtlasContentScaleFactor;
 
-@property (nonatomic, retain) NSDictionary *objects;
-@property (nonatomic, retain) NSDictionary *masks;
+@property (nonatomic, retain) NSDictionary        *objects;
+@property (nonatomic, retain) NSDictionary        *masks;
 
-@property (nonatomic, retain) NSDictionary *namedParts;
+@property (nonatomic, retain) NSDictionary        *namedParts;
 
 @property (nonatomic, retain) NSMutableDictionary *extendedDataObjectGroups;
 
-@property (nonatomic, retain) NSArray *animationFrames;
-@property (nonatomic, retain) NSDictionary *animationSequences;
+@property (nonatomic, retain) NSArray             *animationFrames;
+@property (nonatomic, retain) NSDictionary        *animationSequences;
+
+@property (nonatomic, assign) CGRect              boundingBox;
+@property (nonatomic, assign) CGPoint             pivotPoint;
 
 @end
 
@@ -157,6 +167,9 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 	NSDictionary *namedPartsNodes   = configDictionary[kAnimationNamedPartsKey];
     
 	NSString *versionNode           = configDictionary[kVersionKey];
+    NSDictionary *boundingBox       = configDictionary[kBoundingBoxKey];
+    NSDictionary *pivotPoint        = configDictionary[kPivotPointKey];
+    
 
     if (animationConfigFrames == nil)
     {
@@ -208,6 +221,34 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
     {
         CCLOGWARN(@"Error while creating GAFAsset. 'atlases' subnode is missing.");
         return nil;
+    }
+    
+    if (boundingBox != nil)
+    {
+        CGFloat x = [boundingBox[kXKey] floatValue];
+        CGFloat y = [boundingBox[kYKey] floatValue];
+        CGFloat width = [boundingBox[kWidthKey] floatValue];
+        CGFloat height = [boundingBox[kHeightKey] floatValue];
+        
+        self.boundingBox = CGRectMake(x, y, width, height);
+    }
+    else
+    {
+        self.boundingBox = CGRectZero;
+    }
+    
+    if (pivotPoint != nil)
+    {
+        CGFloat x = [pivotPoint[kXKey] floatValue];
+        CGFloat y = [pivotPoint[kYKey] floatValue];
+        
+        y = self.boundingBox.size.height - y;
+        
+        self.pivotPoint = CGPointMake(x / self.boundingBox.size.width, y / self.boundingBox.size.height);
+    }
+    else
+    {
+        self.pivotPoint = CGPointZero;
     }
     
     GAFTextureAtlas *atlasData = nil;

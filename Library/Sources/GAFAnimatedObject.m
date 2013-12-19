@@ -111,6 +111,9 @@
         
         self.externalNamedPartsTextureAtlases = [NSMutableDictionary dictionaryWithCapacity:0];
         self.hiddenSubobjectIds = [NSMutableArray array];
+        self.contentSize = self.asset.boundingBox.size;
+        self.anchorPoint = self.asset.pivotPoint;
+        self.ignoreAnchorPointForPosition = YES;
 	}
 	return self;
 }
@@ -861,6 +864,11 @@
     {
         GAFSubobjectState *state = (currentFrame.objectsStates)[i];
         GAFSpriteWithAlpha *subObject = (self.subObjects)[state.objectId];
+        CGAffineTransform stateTransform = state.affineTransform;
+        stateTransform.ty -= self.contentSize.height; //flash position to cocos2d position
+        stateTransform.tx *= self.asset.usedAtlasContentScaleFactor;
+        stateTransform.ty *= self.asset.usedAtlasContentScaleFactor;
+        
         if (subObject != nil)
         {
             // Validate sprite type (w/ or w/o filter)
@@ -922,11 +930,9 @@
             {
                 // Update object position and alpha
                 // Applying csf adjustments
-                CGAffineTransform stateTransform = state.affineTransform;
-                stateTransform.tx *= self.asset.usedAtlasContentScaleFactor;
-                stateTransform.ty *= self.asset.usedAtlasContentScaleFactor;
                 
-                subObject.externalTransform = GAF_CGAffineTransformCocosFormatFromFlashFormat(state.affineTransform);
+                
+                subObject.externalTransform = GAF_CGAffineTransformCocosFormatFromFlashFormat(stateTransform);
                 if (subObject.zOrder != state.zIndex)
                 {
                     zOrderChanged |= YES;
@@ -949,7 +955,7 @@
             GAFSprite *mask = (self.masks)[state.objectId];
             if (mask != nil)
             {
-                mask.externalTransform = GAF_CGAffineTransformCocosFormatFromFlashFormat(state.affineTransform);
+                mask.externalTransform = GAF_CGAffineTransformCocosFormatFromFlashFormat(stateTransform);
                 
                 if (mask.zOrder != state.zIndex)
                 {
@@ -985,11 +991,6 @@
             // Masks cannot be captured right now
         }
     }
-}
-
--(CGSize) contentSize
-{
-    return [self realBoundingBoxForCurrentFrame].size;
 }
 
 @end
