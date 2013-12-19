@@ -59,7 +59,7 @@
                                            blurRadiusX:(CGFloat)aBlurRadiusX
                                            blurRadiusY:(CGFloat)aBlurRadiusY
 {
-    const int kGaussianKernelSize = 9;
+    const NSUInteger kGaussianKernelSize = 9;
     
     CGSize rTextureSize = CGSizeMake(rect.size.width + 2 * (kGaussianKernelSize / 2) * aBlurRadiusX,
                                      rect.size.height + 2 * (kGaussianKernelSize / 2) * aBlurRadiusY);

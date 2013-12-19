@@ -22,7 +22,7 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
 // When effect is applied texture is changed, next effect (e.g. change of blur radius) should be applied on the same
 // initial texture, not modified one
 @property (nonatomic, retain) CCTexture2D *initialTexture;
-@property (nonatomic, assign) CGRect initialTextureRect;
+@property (nonatomic, assign) CGRect      initialTextureRect;
 
 - (CCGLProgram *)programForShader;
 - (void)setBlendingFunc;
@@ -45,7 +45,7 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
 
 - (void)setColorTransformMult:(const GLfloat *) mults offsets:(const GLfloat *) offsets
 {
-	for (int i = 0; i < 4; ++i)
+	for (NSUInteger i = 0; i < 4; ++i)
 	{
 		_colorTransform[i]     = mults[i];
 		_colorTransform[i + 4] = offsets[i];
@@ -55,7 +55,7 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
 
 - (void)setColorTransform:(const GLfloat *) colorTransform
 {
-	for (int i = 0; i < 8; ++i)
+	for (NSUInteger i = 0; i < 8; ++i)
 	{
 		_colorTransform[i] = colorTransform[i];
 	}
@@ -83,7 +83,7 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
         
         _blurRadius = CGSizeZero;
         
-		for (int i = 0; i < 4; ++i)
+		for (NSUInteger i = 0; i < 4; ++i)
 		{
 			_colorTransform[i]     = 1.0f;
 			_colorTransform[i + 4] = 0;

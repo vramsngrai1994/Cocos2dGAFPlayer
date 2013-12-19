@@ -32,21 +32,21 @@ typedef struct _gafBlendFuncSeparate
 }
 
 // By setting this parameter all other state values except 'anchorPoint' will be ignored
-@property (nonatomic, assign) BOOL isLocator;
-@property (nonatomic, assign) BOOL useExternalTransform;
-@property (nonatomic, assign) CGAffineTransform externalTransform;
-@property (nonatomic, assign) float atlasScale;
+@property (nonatomic, assign) BOOL                 isLocator;
+@property (nonatomic, assign) BOOL                 useExternalTransform;
+@property (nonatomic, assign) CGAffineTransform    externalTransform;
+@property (nonatomic, assign) CGFloat              atlasScale;
 
 // TODO: test childTransform as it was not used previously anywhere
-@property (nonatomic, assign) BOOL useChildTransform;
-@property (nonatomic, assign) CGAffineTransform childTransform;
+@property (nonatomic, assign) BOOL                 useChildTransform;
+@property (nonatomic, assign) CGAffineTransform    childTransform;
 
-@property (nonatomic, copy) NSString *objectId;
-@property (nonatomic, copy) NSString *atlasElementId;
+@property (nonatomic, copy  ) NSString             *objectId;
+@property (nonatomic, copy  ) NSString             *atlasElementId;
 
-@property (nonatomic, assign) BOOL useSeparateBlendFunc;
+@property (nonatomic, assign) BOOL                 useSeparateBlendFunc;
 @property (nonatomic, assign) gafBlendFuncSeparate blendFuncSeparate;
 
-@property (nonatomic, assign) GLint blendEquation;
+@property (nonatomic, assign) GLint                blendEquation;
 
 @end

@@ -14,7 +14,7 @@ void main()
     vec4 sum = vec4(0.0);
     int halfSize = (u_matrixRowSize - 1) / 2;
 	
-    for (i = 0; i < u_matrixRowSize; i ++)
+    for (i = 0; i < u_matrixRowSize; ++i)
     {
         sum += texture2D(u_texture, vec2(v_texCoord.x + dotSize * float(i - halfSize), v_texCoord.y)) * u_matrixRowValues[i];
     }

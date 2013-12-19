@@ -13,7 +13,7 @@
 {
 @private
     GLfloat _colorTransform[8]; // 0-3 mults, 4-7 offsets
-    GLuint _colorTrasformLocation;
+    GLuint  _colorTrasformLocation;
 }
 
 @property (nonatomic, assign) CGSize blurRadius;

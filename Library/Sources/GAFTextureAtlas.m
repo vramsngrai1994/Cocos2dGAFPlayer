@@ -12,7 +12,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-static NSString * const kAtlasesKey     = @"atlases";
+static NSString * const kAtlasesKey      = @"atlases";
 static NSString * const kElementsKey     = @"elements";
 static NSString * const kSourcesKey      = @"sources";
 static NSString * const kSourceKey       = @"source";
@@ -102,7 +102,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
                     return nil;
                 }
                 
-                int desiredCsf = 1;
+                NSUInteger desiredCsf = 1;
                 
                 if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
                     ([UIScreen mainScreen].scale == 2.0))
@@ -111,7 +111,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
                 }
                 
                 NSString * source = nil;
-                int csf = 0;
+                NSUInteger csf = 0;
                 for (NSDictionary * csfdict in sources)
                 {
                     csf = [csfdict[kCSFKey] intValue];
@@ -213,8 +213,8 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
                     CCLOGWARN(@"ERROR: initializing sources. 'sources' not present");
                     return nil;
                 }
-                int desiredCsf = 1;
-                int realCsf = 1;
+                NSUInteger desiredCsf = 1;
+                NSUInteger realCsf = 1;
                 
                 if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
                     ([UIScreen mainScreen].scale == 2.0))
@@ -222,7 +222,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
                     desiredCsf = 2;
                 }
                 
-                int csf = 0;
+                NSUInteger csf = 0;
                 NSString * source = nil;
                 for (NSDictionary * csfdict in sources)
                 {

@@ -23,7 +23,7 @@
 #if CC_SPRITEBATCHNODE_RENDER_SUBPIXEL
 #define RENDER_IN_SUBPIXEL
 #else
-#define RENDER_IN_SUBPIXEL(__A__) ( (int)(__A__))
+#define RENDER_IN_SUBPIXEL(__A__) ( (NSInteger)(__A__))
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@
     }
 }
 
-- (void) setAtlasScale:(float)anAtlasScale
+- (void) setAtlasScale:(CGFloat)anAtlasScale
 {
 	if (_atlasScale != anAtlasScale)
 	{
@@ -153,30 +153,30 @@
 			CGSize size = _rect.size;
             
             // x1, x2, y1, y2 are changed (comapring to CCSprite) to place Sprite at center
-            float x1 = _offsetPosition.x - size.width / 2;
-			float y1 = _offsetPosition.y - size.height / 2;
+            CGFloat x1 = _offsetPosition.x - size.width / 2;
+			CGFloat y1 = _offsetPosition.y - size.height / 2;
             
-			float x2 = x1 + size.width;
-			float y2 = y1 + size.height;
+			CGFloat x2 = x1 + size.width;
+			CGFloat y2 = y1 + size.height;
             
-			float x = _transformToBatch.tx;
-			float y = _transformToBatch.ty;
+			CGFloat x = _transformToBatch.tx;
+			CGFloat y = _transformToBatch.ty;
             
-			float cr = _transformToBatch.a;
-			float sr = _transformToBatch.b;
-			float cr2 = _transformToBatch.d;
-			float sr2 = -_transformToBatch.c;
-			float ax = x1 * cr - y1 * sr2 + x;
-			float ay = x1 * sr + y1 * cr2 + y;
+			CGFloat cr = _transformToBatch.a;
+			CGFloat sr = _transformToBatch.b;
+			CGFloat cr2 = _transformToBatch.d;
+			CGFloat sr2 = -_transformToBatch.c;
+			CGFloat ax = x1 * cr - y1 * sr2 + x;
+			CGFloat ay = x1 * sr + y1 * cr2 + y;
             
-			float bx = x2 * cr - y1 * sr2 + x;
-			float by = x2 * sr + y1 * cr2 + y;
+			CGFloat bx = x2 * cr - y1 * sr2 + x;
+			CGFloat by = x2 * sr + y1 * cr2 + y;
             
-			float cx = x2 * cr - y2 * sr2 + x;
-			float cy = x2 * sr + y2 * cr2 + y;
+			CGFloat cx = x2 * cr - y2 * sr2 + x;
+			CGFloat cy = x2 * sr + y2 * cr2 + y;
             
-			float dx = x1 * cr - y2 * sr2 + x;
-			float dy = x1 * sr + y2 * cr2 + y;
+			CGFloat dx = x1 * cr - y2 * sr2 + x;
+			CGFloat dy = x1 * sr + y2 * cr2 + y;
             
 			_quad.bl.vertices = (ccVertex3F) { RENDER_IN_SUBPIXEL(ax), RENDER_IN_SUBPIXEL(ay), _vertexZ };
 			_quad.br.vertices = (ccVertex3F) { RENDER_IN_SUBPIXEL(bx), RENDER_IN_SUBPIXEL(by), _vertexZ };

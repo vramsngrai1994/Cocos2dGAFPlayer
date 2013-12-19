@@ -10,14 +10,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-static NSString * const kNameKey = @"name";
-static NSString * const kXKey = @"x";
-static NSString * const kYKey = @"y";
-static NSString * const kScaleKey = @"scale";
-static NSString * const kHeightKey = @"height";
-static NSString * const kWidthKey = @"width";
-static NSString * const kPivotXKey = @"pivotX";
-static NSString * const kPivotYKey = @"pivotY";
+static NSString * const kNameKey    = @"name";
+static NSString * const kXKey       = @"x";
+static NSString * const kYKey       = @"y";
+static NSString * const kScaleKey   = @"scale";
+static NSString * const kHeightKey  = @"height";
+static NSString * const kWidthKey   = @"width";
+static NSString * const kPivotXKey  = @"pivotX";
+static NSString * const kPivotYKey  = @"pivotY";
 static NSString * const kAtlasIDKey = @"atlasID";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

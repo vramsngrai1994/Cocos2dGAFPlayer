@@ -17,27 +17,26 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-typedef enum : NSUInteger
+typedef NS_ENUM(NSUInteger, GAFAnimationFPSType)
 {
     kGAFAnimationFPSType_15 = 15,
     kGAFAnimationFPSType_30 = 30,
     kGAFAnimationFPSType_60 = 60
-} GAFAnimationFPSType;
+};
 
-typedef enum
+typedef NS_ENUM(NSUInteger, AnimSetSequenceHint)
 {
-	ASSH_CONTINUE,
+	ASSH_CONTINUE = 0,
 	ASSH_RESTART
-} AnimSetSequenceHint;
+};
 
-enum
+typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 {
     kGAFAnimatedObjectControl_None = 0,
     // If specified, state of controlled object will be changed every frame (like it is by default) and then
     // animatedObject:didDisplayFrameWithSubobject: will be called
     kGAFAnimatedObjectControl_ApplyState = 1 << 0
 };
-typedef NSUInteger GAFAnimatedObjectControlFlags;
 
 #define GAF_FIRST_FRAME_INDEX 0
 
@@ -73,25 +72,25 @@ typedef NSUInteger GAFAnimatedObjectControlFlags;
     BOOL _animationsSelectorScheduled;
 }
 
-@property (nonatomic, retain) GAFAsset *asset;
+@property (nonatomic, retain) GAFAsset            *asset;
 @property (nonatomic, retain) NSMutableDictionary *subObjects;
-@property (nonatomic, retain) NSMutableDictionary *masks;           ///< stores all masks (not displayed)
-@property (nonatomic, assign) NSUInteger currentFrameIndex;
-@property (nonatomic, assign) NSUInteger totalFrameCount;
-@property (nonatomic, assign) NSUInteger currentSequenceStart;
-@property (nonatomic, assign) NSUInteger currentSequenceEnd;
+@property (nonatomic, retain) NSMutableDictionary *masks; ///< stores all masks (not displayed)
+@property (nonatomic, assign) NSUInteger          currentFrameIndex;
+@property (nonatomic, assign) NSUInteger          totalFrameCount;
+@property (nonatomic, assign) NSUInteger          currentSequenceStart;
+@property (nonatomic, assign) NSUInteger          currentSequenceEnd;
 @property (nonatomic, assign) GAFAnimationFPSType FPSType;
-@property (nonatomic, assign) NSUInteger extraFramesCounter;
-@property (nonatomic, retain) NSMutableDictionary *externalNamedPartsTextureAtlases;  ///< Value is of GAFTextureAtlas class
-@property (nonatomic, retain) NSMutableArray *hiddenSubobjectIds;
+@property (nonatomic, assign) NSUInteger          extraFramesCounter;
+@property (nonatomic, retain) NSMutableDictionary *externalNamedPartsTextureAtlases; ///< Value is of GAFTextureAtlas class
+@property (nonatomic, retain) NSMutableArray      *hiddenSubobjectIds;
 
-@property (nonatomic, assign, readonly) BOOL isInitialized;
-@property (nonatomic, assign, readonly) BOOL isRunning;
-@property (nonatomic, assign) BOOL isLooped;
+@property (nonatomic, assign, readonly) BOOL    isInitialized;
+@property (nonatomic, assign, readonly) BOOL    isRunning;
+@property (nonatomic, assign          ) BOOL    isLooped;
 
 // do not forget clear delegates if you use them
-@property (nonatomic, assign) id <GAFFramePlayedDelegate> framePlayedDelegate;
-@property (nonatomic, assign) id <GAFSequenceDelegate>    sequenceDelegate;
+@property (nonatomic, assign) id <GAFFramePlayedDelegate          > framePlayedDelegate;
+@property (nonatomic, assign) id <GAFSequenceDelegate             > sequenceDelegate;
 @property (nonatomic, assign) id <GAFAnimatedObjectControlDelegate> controlDelegate;
 
 

@@ -7,11 +7,11 @@
 
 @interface GAFTextureAtlasElement : NSObject
 
-@property (nonatomic,   copy) NSString * name;
+@property (nonatomic,   copy) NSString   *name;
 @property (nonatomic, assign) CGPoint    pivotPoint;
 @property (nonatomic, assign) CGRect     bounds;
 @property (nonatomic, assign) NSUInteger atlasIdx;
-@property (nonatomic, assign) float      scale;
+@property (nonatomic, assign) CGFloat    scale;
 
 // DI
 - (id)init;

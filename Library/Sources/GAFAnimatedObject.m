@@ -773,13 +773,13 @@
 	return result;
 }
 
-- (int)numberOfGlobalFramesForOneAnimationFrame
+- (NSInteger)numberOfGlobalFramesForOneAnimationFrame
 {
-    float globalFPS = roundf(1.0 / [[CCDirector sharedDirector] animationInterval]);
+    CGFloat globalFPS = roundf(1.0 / [[CCDirector sharedDirector] animationInterval]);
     
-    if (globalFPS > (float)self.FPSType - FLT_EPSILON)
+    if (globalFPS > (CGFloat)self.FPSType - FLT_EPSILON)
     {
-        return (int)roundf(globalFPS / (float)self.FPSType);
+        return (NSInteger)roundf(globalFPS / (CGFloat)self.FPSType);
     }
     else
     {
@@ -842,7 +842,9 @@
     // of [self step] so we decrease it and restore)
     NSUInteger oldFrameIndex = self.currentFrameIndex;
     if (self.currentFrameIndex != 0)
-        self.currentFrameIndex --;
+    {
+        --self.currentFrameIndex;
+    }
     
     [self processAnimation];
     
@@ -854,7 +856,8 @@
     GAFAnimationFrame *currentFrame = (self.asset.animationFrames)[self.currentFrameIndex];
     
     // Make all object invisible
-    [self.subObjects enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    [self.subObjects enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    {
         ((GAFSprite *)obj).visible = NO;
     }];
     

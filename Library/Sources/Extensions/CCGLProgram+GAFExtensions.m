@@ -17,7 +17,8 @@
 
 - (id)initWithVertexShaderFilename:(NSString *)vShaderFilename fragmentShaderByteArray:(const GLchar *)fShaderByteArray
 {
-	const GLchar * vertexSource = (GLchar*) [[NSString stringWithContentsOfFile:[[CCFileUtils sharedFileUtils] fullPathFromRelativePath:vShaderFilename] encoding:NSUTF8StringEncoding error:nil] UTF8String];
+	const GLchar * vertexSource = (GLchar*) [[NSString stringWithContentsOfFile:[[CCFileUtils sharedFileUtils] fullPathFromRelativePath:vShaderFilename]
+                                                                       encoding:NSUTF8StringEncoding error:nil] UTF8String];
     
     if (vertexSource == nil)
     {
@@ -32,7 +33,8 @@
 
 - (id)initWithVertexShaderByteArray:(const GLchar *)vShaderByteArray fragmentShaderFilename:(NSString *)fShaderFilename
 {
-	const GLchar * fragmentSource = (GLchar*) [[NSString stringWithContentsOfFile:[[CCFileUtils sharedFileUtils] fullPathFromRelativePath:fShaderFilename] encoding:NSUTF8StringEncoding error:nil] UTF8String];
+	const GLchar * fragmentSource = (GLchar*) [[NSString stringWithContentsOfFile:[[CCFileUtils sharedFileUtils] fullPathFromRelativePath:fShaderFilename]
+                                                                         encoding:NSUTF8StringEncoding error:nil] UTF8String];
     
     if (fragmentSource == nil)
     {

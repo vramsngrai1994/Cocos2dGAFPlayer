@@ -20,7 +20,7 @@
 @interface GAFAnimationSequence ()
 
 @property (nonatomic, copy  ) NSString *name;
-@property (nonatomic, assign) NSRange framesRange;
+@property (nonatomic, assign) NSRange  framesRange;
 
 @end
 

@@ -56,7 +56,7 @@
     while (size >= 1024)
     {
         size /= 1024;
-        mult++;
+        ++mult;
     }
     
     NSString *format = [NSString stringWithFormat:@"%%.%ldf %%@", (long)precision];
@@ -193,7 +193,7 @@
         while ([result length] > lastTabIndex + 1 && 
                [result characterAtIndex:lastTabIndex + 1] == '\t')
         {
-            lastTabIndex ++;
+            ++lastTabIndex;
         }
         
         if (lastTabIndex != range.location + range.length - 1)
@@ -253,23 +253,23 @@
 
 + (NSString *)urlEncode:(NSString *)anUrl
 {
-    NSArray *escapeChars = @[@";" , @"/" , @"?" , @":" ,
+    NSArray *escapeChars  = @[@";" , @"/" , @"?" , @":" ,
 													 @"@" , @"&" , @"=" , @"+" ,
 													 @"$" , @"," , @"[" , @"]",
-													 @"#", @"!", @"'", @"(", 
+													 @"#", @"!", @"'", @"(",
 													 @")", @"*"];
-	
+
     NSArray *replaceChars = @[@"%3B" , @"%2F" , @"%3F" ,
 													  @"%3A" , @"%40" , @"%26" ,
 													  @"%3D" , @"%2B" , @"%24" ,
-													  @"%2C" , @"%5B" , @"%5D", 
+													  @"%2C" , @"%5B" , @"%5D",
 													  @"%23", @"%21", @"%27",
 													  @"%28", @"%29", @"%2A"];
 	
     NSUInteger len = [escapeChars count];
     NSMutableString *temp = [anUrl mutableCopy];
 	
-    for(int i = 0; i < len; i++)
+    for(NSUInteger i = 0; i < len; ++i)
     {
         [temp replaceOccurrencesOfString:escapeChars[i]
 							  withString:replaceChars[i]

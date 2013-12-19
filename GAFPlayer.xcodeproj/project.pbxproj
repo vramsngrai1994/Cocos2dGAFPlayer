@@ -155,7 +155,6 @@
 		A55559FB182A545600420A21 /* GAFTextureEffectsConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFTextureEffectsConverter.h; sourceTree = "<group>"; };
 		A55559FC182A545600420A21 /* GAFTextureEffectsConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFTextureEffectsConverter.m; sourceTree = "<group>"; };
 		A5555A1E182A56F200420A21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A5555A21182A5E3000420A21 /* ARCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCHelper.h; path = "Externals/arc-helper/ARCHelper.h"; sourceTree = "<group>"; };
 		A5555A22182A5F2200420A21 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A5555A25182A5FF500420A21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5555A74182A87FA00420A21 /* GaussianBlurFragmentShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = GaussianBlurFragmentShader.fs; sourceTree = "<group>"; };
@@ -196,7 +195,6 @@
 		A5555995182A53F700420A21 = {
 			isa = PBXGroup;
 			children = (
-				A5555A20182A5E1800420A21 /* External */,
 				A55559A3182A53F700420A21 /* GAFPlayer */,
 				A55559B7182A53F700420A21 /* GAFPlayerTests */,
 				A55559A0182A53F700420A21 /* Frameworks */,
@@ -324,14 +322,6 @@
 				A55559D8182A545600420A21 /* NSString+GAFExtensions.m */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		A5555A20182A5E1800420A21 /* External */ = {
-			isa = PBXGroup;
-			children = (
-				A5555A21182A5E3000420A21 /* ARCHelper.h */,
-			);
-			name = External;
 			sourceTree = "<group>";
 		};
 		A5555A72182A87FA00420A21 /* Resources */ = {

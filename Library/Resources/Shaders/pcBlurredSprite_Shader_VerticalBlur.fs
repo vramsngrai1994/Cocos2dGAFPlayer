@@ -20,7 +20,7 @@ void main()
     vec4 sum = vec4(0.0);
     int halfSize = (u_matrixRowSize - 1) / 2;								
                                                                         
-    for (i = 0; i < u_matrixRowSize; i ++)
+    for (i = 0; i < u_matrixRowSize; ++i)
     {                                                                       
         sum += texture2D(u_texture, vec2(v_texCoord.x, v_texCoord.y + dotSize * float(i - halfSize))) * u_matrixRowValues[i];
     }                                                                               
@@ -29,5 +29,3 @@ void main()
     gl_FragColor = vec4(sum.x * sum.a, sum.y * sum.a, sum.z * sum.a, sum.a);
 
 }
-
-

@@ -148,7 +148,7 @@ static NSString * const kBlurEffectName = @"Fblur";
 		if (effects != nil)
 		{
 			NSMutableDictionary * mutableFilters = [NSMutableDictionary dictionary];
-			for (int i = 0; i < [effects count]; ++i)
+			for (NSUInteger i = 0; i < [effects count]; ++i)
 			{
 				NSDictionary * dict = (NSDictionary*)effects[i];
 				NSString * type = (NSString*)dict[kEffectTypeName];

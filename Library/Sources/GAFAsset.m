@@ -196,14 +196,14 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
     }
     
     // Determining best available atlas content scale factor compatible with current device
-    float currentDeviceScale = CC_CONTENT_SCALE_FACTOR();
+    CGFloat currentDeviceScale = CC_CONTENT_SCALE_FACTOR();
     
     NSDictionary *atlasDictionary = textureAtlasNode[0];
     CGFloat atlasScale = 1.0;
-    for (int i = 0; i < [textureAtlasNode count]; ++i)
+    for (NSInteger i = 0; i < [textureAtlasNode count]; ++i)
     {
         NSDictionary *newAtlasDictionary = textureAtlasNode[i];
-        float newAtlasScale = [self atlasScaleFromAtlasConfig:atlasDictionary];
+        CGFloat newAtlasScale = [self atlasScaleFromAtlasConfig:atlasDictionary];
         
         if (newAtlasScale > 0)
         {
@@ -517,7 +517,7 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
     return states;
 }
 
-- (float)atlasScaleFromAtlasConfig:(NSDictionary *)anAtlasConfigDictionary
+- (CGFloat)atlasScaleFromAtlasConfig:(NSDictionary *)anAtlasConfigDictionary
 {
 	if (anAtlasConfigDictionary == nil)
 	{

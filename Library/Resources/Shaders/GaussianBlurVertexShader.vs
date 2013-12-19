@@ -25,7 +25,7 @@ void main()
  	vec2 blurStep;
     vec2 singleStepOffset = vec2(texelWidthOffset, texelHeightOffset);
     
- 	for (int i = 0; i < GAUSSIAN_SAMPLES; i++)
+ 	for (int i = 0; i < GAUSSIAN_SAMPLES; ++i)
     {
  		multiplier = (i - ((GAUSSIAN_SAMPLES - 1) / 2));
 
