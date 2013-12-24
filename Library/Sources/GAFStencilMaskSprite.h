@@ -11,6 +11,12 @@
 
 @class GAFStencilMaskSprite;
 
+
+extern NSString * const kPCMaskAlphaFilterProgramCacheKey;
+extern NSString * const kPCMaskAlphaFilterFragmentShaderFilename;
+
+extern NSString * const kCCNodeMaskContainerAssociatedObject;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface CCNode (PCStencilMaskExtensions)

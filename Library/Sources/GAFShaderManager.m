@@ -15,13 +15,12 @@
 #import "ccShaders.h"
 #import "NSError+GAFExtensions.h"
 #import "CCGLProgram+GAFExtensions.h"
+#import "GAFStencilMaskSprite.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Constants
 
 NSString * const kGAFShader_AlphaFilterProgramCacheKey = @"kGAFShader_AlphaFilterProgramCacheKey";
-
-static NSString * const kGAFShader_AlphaFilterFragmentShaderFilename = @"pcShader_PositionTexture_alphaFilter.fs";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private interface
@@ -94,7 +93,7 @@ static NSString * const kGAFShader_AlphaFilterFragmentShaderFilename = @"pcShade
     if (program == nil)
     {
         program = [[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert
-                                              fragmentShaderFilename:kGAFShader_AlphaFilterFragmentShaderFilename];
+                                              fragmentShaderFilename:kPCMaskAlphaFilterFragmentShaderFilename];
         
         if (program != nil)
         {

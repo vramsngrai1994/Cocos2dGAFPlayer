@@ -19,10 +19,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Constants
 
-static NSString * const kPCStencilMaskAlphaFilterProgramCacheKey = @"kPCScrollLayerAlphaFilterProgramCacheKey";
-static NSString * const kPCStencilMaskAlphaFilterFragmentShaderFilename = @"pcShader_PositionTexture_alphaFilter.fs";
+NSString * const kPCMaskAlphaFilterProgramCacheKey        = @"kPCScrollLayerAlphaFilterProgramCacheKey";
+NSString * const kPCMaskAlphaFilterFragmentShaderFilename = @"pcShader_PositionTexture_alphaFilter.fs";
 
-static NSString * const kCCNodeMaskContainerAssociatedObject = @"CCNodeMaskContainerAssociatedObject";
+NSString * const kCCNodeMaskContainerAssociatedObject     = @"CCNodeMaskContainerAssociatedObject";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Category
@@ -208,11 +208,11 @@ static NSString * const kCCNodeMaskContainerAssociatedObject = @"CCNodeMaskConta
 
 - (CCGLProgram *)programShaderForMask
 {
-    CCGLProgram *program = [[CCShaderCache sharedShaderCache] programForKey:kPCStencilMaskAlphaFilterProgramCacheKey];
+    CCGLProgram *program = [[CCShaderCache sharedShaderCache] programForKey:kPCMaskAlphaFilterProgramCacheKey];
     if (program == nil)
     {
         program = [[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert
-                                              fragmentShaderFilename:kPCStencilMaskAlphaFilterFragmentShaderFilename];
+                                              fragmentShaderFilename:kPCMaskAlphaFilterFragmentShaderFilename];
         
         if (program != nil)
         {
@@ -225,7 +225,7 @@ static NSString * const kCCNodeMaskContainerAssociatedObject = @"CCNodeMaskConta
             
             CHECK_GL_ERROR_DEBUG();
             
-            [[CCShaderCache sharedShaderCache] addProgram:program forKey:kPCStencilMaskAlphaFilterProgramCacheKey];
+            [[CCShaderCache sharedShaderCache] addProgram:program forKey:kPCMaskAlphaFilterProgramCacheKey];
         }
         else
         {
