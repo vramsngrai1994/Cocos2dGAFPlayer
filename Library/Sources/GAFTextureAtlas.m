@@ -23,8 +23,8 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
 
 @interface GAFTextureAtlas ()
 
-@property (nonatomic, retain) NSMutableArray *images;
-@property (nonatomic, retain) NSMutableArray *textures;
+@property (nonatomic, strong) NSMutableArray *images;
+@property (nonatomic, strong) NSMutableArray *textures;
 
 - (void)loadElementsFromAnimationConfigDictionary:(NSDictionary *)aConfigDictionary;
 

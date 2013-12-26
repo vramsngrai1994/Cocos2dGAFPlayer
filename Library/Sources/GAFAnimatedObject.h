@@ -72,17 +72,17 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
     BOOL _animationsSelectorScheduled;
 }
 
-@property (nonatomic, retain) GAFAsset            *asset;
-@property (nonatomic, retain) NSMutableDictionary *subObjects;
-@property (nonatomic, retain) NSMutableDictionary *masks; ///< stores all masks (not displayed)
+@property (nonatomic, strong) GAFAsset            *asset;
+@property (nonatomic, strong) NSMutableDictionary *subObjects;
+@property (nonatomic, strong) NSMutableDictionary *masks; ///< stores all masks (not displayed)
 @property (nonatomic, assign) NSUInteger          currentFrameIndex;
 @property (nonatomic, assign) NSUInteger          totalFrameCount;
 @property (nonatomic, assign) NSUInteger          currentSequenceStart;
 @property (nonatomic, assign) NSUInteger          currentSequenceEnd;
 @property (nonatomic, assign) GAFAnimationFPSType FPSType;
 @property (nonatomic, assign) NSUInteger          extraFramesCounter;
-@property (nonatomic, retain) NSMutableDictionary *externalNamedPartsTextureAtlases; ///< Value is of GAFTextureAtlas class
-@property (nonatomic, retain) NSMutableArray      *hiddenSubobjectIds;
+@property (nonatomic, strong) NSMutableDictionary *externalNamedPartsTextureAtlases; ///< Value is of GAFTextureAtlas class
+@property (nonatomic, strong) NSMutableArray      *hiddenSubobjectIds;
 
 @property (nonatomic, assign, readonly) BOOL    isInitialized;
 @property (nonatomic, assign, readonly) BOOL    isRunning;

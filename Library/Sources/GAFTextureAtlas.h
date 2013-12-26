@@ -13,13 +13,13 @@
 
 @property (nonatomic, assign) BOOL loaded;
 
-//@property (nonatomic, retain) UIImage *image;   // returns or sets the first image in .images array
-//@property (nonatomic, retain, readonly) CCTexture2D *texture;   // returns the first image in .textures array
+//@property (nonatomic, strong) UIImage *image;   // returns or sets the first image in .images array
+//@property (nonatomic, strong, readonly) CCTexture2D *texture;   // returns the first image in .textures array
 
-@property (nonatomic, retain, readonly) NSMutableArray *images;     ///< UIImage images
-@property (nonatomic, retain, readonly) NSMutableArray *textures;   ///< CCTexture2D textures
+@property (nonatomic, strong, readonly) NSMutableArray *images;     ///< UIImage images
+@property (nonatomic, strong, readonly) NSMutableArray *textures;   ///< CCTexture2D textures
 
-@property (nonatomic, retain) NSDictionary *elements;
+@property (nonatomic, strong) NSDictionary *elements;
 
 /// Loads texture atlas from config dictionary and textures NSData
 /// @param aTextureAtlasesDictionary dictionary with texture data with Key->Value pairs [AtlasName -> AtlasData]

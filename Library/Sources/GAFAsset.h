@@ -23,21 +23,21 @@
 @property (nonatomic, assign, readonly) NSUInteger          majorVersion;
 @property (nonatomic, assign, readonly) NSUInteger          minorVersion;
 
-@property (nonatomic, retain, readonly) GAFTextureAtlas     *textureAtlas;
+@property (nonatomic, strong, readonly) GAFTextureAtlas     *textureAtlas;
 @property (nonatomic, assign, readonly) CGFloat             usedAtlasContentScaleFactor; // csf of used atlas
 
-@property (nonatomic, retain, readonly) NSDictionary        *objects; // dictionary of objects [ObjectId -> AtlasElementName]
-@property (nonatomic, retain, readonly) NSDictionary        *masks; // dictionary of masks [MaskId -> AtlasElementName]
+@property (nonatomic, strong, readonly) NSDictionary        *objects; // dictionary of objects [ObjectId -> AtlasElementName]
+@property (nonatomic, strong, readonly) NSDictionary        *masks; // dictionary of masks [MaskId -> AtlasElementName]
 
-@property (nonatomic, retain, readonly) NSDictionary        *namedParts; // dictionary of masks [MaskId -> AtlasElementName]
+@property (nonatomic, strong, readonly) NSDictionary        *namedParts; // dictionary of masks [MaskId -> AtlasElementName]
 
 /// List of extended data object groups. Key - groupJSONName, Value - group, which is an array of parsed objects.
-@property (nonatomic, retain, readonly) NSMutableDictionary *extendedDataObjectGroups;
+@property (nonatomic, strong, readonly) NSMutableDictionary *extendedDataObjectGroups;
 
 #pragma mark Animation related data
 
-@property (nonatomic, retain, readonly) NSArray             *animationFrames; ///< List of GAFAnimationFrame objects
-@property (nonatomic, retain, readonly) NSDictionary        *animationSequences; ///< List of GAFAnimationSequences objects
+@property (nonatomic, strong, readonly) NSArray             *animationFrames; ///< List of GAFAnimationFrame objects
+@property (nonatomic, strong, readonly) NSDictionary        *animationSequences; ///< List of GAFAnimationSequences objects
 
 @property (nonatomic, assign, readonly) CGRect              boundingBox;
 @property (nonatomic, assign, readonly) CGPoint             pivotPoint;

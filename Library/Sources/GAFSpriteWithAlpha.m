@@ -21,7 +21,7 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
 
 // When effect is applied texture is changed, next effect (e.g. change of blur radius) should be applied on the same
 // initial texture, not modified one
-@property (nonatomic, retain) CCTexture2D *initialTexture;
+@property (nonatomic, strong) CCTexture2D *initialTexture;
 @property (nonatomic, assign) CGRect      initialTextureRect;
 
 - (CCGLProgram *)programForShader;

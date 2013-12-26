@@ -30,7 +30,7 @@
 @property (nonatomic, assign) BOOL isInitialized;
 @property (nonatomic, assign) BOOL isRunning;
 
-@property (nonatomic, retain) NSMutableDictionary *capturedObjects;    // [Key]:inner ids of captured objects [Value]:controlFlags
+@property (nonatomic, strong) NSMutableDictionary *capturedObjects;    // [Key]:inner ids of captured objects [Value]:controlFlags
 
 - (GAFSprite *)subObjectForInnerObjectId:(NSString *)anInnerObjectId;
 - (NSString *)objectIdByObjectName:(NSString *)aName;

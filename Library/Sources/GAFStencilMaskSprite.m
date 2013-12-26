@@ -49,7 +49,7 @@ NSString * const kCCNodeMaskContainerAssociatedObject     = @"CCNodeMaskContaine
     BOOL _isReorderMaskedObjectsDirty;
 }
 
-@property (nonatomic, retain) NSArray *maskedObjects;
+@property (nonatomic, strong) NSArray *maskedObjects;
 - (NSMutableArray *)mutableMaskedObjects;
 
 - (CCGLProgram *)programShaderForMask;

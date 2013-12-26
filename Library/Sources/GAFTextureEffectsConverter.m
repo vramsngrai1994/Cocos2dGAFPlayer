@@ -17,7 +17,7 @@
 
 @interface GAFTextureEffectsConverter ()
 
-@property (nonatomic, retain) NSMutableDictionary *vertexShaderUniforms;
+@property (nonatomic, strong) NSMutableDictionary *vertexShaderUniforms;
 
 @end
 

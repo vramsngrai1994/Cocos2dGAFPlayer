@@ -54,18 +54,18 @@ static NSString * const kHeightKey                          = @"height";
 @property (nonatomic, assign) NSUInteger          majorVersion;
 @property (nonatomic, assign) NSUInteger          minorVersion;
 
-@property (nonatomic, retain) GAFTextureAtlas     *textureAtlas;
+@property (nonatomic, strong) GAFTextureAtlas     *textureAtlas;
 @property (nonatomic, assign) CGFloat             usedAtlasContentScaleFactor;
 
-@property (nonatomic, retain) NSDictionary        *objects;
-@property (nonatomic, retain) NSDictionary        *masks;
+@property (nonatomic, strong) NSDictionary        *objects;
+@property (nonatomic, strong) NSDictionary        *masks;
 
-@property (nonatomic, retain) NSDictionary        *namedParts;
+@property (nonatomic, strong) NSDictionary        *namedParts;
 
-@property (nonatomic, retain) NSMutableDictionary *extendedDataObjectGroups;
+@property (nonatomic, strong) NSMutableDictionary *extendedDataObjectGroups;
 
-@property (nonatomic, retain) NSArray             *animationFrames;
-@property (nonatomic, retain) NSDictionary        *animationSequences;
+@property (nonatomic, strong) NSArray             *animationFrames;
+@property (nonatomic, strong) NSDictionary        *animationSequences;
 
 @property (nonatomic, assign) CGRect              boundingBox;
 @property (nonatomic, assign) CGPoint             pivotPoint;

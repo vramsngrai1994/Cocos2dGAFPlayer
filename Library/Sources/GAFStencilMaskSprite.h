@@ -33,7 +33,7 @@ extern NSString * const kCCNodeMaskContainerAssociatedObject;
     NSMutableArray *_maskedObjects;
 }
 
-@property (nonatomic, retain, readonly) NSArray *maskedObjects;
+@property (nonatomic, strong, readonly) NSArray *maskedObjects;
 
 - (void)addMaskedObject:(CCNode *)anObject;
 - (void)removeMaskedObject:(CCNode *)anObject;
