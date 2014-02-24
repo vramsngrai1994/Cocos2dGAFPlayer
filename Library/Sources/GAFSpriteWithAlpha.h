@@ -17,6 +17,9 @@
 }
 
 @property (nonatomic, assign) CGSize blurRadius;
+@property (nonatomic, readonly) CGFloat postprocessedScale;
+@property (nonatomic, readonly) CGRect  preprocessedFrame;
+@property (nonatomic, readonly) CGRect  postprocessedFrame;
 
 - (void)setColorTransformMult:(const GLfloat *)mults offsets:(const GLfloat *)offsets;
 - (void)setColorTransform:(const GLfloat *)colorTransform;

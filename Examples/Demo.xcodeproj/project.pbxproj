@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2151C75418BBADEF00A33707 /* libGAFPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A507B739185A1C0100F46297 /* libGAFPlayer.a */; };
 		257F0060178450CC00D89D29 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 257F005F178450CC00D89D29 /* main.m */; };
 		257F00711784512A00D89D29 /* SampleAnimations in Resources */ = {isa = PBXBuildFile; fileRef = 257F006F1784512A00D89D29 /* SampleAnimations */; };
 		257F00751784513600D89D29 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 257F00731784513600D89D29 /* CloseNormal.png */; };
@@ -35,16 +36,10 @@
 		936BEA561793FC97005DB560 /* GafFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 936BEA521793FC97005DB560 /* GafFeatures.m */; };
 		936BEA571793FC97005DB560 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 936BEA541793FC97005DB560 /* AppDelegate.m */; };
 		9393D595179A89D1004C6234 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9393D594179A89D1004C6234 /* CoreImage.framework */; };
+		A49994791860A3E6003DA222 /* gaf_ShaderGaussianBlur.fs in Copy Shaders */ = {isa = PBXBuildFile; fileRef = A499946B1860A3B8003DA222 /* gaf_ShaderGaussianBlur.fs */; };
+		A499947A1860A3E6003DA222 /* gaf_ShaderGaussianBlur.vs in Copy Shaders */ = {isa = PBXBuildFile; fileRef = A499946C1860A3B8003DA222 /* gaf_ShaderGaussianBlur.vs */; };
 		A507B742185A1CA100F46297 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A507B725185A1BF700F46297 /* libcocos2d.a */; };
-		A507B743185A1CA100F46297 /* libGAFPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A507B739185A1C0100F46297 /* libGAFPlayer.a */; };
 		A507B744185A1CA100F46297 /* libkazmath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A507B733185A1BF700F46297 /* libkazmath.a */; };
-		A507B767185A1EE600F46297 /* GaussianBlurFragmentShader.fs in Sources */ = {isa = PBXBuildFile; fileRef = A507B760185A1EE600F46297 /* GaussianBlurFragmentShader.fs */; };
-		A507B768185A1EE600F46297 /* GaussianBlurVertexShader.vs in Sources */ = {isa = PBXBuildFile; fileRef = A507B761185A1EE600F46297 /* GaussianBlurVertexShader.vs */; };
-		A507B769185A1EE600F46297 /* pcBlurredSprite_Shader_HorizontalBlur.fs in Sources */ = {isa = PBXBuildFile; fileRef = A507B762185A1EE600F46297 /* pcBlurredSprite_Shader_HorizontalBlur.fs */; };
-		A507B76A185A1EE600F46297 /* pcBlurredSprite_Shader_VerticalBlur.fs in Sources */ = {isa = PBXBuildFile; fileRef = A507B763185A1EE600F46297 /* pcBlurredSprite_Shader_VerticalBlur.fs */; };
-		A507B76B185A1EE600F46297 /* pcShader_masked_texture.fs in Sources */ = {isa = PBXBuildFile; fileRef = A507B764185A1EE600F46297 /* pcShader_masked_texture.fs */; };
-		A507B76C185A1EE600F46297 /* pcShader_PositionTexture_alphaFilter.fs in Sources */ = {isa = PBXBuildFile; fileRef = A507B765185A1EE600F46297 /* pcShader_PositionTexture_alphaFilter.fs */; };
-		A507B76D185A1EE600F46297 /* pcShader_PositionTextureAlpha_frag.fs in Sources */ = {isa = PBXBuildFile; fileRef = A507B766185A1EE600F46297 /* pcShader_PositionTextureAlpha_frag.fs */; };
 		A507B76E185A1EEC00F46297 /* GaussianBlurFragmentShader.fs in Copy Shaders */ = {isa = PBXBuildFile; fileRef = A507B760185A1EE600F46297 /* GaussianBlurFragmentShader.fs */; };
 		A507B76F185A1EEE00F46297 /* GaussianBlurVertexShader.vs in Copy Shaders */ = {isa = PBXBuildFile; fileRef = A507B761185A1EE600F46297 /* GaussianBlurVertexShader.vs */; };
 		A507B770185A1EF100F46297 /* pcBlurredSprite_Shader_HorizontalBlur.fs in Copy Shaders */ = {isa = PBXBuildFile; fileRef = A507B762185A1EE600F46297 /* pcBlurredSprite_Shader_HorizontalBlur.fs */; };
@@ -177,6 +172,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				A49994791860A3E6003DA222 /* gaf_ShaderGaussianBlur.fs in Copy Shaders */,
+				A499947A1860A3E6003DA222 /* gaf_ShaderGaussianBlur.vs in Copy Shaders */,
 				A507B771185A1EF300F46297 /* pcBlurredSprite_Shader_VerticalBlur.fs in Copy Shaders */,
 				A507B774185A1EFA00F46297 /* pcShader_PositionTextureAlpha_frag.fs in Copy Shaders */,
 				A507B772185A1EF600F46297 /* pcShader_masked_texture.fs in Copy Shaders */,
@@ -196,7 +193,7 @@
 		257F006F1784512A00D89D29 /* SampleAnimations */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SampleAnimations; path = Resources/SampleAnimations; sourceTree = "<group>"; };
 		257F00731784513600D89D29 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseNormal.png; path = Resources/CloseNormal.png; sourceTree = "<group>"; };
 		257F00741784513600D89D29 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseSelected.png; path = Resources/CloseSelected.png; sourceTree = "<group>"; };
-		257FFEBE178450C800D89D29 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		257FFEBE178450C800D89D29 /* Demo_develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_develop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		257FFEC1178450C800D89D29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		257FFEC3178450C800D89D29 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		257FFEC5178450C800D89D29 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -224,6 +221,8 @@
 		936BEA541793FC97005DB560 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		936BEA551793FC97005DB560 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9393D594179A89D1004C6234 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		A499946B1860A3B8003DA222 /* gaf_ShaderGaussianBlur.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gaf_ShaderGaussianBlur.fs; sourceTree = "<group>"; };
+		A499946C1860A3B8003DA222 /* gaf_ShaderGaussianBlur.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gaf_ShaderGaussianBlur.vs; sourceTree = "<group>"; };
 		A507B760185A1EE600F46297 /* GaussianBlurFragmentShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = GaussianBlurFragmentShader.fs; sourceTree = "<group>"; };
 		A507B761185A1EE600F46297 /* GaussianBlurVertexShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = GaussianBlurVertexShader.vs; sourceTree = "<group>"; };
 		A507B762185A1EE600F46297 /* pcBlurredSprite_Shader_HorizontalBlur.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pcBlurredSprite_Shader_HorizontalBlur.fs; sourceTree = "<group>"; };
@@ -241,8 +240,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2151C75418BBADEF00A33707 /* libGAFPlayer.a in Frameworks */,
 				A507B742185A1CA100F46297 /* libcocos2d.a in Frameworks */,
-				A507B743185A1CA100F46297 /* libGAFPlayer.a in Frameworks */,
 				A507B744185A1CA100F46297 /* libkazmath.a in Frameworks */,
 				A5555A71182A845900420A21 /* CoreText.framework in Frameworks */,
 				9393D595179A89D1004C6234 /* CoreImage.framework in Frameworks */,
@@ -281,7 +280,7 @@
 		257FFEBF178450C800D89D29 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				257FFEBE178450C800D89D29 /* Demo.app */,
+				257FFEBE178450C800D89D29 /* Demo_develop.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -374,6 +373,8 @@
 		A507B75F185A1EE600F46297 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A499946B1860A3B8003DA222 /* gaf_ShaderGaussianBlur.fs */,
+				A499946C1860A3B8003DA222 /* gaf_ShaderGaussianBlur.vs */,
 				A507B760185A1EE600F46297 /* GaussianBlurFragmentShader.fs */,
 				A507B761185A1EE600F46297 /* GaussianBlurVertexShader.vs */,
 				A507B762185A1EE600F46297 /* pcBlurredSprite_Shader_HorizontalBlur.fs */,
@@ -407,7 +408,7 @@
 			);
 			name = Demo;
 			productName = HelloChris;
-			productReference = 257FFEBE178450C800D89D29 /* Demo.app */;
+			productReference = 257FFEBE178450C800D89D29 /* Demo_develop.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -583,14 +584,7 @@
 			files = (
 				257F0060178450CC00D89D29 /* main.m in Sources */,
 				936BEA561793FC97005DB560 /* GafFeatures.m in Sources */,
-				A507B76D185A1EE600F46297 /* pcShader_PositionTextureAlpha_frag.fs in Sources */,
-				A507B768185A1EE600F46297 /* GaussianBlurVertexShader.vs in Sources */,
-				A507B769185A1EE600F46297 /* pcBlurredSprite_Shader_HorizontalBlur.fs in Sources */,
 				936BEA571793FC97005DB560 /* AppDelegate.m in Sources */,
-				A507B76A185A1EE600F46297 /* pcBlurredSprite_Shader_VerticalBlur.fs in Sources */,
-				A507B767185A1EE600F46297 /* GaussianBlurFragmentShader.fs in Sources */,
-				A507B76B185A1EE600F46297 /* pcShader_masked_texture.fs in Sources */,
-				A507B76C185A1EE600F46297 /* pcShader_PositionTexture_alphaFilter.fs in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -691,7 +686,8 @@
 					"-ObjC",
 					"-lz",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)_develop";
+				PROVISIONING_PROFILE = "4026F885-45E3-4978-BF31-962A1B65E48E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -700,6 +696,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Prefix.pch";
@@ -714,7 +711,8 @@
 					"-ObjC",
 					"-lz",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)_develop";
+				PROVISIONING_PROFILE = "4026F885-45E3-4978-BF31-962A1B65E48E";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

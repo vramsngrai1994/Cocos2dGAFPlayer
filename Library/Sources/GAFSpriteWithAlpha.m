@@ -8,7 +8,7 @@
 #import "GAFSpriteWithAlpha.h"
 #import "GAFSprite_Protected.h"
 #import "CCGLProgram+GAFExtensions.h"
-#import "GAFTextureEffectsConverter.h"
+#import "GAFEffectPreprocessor.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -23,6 +23,10 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
 // initial texture, not modified one
 @property (nonatomic, strong) CCTexture2D *initialTexture;
 @property (nonatomic, assign) CGRect      initialTextureRect;
+
+@property (nonatomic, readwrite) CGFloat postprocessedScale;
+@property (nonatomic, readwrite) CGRect  preprocessedFrame;
+@property (nonatomic, readwrite) CGRect  postprocessedFrame;
 
 - (CCGLProgram *)programForShader;
 - (void)setBlendingFunc;
@@ -78,12 +82,15 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
 {
     if ((self = [super initWithTexture:texture rect:rect rotated:rotated]))
     {
-        self.initialTexture = texture;
-        self.initialTextureRect = rect;
-        
+        _initialTexture = texture;
+        _initialTextureRect = rect;
         _blurRadius = CGSizeZero;
         
-		for (NSUInteger i = 0; i < 4; ++i)
+        _postprocessedScale = 1.0f;
+        _preprocessedFrame = _initialTextureRect;
+        _postprocessedFrame = _initialTextureRect;
+        
+		for (int i = 0; i < 4; ++i)
 		{
 			_colorTransform[i]     = 1.0f;
 			_colorTransform[i + 4] = 0;
@@ -114,22 +121,20 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
     {
         [self setTexture:self.initialTexture];
         [self setTextureRect:self.initialTextureRect rotated:NO untrimmedSize:self.initialTextureRect.size];
-        self.flipY = NO;
+        [self setFlipY:NO];
     }
     else
     {
-        GAFTextureEffectsConverter *converter = [GAFTextureEffectsConverter sharedConverter];
-        CCRenderTexture *resultTex = [converter gaussianBlurredTextureFromTexture:self.initialTexture
-                                                                             rect:self.initialTextureRect
-                                                                      blurRadiusX:self.blurRadius.width
-                                                                      blurRadiusY:self.blurRadius.height];
-        if (resultTex != nil)
+        GAFPreprocessedTexture* texture = [[GAFEffectPreprocessor sharedInstance] gaussianBlurredTextureFromTexture:self.initialTexture
+                                                                                                              frame:self.initialTextureRect
+                                                                                                        blurredSize:CGSizeMake(self.blurRadius.width, self.blurRadius.height)];
+        if (texture != nil)
         {
-            [self setTexture:resultTex.sprite.texture];
-            self.flipY = YES;
-            
-            CGRect texureRect = CGRectMake(0, 0, resultTex.sprite.contentSize.width, resultTex.sprite.contentSize.height);
-            [self setTextureRect:texureRect rotated:NO untrimmedSize:texureRect.size];
+            [self setTexture:texture.texture];
+            [self setFlipY:YES];
+            [self setTextureRect:texture.frame];
+            [self setPostprocessedFrame:texture.frame];
+            [self setPostprocessedScale:(1.0f / texture.scale)];
         }
     }
 }

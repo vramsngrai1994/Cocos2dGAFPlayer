@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A499946118609DAC003DA222 /* GAFCustomAtlasPreprocessor.m in Sources */ = {isa = PBXBuildFile; fileRef = A499945E18609DAC003DA222 /* GAFCustomAtlasPreprocessor.m */; };
+		A499946218609DAC003DA222 /* GAFEffectPreprocessor.m in Sources */ = {isa = PBXBuildFile; fileRef = A499946018609DAC003DA222 /* GAFEffectPreprocessor.m */; };
+		A49994691860A34D003DA222 /* gaf_ShaderGaussianBlur.fs in Sources */ = {isa = PBXBuildFile; fileRef = A49994671860A34D003DA222 /* gaf_ShaderGaussianBlur.fs */; };
+		A499946A1860A34D003DA222 /* gaf_ShaderGaussianBlur.vs in Sources */ = {isa = PBXBuildFile; fileRef = A49994681860A34D003DA222 /* gaf_ShaderGaussianBlur.vs */; };
 		A55559A2182A53F700420A21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55559A1182A53F700420A21 /* Foundation.framework */; };
 		A55559B0182A53F700420A21 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55559AF182A53F700420A21 /* XCTest.framework */; };
 		A55559B1182A53F700420A21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55559A1182A53F700420A21 /* Foundation.framework */; };
@@ -22,7 +26,6 @@
 		A5555A0A182A545600420A21 /* GAFAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E1182A545600420A21 /* GAFAsset.m */; };
 		A5555A0B182A545600420A21 /* GAFAssetExtendedDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E3182A545600420A21 /* GAFAssetExtendedDataObject.m */; };
 		A5555A0C182A545600420A21 /* GAFFilterData.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E5182A545600420A21 /* GAFFilterData.m */; };
-		A5555A0D182A545600420A21 /* GAFHelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E7182A545600420A21 /* GAFHelperMethods.m */; };
 		A5555A0E182A545600420A21 /* GAFNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559E9182A545600420A21 /* GAFNode.m */; };
 		A5555A0F182A545600420A21 /* GAFShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559EB182A545600420A21 /* GAFShaderManager.m */; };
 		A5555A10182A545600420A21 /* GAFSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559ED182A545600420A21 /* GAFSprite.m */; };
@@ -32,7 +35,6 @@
 		A5555A14182A545600420A21 /* GAFSubobjectState.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559F6182A545600420A21 /* GAFSubobjectState.m */; };
 		A5555A15182A545600420A21 /* GAFTextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559F8182A545600420A21 /* GAFTextureAtlas.m */; };
 		A5555A16182A545600420A21 /* GAFTextureAtlasElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559FA182A545600420A21 /* GAFTextureAtlasElement.m */; };
-		A5555A17182A545600420A21 /* GAFTextureEffectsConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = A55559FC182A545600420A21 /* GAFTextureEffectsConverter.m */; };
 		A5555A1F182A56F200420A21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5555A1E182A56F200420A21 /* CoreGraphics.framework */; };
 		A5555A23182A5F2200420A21 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5555A22182A5F2200420A21 /* OpenGLES.framework */; };
 		A5555A26182A5FF500420A21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5555A25182A5FF500420A21 /* UIKit.framework */; };
@@ -104,6 +106,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A499945C18609DAC003DA222 /* GAFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFConstants.h; sourceTree = "<group>"; };
+		A499945D18609DAC003DA222 /* GAFCustomAtlasPreprocessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFCustomAtlasPreprocessor.h; sourceTree = "<group>"; };
+		A499945E18609DAC003DA222 /* GAFCustomAtlasPreprocessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFCustomAtlasPreprocessor.m; sourceTree = "<group>"; };
+		A499945F18609DAC003DA222 /* GAFEffectPreprocessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFEffectPreprocessor.h; sourceTree = "<group>"; };
+		A499946018609DAC003DA222 /* GAFEffectPreprocessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFEffectPreprocessor.m; sourceTree = "<group>"; };
+		A499946618609E1B003DA222 /* GAFCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAFCommon.h; sourceTree = "<group>"; };
+		A49994671860A34D003DA222 /* gaf_ShaderGaussianBlur.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gaf_ShaderGaussianBlur.fs; sourceTree = "<group>"; };
+		A49994681860A34D003DA222 /* gaf_ShaderGaussianBlur.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gaf_ShaderGaussianBlur.vs; sourceTree = "<group>"; };
 		A555599E182A53F700420A21 /* libGAFPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGAFPlayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A55559A1182A53F700420A21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A55559A5182A53F700420A21 /* GAFPlayer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GAFPlayer-Prefix.pch"; sourceTree = "<group>"; };
@@ -131,8 +141,6 @@
 		A55559E3182A545600420A21 /* GAFAssetExtendedDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFAssetExtendedDataObject.m; sourceTree = "<group>"; };
 		A55559E4182A545600420A21 /* GAFFilterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFFilterData.h; sourceTree = "<group>"; };
 		A55559E5182A545600420A21 /* GAFFilterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFFilterData.m; sourceTree = "<group>"; };
-		A55559E6182A545600420A21 /* GAFHelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFHelperMethods.h; sourceTree = "<group>"; };
-		A55559E7182A545600420A21 /* GAFHelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFHelperMethods.m; sourceTree = "<group>"; };
 		A55559E8182A545600420A21 /* GAFNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFNode.h; sourceTree = "<group>"; };
 		A55559E9182A545600420A21 /* GAFNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFNode.m; sourceTree = "<group>"; };
 		A55559EA182A545600420A21 /* GAFShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFShaderManager.h; sourceTree = "<group>"; };
@@ -152,8 +160,6 @@
 		A55559F8182A545600420A21 /* GAFTextureAtlas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFTextureAtlas.m; sourceTree = "<group>"; };
 		A55559F9182A545600420A21 /* GAFTextureAtlasElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFTextureAtlasElement.h; sourceTree = "<group>"; };
 		A55559FA182A545600420A21 /* GAFTextureAtlasElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFTextureAtlasElement.m; sourceTree = "<group>"; };
-		A55559FB182A545600420A21 /* GAFTextureEffectsConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFTextureEffectsConverter.h; sourceTree = "<group>"; };
-		A55559FC182A545600420A21 /* GAFTextureEffectsConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAFTextureEffectsConverter.m; sourceTree = "<group>"; };
 		A5555A1E182A56F200420A21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A5555A22182A5F2200420A21 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A5555A25182A5FF500420A21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -192,6 +198,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A499946318609DBB003DA222 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A499946618609E1B003DA222 /* GAFCommon.h */,
+				A499945C18609DAC003DA222 /* GAFConstants.h */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		A499946418609DC7003DA222 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A499945D18609DAC003DA222 /* GAFCustomAtlasPreprocessor.h */,
+				A499945E18609DAC003DA222 /* GAFCustomAtlasPreprocessor.m */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
+		A499946518609DD8003DA222 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				A499945F18609DAC003DA222 /* GAFEffectPreprocessor.h */,
+				A499946018609DAC003DA222 /* GAFEffectPreprocessor.m */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
 		A5555995182A53F700420A21 = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +303,9 @@
 		A55559D1182A545600420A21 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A499946518609DD8003DA222 /* Effects */,
+				A499946418609DC7003DA222 /* Support */,
+				A499946318609DBB003DA222 /* Common */,
 				A55559D2182A545600420A21 /* Extensions */,
 				A55559D9182A545600420A21 /* GAF.h */,
 				A55559DA182A545600420A21 /* GAFAnimatedObject.h */,
@@ -284,8 +320,6 @@
 				A55559E3182A545600420A21 /* GAFAssetExtendedDataObject.m */,
 				A55559E4182A545600420A21 /* GAFFilterData.h */,
 				A55559E5182A545600420A21 /* GAFFilterData.m */,
-				A55559E6182A545600420A21 /* GAFHelperMethods.h */,
-				A55559E7182A545600420A21 /* GAFHelperMethods.m */,
 				A55559E8182A545600420A21 /* GAFNode.h */,
 				A55559E9182A545600420A21 /* GAFNode.m */,
 				A55559EA182A545600420A21 /* GAFShaderManager.h */,
@@ -305,8 +339,6 @@
 				A55559F8182A545600420A21 /* GAFTextureAtlas.m */,
 				A55559F9182A545600420A21 /* GAFTextureAtlasElement.h */,
 				A55559FA182A545600420A21 /* GAFTextureAtlasElement.m */,
-				A55559FB182A545600420A21 /* GAFTextureEffectsConverter.h */,
-				A55559FC182A545600420A21 /* GAFTextureEffectsConverter.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -336,6 +368,8 @@
 		A5555A73182A87FA00420A21 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A49994671860A34D003DA222 /* gaf_ShaderGaussianBlur.fs */,
+				A49994681860A34D003DA222 /* gaf_ShaderGaussianBlur.vs */,
 				A5555A74182A87FA00420A21 /* GaussianBlurFragmentShader.fs */,
 				A5555A75182A87FA00420A21 /* GaussianBlurVertexShader.vs */,
 				A5555A76182A87FA00420A21 /* pcBlurredSprite_Shader_HorizontalBlur.fs */,
@@ -435,11 +469,13 @@
 				A5555A80182A87FA00420A21 /* pcShader_PositionTexture_alphaFilter.fs in Sources */,
 				A5555A11182A545600420A21 /* GAFSpriteWithAlpha.m in Sources */,
 				A5555A06182A545600420A21 /* NSString+GAFExtensions.m in Sources */,
-				A5555A0D182A545600420A21 /* GAFHelperMethods.m in Sources */,
 				A5555A14182A545600420A21 /* GAFSubobjectState.m in Sources */,
 				A5555A0E182A545600420A21 /* GAFNode.m in Sources */,
+				A499946118609DAC003DA222 /* GAFCustomAtlasPreprocessor.m in Sources */,
+				A499946218609DAC003DA222 /* GAFEffectPreprocessor.m in Sources */,
 				A5555A16182A545600420A21 /* GAFTextureAtlasElement.m in Sources */,
 				A5555A10182A545600420A21 /* GAFSprite.m in Sources */,
+				A49994691860A34D003DA222 /* gaf_ShaderGaussianBlur.fs in Sources */,
 				A5555A81182A87FA00420A21 /* pcShader_PositionTextureAlpha_frag.fs in Sources */,
 				A5555A0A182A545600420A21 /* GAFAsset.m in Sources */,
 				A5555A7F182A87FA00420A21 /* pcShader_masked_texture.fs in Sources */,
@@ -450,10 +486,10 @@
 				A5555A15182A545600420A21 /* GAFTextureAtlas.m in Sources */,
 				A5555A0F182A545600420A21 /* GAFShaderManager.m in Sources */,
 				A5555A13182A545600420A21 /* GAFStencilMaskSprite.m in Sources */,
+				A499946A1860A34D003DA222 /* gaf_ShaderGaussianBlur.vs in Sources */,
 				A5555A0B182A545600420A21 /* GAFAssetExtendedDataObject.m in Sources */,
 				A5555A7D182A87FA00420A21 /* pcBlurredSprite_Shader_HorizontalBlur.fs in Sources */,
 				A5555A7C182A87FA00420A21 /* GaussianBlurVertexShader.vs in Sources */,
-				A5555A17182A545600420A21 /* GAFTextureEffectsConverter.m in Sources */,
 				A5555A07182A545600420A21 /* GAFAnimatedObject.m in Sources */,
 				A5555A09182A545600420A21 /* GAFAnimationSequence.m in Sources */,
 				A5555A08182A545600420A21 /* GAFAnimationFrame.m in Sources */,

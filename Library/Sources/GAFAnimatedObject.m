@@ -21,7 +21,8 @@
 #import "CCSpriteFrame.h"
 #import "NSString+GAFExtensions.h"
 #import "CCDirector.h"
-#import "GAFHelperMethods.h"
+#import "GAFCommon.h"
+#import "GAFConstants.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -931,11 +932,27 @@
             if (!subobjectCaptured ||
                 (subobjectCaptured && (controlFlags & kGAFAnimatedObjectControl_ApplyState)))
             {
-                // Update object position and alpha
-                // Applying csf adjustments
                 
+#if defined(__ENABLE_EFFECT_PREPROCESSING_CACHING__)
                 
-                subObject.externalTransform = GAF_CGAffineTransformCocosFormatFromFlashFormat(stateTransform);
+                CGAffineTransform transformation = CGAffineTransformScale(CGAffineTransformIdentity,
+                                                                          subObject.postprocessedScale,
+                                                                          subObject.postprocessedScale);
+                
+                CGSize expectedSize = CGSizeMake(subObject.preprocessedFrame.size.width + 2 * (kGAFgaussianKernelSize / 2) * subObject.blurRadius.width,
+                                                 subObject.preprocessedFrame.size.height + 2 * (kGAFgaussianKernelSize / 2) * subObject.blurRadius.height);
+                
+                transformation.tx -= fabsf(expectedSize.width - subObject.postprocessedFrame.size.width) / 2.0f;
+                transformation.ty += fabsf(expectedSize.height - subObject.postprocessedFrame.size.height) / 2.0f;
+                
+                transformation = CGAffineTransformConcat(transformation, GAF_CGAffineTransformCocosFormatFromFlashFormat(state.affineTransform));
+                subObject.externalTransform = transformation;
+          
+#else
+                
+                subObject.externalTransform = GAF_CGAffineTransformCocosFormatFromFlashFormat(state.affineTransform);
+                
+#endif
                 if (subObject.zOrder != state.zIndex)
                 {
                     zOrderChanged |= YES;
