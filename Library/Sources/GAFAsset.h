@@ -29,8 +29,6 @@
 @property (nonatomic, strong, readonly) NSDictionary        *objects; // dictionary of objects [ObjectId -> AtlasElementName]
 @property (nonatomic, strong, readonly) NSDictionary        *masks; // dictionary of masks [MaskId -> AtlasElementName]
 
-@property (nonatomic, strong, readonly) NSDictionary        *namedParts; // dictionary of masks [MaskId -> AtlasElementName]
-
 /// List of extended data object groups. Key - groupJSONName, Value - group, which is an array of parsed objects.
 @property (nonatomic, strong, readonly) NSMutableDictionary *extendedDataObjectGroups;
 

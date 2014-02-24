@@ -234,6 +234,16 @@
     NSAssert(!CGRectEqualToRect(frame, CGRectZero), @"Error: can't allocate frame in the current Texture Altas"); // TODO : create texture atlas builder.
     NSAssert(CGSizeEqualToSize(frame.size, blurredTextureSize), @"Error: calculated wrong cached size");
     
+    if(CGRectEqualToRect(frame, CGRectZero))
+    {
+        return [[GAFPreprocessedTexture alloc] initWithTexture:accessoryFrameBuffer_01.sprite.texture
+                                                     withFrame:CGRectMake(0,
+                                                                          0,
+                                                                          accessoryFrameBuffer_01.sprite.contentSize.width,
+                                                                          accessoryFrameBuffer_01.sprite.contentSize.height)
+                                                     withScale:scale];
+    }
+    
     for(GAFCachedBlurredTexture* texture in self.cachedBlurredTextures)
     {
         CGRect precomputedFrame = texture.precomputedFrame;

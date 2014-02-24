@@ -22,7 +22,6 @@
 #import "NSString+GAFExtensions.h"
 #import "CCDirector.h"
 #import "GAFCommon.h"
-#import "GAFConstants.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -110,7 +109,7 @@
         self.isInitialized = NO;
         self.capturedObjects = [NSMutableDictionary new];
         
-        self.externalNamedPartsTextureAtlases = [NSMutableDictionary dictionaryWithCapacity:0];
+        self.externalTextureAtlases = [NSMutableDictionary dictionaryWithCapacity:0];
         self.hiddenSubobjectIds = [NSMutableArray array];
         self.contentSize = self.asset.boundingBox.size;
         self.anchorPoint = self.asset.pivotPoint;
@@ -157,8 +156,6 @@
 
 - (CGRect)realBoundingBoxForCurrentFrame
 {
-    [self pause];
-    
     CGRect result = CGRectZero;
     for (GAFSprite *subObject in [self.subObjects allValues])
     {
@@ -168,8 +165,6 @@
             result = CGRectUnion(result, bb);
         }
     }
-    
-    [self resume];
     
     return CGRectApplyAffineTransform(result, [self nodeToParentTransform]);
 }
@@ -183,6 +178,7 @@
         NSString *atlasElementId = anAnimationObjects[objectId];
         CCSpriteFrame *spriteFrame = nil;
         
+        // Try to search in inner texture atlas
         GAFTextureAtlasElement *element = self.asset.textureAtlas.elements[atlasElementId];
         if (nil != element)
         {
@@ -197,32 +193,28 @@
                            atlasElementId, element.atlasIdx);
             }
         }
-        else if (self.externalNamedPartsTextureAtlases.count > 0) // Try using named objects' atlas
+        // or in external texture atlas
+        else if (self.externalTextureAtlases.count > 0)
         {
-            NSString *namedPartId = self.asset.namedParts[objectId];
-            if (namedPartId != nil)
+            GAFTextureAtlas *externalAtlas = nil;
+            for (externalAtlas in [self.externalTextureAtlases allValues])
             {
-                // Search external atlases for such object
-                GAFTextureAtlas *externalAtlas = nil;
-                for (externalAtlas in [self.externalNamedPartsTextureAtlases allValues])
+                element = externalAtlas.elements[atlasElementId];
+                if (element != nil)
+                    break;
+            }
+            
+            if (nil != element)
+            {
+                if ([externalAtlas.textures count] > element.atlasIdx)
                 {
-                    element = externalAtlas.elements[namedPartId];
-                    if (element != nil)
-                        break;
+                    CCTexture2D *texture = externalAtlas.textures[element.atlasIdx];
+                    spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
                 }
-                
-                if (nil != element)
+                else
                 {
-                    if ([externalAtlas.textures count] > element.atlasIdx)
-                    {
-                        CCTexture2D *texture = externalAtlas.textures[element.atlasIdx];
-                        spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
-                    }
-                    else
-                    {
-                        CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.",
-                                  atlasElementId, element.atlasIdx);
-                    }
+                    CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.",
+                              atlasElementId, element.atlasIdx);
                 }
             }
         }
@@ -275,32 +267,28 @@
                           atlasElementId, element.atlasIdx);
             }
         }
-        else if (self.externalNamedPartsTextureAtlases.count > 0) // Try using named objects' atlas
+        else if (self.externalTextureAtlases.count > 0)
         {
-            NSString *maskPartId = self.asset.namedParts[maskId];
-            if (maskPartId != nil)
+            // Search external atlases for such object
+            GAFTextureAtlas *externalAtlas = nil;
+            for (externalAtlas in [self.externalTextureAtlases allValues])
             {
-                // Search external atlases for such object
-                GAFTextureAtlas *externalAtlas = nil;
-                for (externalAtlas in [self.externalNamedPartsTextureAtlases allValues])
+                element = externalAtlas.elements[atlasElementId];
+                if (element != nil)
+                    break;
+            }
+            
+            if (nil != element)
+            {
+                if ([externalAtlas.textures count] > element.atlasIdx)
                 {
-                    element = externalAtlas.elements[maskPartId];
-                    if (element != nil)
-                        break;
+                    CCTexture2D *texture = externalAtlas.textures[element.atlasIdx];
+                    spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
                 }
-                
-                if (nil != element)
+                else
                 {
-                    if ([externalAtlas.textures count] > element.atlasIdx)
-                    {
-                        CCTexture2D *texture = externalAtlas.textures[element.atlasIdx];
-                        spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
-                    }
-                    else
-                    {
-                        CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.",
-                                  atlasElementId, element.atlasIdx);
-                    }
+                    CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.",
+                              atlasElementId, element.atlasIdx);
                 }
             }
         }
@@ -348,6 +336,26 @@
 	return (rawName != nil) ? [self subobjectByRawName:rawName] : nil;
 }
 
+- (NSString *)nameOfSubobject:(GAFSprite *)aSubobject
+{
+    if (aSubobject == nil)
+	{
+		return nil;
+	}
+    NSString *name = nil;
+    NSString *rawName = [[self.subObjects allKeysForObject:aSubobject] firstObject];
+    if (rawName)
+    {
+        name = [self.asset.objects objectForKey:rawName];
+    }
+    if (name == nil)
+    {
+        name = [self.asset.masks objectForKey:rawName];
+    }
+    
+    return name;
+}
+
 - (GAFSprite *)subobjectByRawName:(NSString *)aRawName
 {
 	return (GAFSprite *)(self.subObjects)[aRawName];
@@ -363,7 +371,7 @@
 {
 	NSString *rawName = [self objectIdByObjectName:aName];
     BOOL alreadyHidden = [self.hiddenSubobjectIds containsObject:rawName];
-    if (isHidden != alreadyHidden)
+    if (rawName && isHidden != alreadyHidden)
     {
         if (isHidden)
         {
@@ -386,7 +394,7 @@
 
 #pragma mark -
 
-- (void)linkExternalNamedPartsAtlas:(GAFTextureAtlas *)aTextureAtlas forName:(NSString *)anAtlasName
+- (void)linkExternalAtlas:(GAFTextureAtlas *)aTextureAtlas forName:(NSString *)anAtlasName
 {
     NSAssert(anAtlasName != nil, @"");
     if (anAtlasName == nil)
@@ -395,12 +403,12 @@
     [self removeLinkedAtlasForName:anAtlasName];
     
     // Add new atlas to animation
-    if (aTextureAtlas != nil && self.externalNamedPartsTextureAtlases[anAtlasName] == nil)
+    if (aTextureAtlas != nil && self.externalTextureAtlases[anAtlasName] == nil)
     {
         // To save memory
         [aTextureAtlas releaseImages];
         
-        self.externalNamedPartsTextureAtlases[anAtlasName] = aTextureAtlas;
+        self.externalTextureAtlases[anAtlasName] = aTextureAtlas;
         
         if (self.isInitialized)
         {
@@ -444,7 +452,7 @@
         return;
     
     // Remove old atlas from animation
-    GAFTextureAtlas *oldAtlas = self.externalNamedPartsTextureAtlases[anAtlasName];
+    GAFTextureAtlas *oldAtlas = self.externalTextureAtlases[anAtlasName];
     if (oldAtlas != nil)
     {
         if (self.isInitialized)
@@ -497,7 +505,7 @@
             }
         }
         
-        [self.externalNamedPartsTextureAtlases removeObjectForKey:anAtlasName];
+        [self.externalTextureAtlases removeObjectForKey:anAtlasName];
     }
 }
 
@@ -678,13 +686,13 @@
 	if (self.currentFrameIndex < self.currentSequenceStart ||
         self.currentFrameIndex > self.currentSequenceEnd)
 	{
-		self.currentFrameIndex = self.currentSequenceStart;
+        [self setFrame:self.currentSequenceStart];
 	}
 	else
 	{
 		if (aHint == ASSH_RESTART)
 		{
-			self.currentFrameIndex = self.currentSequenceStart;
+            [self setFrame:self.currentSequenceStart];
 		}
 		else
 		{
@@ -700,6 +708,7 @@
 	{
 		[self stop];
 	}
+    
 	return YES;
 }
 
@@ -762,7 +771,8 @@
 	}
     
     __block NSString *result = nil;
-    [self.asset.namedParts enumerateKeysAndObjectsUsingBlock:
+    
+    [self.asset.objects enumerateKeysAndObjectsUsingBlock:
      ^(id key, id obj, BOOL *stop)
     {
          if ([(NSString *)obj isEqual:aName])
@@ -771,6 +781,20 @@
              *stop = YES;
          }
     }];
+    
+    if (result == nil)
+    {
+        [self.asset.masks enumerateKeysAndObjectsUsingBlock:
+         ^(id key, id obj, BOOL *stop)
+         {
+             if ([(NSString *)obj isEqual:aName])
+             {
+                 result = (NSString *)key;
+                 *stop = YES;
+             }
+         }];
+    }
+    
 	return result;
 }
 
@@ -932,27 +956,11 @@
             if (!subobjectCaptured ||
                 (subobjectCaptured && (controlFlags & kGAFAnimatedObjectControl_ApplyState)))
             {
+                // Update object position and alpha
+                // Applying csf adjustments
                 
-#if defined(__ENABLE_EFFECT_PREPROCESSING_CACHING__)
                 
-                CGAffineTransform transformation = CGAffineTransformScale(CGAffineTransformIdentity,
-                                                                          subObject.postprocessedScale,
-                                                                          subObject.postprocessedScale);
-                
-                CGSize expectedSize = CGSizeMake(subObject.preprocessedFrame.size.width + 2 * (kGAFgaussianKernelSize / 2) * subObject.blurRadius.width,
-                                                 subObject.preprocessedFrame.size.height + 2 * (kGAFgaussianKernelSize / 2) * subObject.blurRadius.height);
-                
-                transformation.tx -= fabsf(expectedSize.width - subObject.postprocessedFrame.size.width) / 2.0f;
-                transformation.ty += fabsf(expectedSize.height - subObject.postprocessedFrame.size.height) / 2.0f;
-                
-                transformation = CGAffineTransformConcat(transformation, GAF_CGAffineTransformCocosFormatFromFlashFormat(state.affineTransform));
-                subObject.externalTransform = transformation;
-          
-#else
-                
-                subObject.externalTransform = GAF_CGAffineTransformCocosFormatFromFlashFormat(state.affineTransform);
-                
-#endif
+                subObject.externalTransform = GAF_CGAffineTransformCocosFormatFromFlashFormat(stateTransform);
                 if (subObject.zOrder != state.zIndex)
                 {
                     zOrderChanged |= YES;

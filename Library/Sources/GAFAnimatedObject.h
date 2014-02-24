@@ -81,7 +81,7 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 @property (nonatomic, assign) NSUInteger          currentSequenceEnd;
 @property (nonatomic, assign) GAFAnimationFPSType FPSType;
 @property (nonatomic, assign) NSUInteger          extraFramesCounter;
-@property (nonatomic, strong) NSMutableDictionary *externalNamedPartsTextureAtlases; ///< Value is of GAFTextureAtlas class
+@property (nonatomic, strong) NSMutableDictionary *externalTextureAtlases; ///< Value is of GAFTextureAtlas class
 @property (nonatomic, strong) NSMutableArray      *hiddenSubobjectIds;
 
 @property (nonatomic, assign, readonly) BOOL    isInitialized;
@@ -111,26 +111,28 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 
 #pragma mark Working with subobjects and external objects
 
-/// Returns subobject which has specified name assinged to it ("namedParts" section in config)
+/// Returns subobject which has specified name assinged to it ("animationObjects" section in config)
 - (GAFSprite *)subobjectByName:(NSString *)aName;
 /// Returns subobject by raw name (usually "Zn", where n is natural number (1,2,3,...))
 - (GAFSprite *)subobjectByRawName:(NSString *)aRawName;
 
-/// Hides or show subobject which has specified name assinged to it ("namedParts" section in config)
+- (NSString *)nameOfSubobject:(GAFSprite *)aSubobject;
+
+/// Hides or show subobject which has specified name assinged to it ("animationObjects" section in config)
 - (BOOL)isSubobjectHiddenWithName:(NSString *)aName;
 - (void)setSubobjectHidden:(BOOL)isHidden withName:(NSString *)aName;
 
-/// Uses objects from atlas by linking their IDs to IDs specified in 'namedParts' config section
+/// Uses objects from atlas by linking their IDs to IDs specified in 'animationObjects' config section
 /// @note after execution of this method, aTextureAtlas will have only textures, images will be released
 /// @param aTextureAtlas new texture atlas
 /// @param anOldTextureAtlas old external texture atlas that should be replaced by a new one (can be nil)
-- (void)linkExternalNamedPartsAtlas:(GAFTextureAtlas *)aTextureAtlas forName:(NSString *)anAtlasName;
+- (void)linkExternalAtlas:(GAFTextureAtlas *)aTextureAtlas forName:(NSString *)anAtlasName;
 - (void)removeLinkedAtlasForName:(NSString *)anAtlasName;
 
 /// Takes control over subobject, which means that every frame control delegate will be notified to decide
 /// what to do with captured external object
 /// @note it supports only objects for now, DOES NOT SUPPORT MASKS
-/// @param subobject name taken from "namedParts" section in config
+/// @param subobject name taken from "animationObjects" section in config
 /// @param controlFlags flags specifying what played will do with subobjects controlled externally
 /// @returns YES if control was successfully taken and all future 
 - (BOOL)captureControlOverSubobjectNamed:(NSString *)aName controlFlags:(GAFAnimatedObjectControlFlags)aControlFlags;

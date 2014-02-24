@@ -157,6 +157,7 @@ NSString * const kCCNodeMaskContainerAssociatedObject     = @"CCNodeMaskContaine
     // Use stencil
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
     glStencilFunc(GL_EQUAL, 1, 1);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 }
 
 #pragma mark -

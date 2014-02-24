@@ -27,11 +27,11 @@
 + (GAFStaticObject *)staticObjectWithAsset:(GAFAsset *)anAsset;
 + (GAFStaticObject *)staticObjectWithPath:(NSString *)aJSONPath;
 + (GAFStaticObject *)staticObjectWithAsset:(GAFAsset *)anAsset
-                   externalNamedPartsAtlas:(GAFTextureAtlas *)anAtlas
+                             externalAtlas:(GAFTextureAtlas *)anAtlas
                                  atlasName:(NSString *)anExternalAtlasName;
 
 - (id)initWithAsset:(GAFAsset *)anAsset
-externalNamedPartsAtlas:(GAFTextureAtlas *)anAtlas
+      externalAtlas:(GAFTextureAtlas *)anAtlas
           atlasName:(NSString *)anExternalAtlasName;
 
 @end

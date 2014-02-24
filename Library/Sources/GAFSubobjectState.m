@@ -91,7 +91,7 @@ static NSString * const kBlurEffectName = @"Fblur";
 			return nil;
 		}
 		NSString * temp = [state substringWithRange:NSMakeRange(0, s.location - 1)];
-		self.zIndex = [temp intValue];
+		self.zIndex = [temp integerValue];
 		NSRange r = NSMakeRange(e.location + 2, [state length] - e.location - 2);
 		temp = [state substringWithRange:r];
 		_colorMults[GAFCTI_A] = [temp floatValue];

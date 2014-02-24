@@ -45,12 +45,12 @@
 }
 
 + (GAFStaticObject *)staticObjectWithAsset:(GAFAsset *)anAsset
-externalNamedPartsAtlas:(GAFTextureAtlas *)anAtlas
-          atlasName:(NSString *)anExternalAtlasName
+                             externalAtlas:(GAFTextureAtlas *)anAtlas
+                                 atlasName:(NSString *)anExternalAtlasName
 {
     return [[self alloc] initWithAsset:anAsset
-                externalNamedPartsAtlas:anAtlas
-                              atlasName:anExternalAtlasName];
+                         externalAtlas:anAtlas
+                             atlasName:anExternalAtlasName];
 }
 
 - (id)initWithAsset:(GAFAsset *)anAsset
@@ -69,12 +69,12 @@ externalNamedPartsAtlas:(GAFTextureAtlas *)anAtlas
 }
 
 - (id)initWithAsset:(GAFAsset *)anAsset
-externalNamedPartsAtlas:(GAFTextureAtlas *)anAtlas
+      externalAtlas:(GAFTextureAtlas *)anAtlas
           atlasName:(NSString *)anExternalAtlasName
 {
     if ((self = [super initWithAsset:anAsset]))
     {
-        [self linkExternalNamedPartsAtlas:anAtlas forName:anExternalAtlasName];
+        [self linkExternalAtlas:anAtlas forName:anExternalAtlasName];
         [self start];
         [self gotoFrameAndStop:0];
     }

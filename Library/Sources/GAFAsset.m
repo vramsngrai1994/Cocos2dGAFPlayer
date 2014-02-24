@@ -24,7 +24,7 @@ static NSString * const kAnimationFrameCountKey             = @"animationFrameCo
 static NSString * const kAnimationConfigFramesKey           = @"animationConfigFrames";
 static NSString * const kAnimationObjectsKey                = @"animationObjects";
 static NSString * const kAnimationMasksKey                  = @"animationMasks";
-static NSString * const kAnimationNamedPartsKey             = @"namedParts";
+//static NSString * const kAnimationNamedPartsKey             = @"namedParts";
 static NSString * const kTextureAtlasKey                    = @"textureAtlas";
 static NSString * const kAnimationSequencesKey              = @"animationSequences";
 static NSString * const kVersionKey                         = @"version";
@@ -59,8 +59,6 @@ static NSString * const kHeightKey                          = @"height";
 
 @property (nonatomic, strong) NSDictionary        *objects;
 @property (nonatomic, strong) NSDictionary        *masks;
-
-@property (nonatomic, strong) NSDictionary        *namedParts;
 
 @property (nonatomic, strong) NSMutableDictionary *extendedDataObjectGroups;
 
@@ -164,7 +162,6 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 	
 	NSDictionary *objectNodes       = configDictionary[kAnimationObjectsKey];
 	NSDictionary *masksNodes        = configDictionary[kAnimationMasksKey];
-	NSDictionary *namedPartsNodes   = configDictionary[kAnimationNamedPartsKey];
     
 	NSString *versionNode           = configDictionary[kVersionKey];
     NSDictionary *boundingBox       = configDictionary[kBoundingBoxKey];
@@ -277,7 +274,6 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
     // Nodes are accurately the same as we need [ObjectId] -> [AtlasTextureId]
     self.objects = objectNodes;
     self.masks = masksNodes;
-    self.namedParts = namedPartsNodes;
     
     // Extended objects
     if (anExtendedDataObjectClasses != nil)

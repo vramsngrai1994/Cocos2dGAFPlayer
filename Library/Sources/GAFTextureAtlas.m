@@ -114,7 +114,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
                 NSUInteger csf = 0;
                 for (NSDictionary * csfdict in sources)
                 {
-                    csf = [csfdict[kCSFKey] intValue];
+                    csf = [csfdict[kCSFKey] unsignedIntegerValue];
                     NSString * s = (NSString *)csfdict[kSourceKey];
                     if (1 == csf)
                     {
@@ -226,7 +226,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
                 NSString * source = nil;
                 for (NSDictionary * csfdict in sources)
                 {
-                    csf = [csfdict[kCSFKey] intValue];
+                    csf = [csfdict[kCSFKey] unsignedIntegerValue];
                     NSString * s = (NSString *)csfdict[kSourceKey];
                     if (1 == csf)
                     {

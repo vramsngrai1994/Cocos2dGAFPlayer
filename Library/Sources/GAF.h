@@ -24,4 +24,4 @@
 #import "GAFTextureAtlas.h"
 #import "GAFTextureAtlasElement.h"
 #import "GAFAssetExtendedDataObject.h"
-#import "GAFTextureEffectsConverter.h"
+#import "GAFEffectPreprocessor.h"
