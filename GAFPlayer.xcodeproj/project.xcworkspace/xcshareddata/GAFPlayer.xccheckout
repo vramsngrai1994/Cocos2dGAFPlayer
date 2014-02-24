@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2C955D14-A34B-4445-8059-F43587CAA2B3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GAFPlayer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BD069BD6-F6D7-4508-8B5A-3020FA5EFDC4</key>
+		<string>https://github.com/CatalystApps/Cocos2dGAFPlayer.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GAFPlayer.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BD069BD6-F6D7-4508-8B5A-3020FA5EFDC4</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/CatalystApps/Cocos2dGAFPlayer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BD069BD6-F6D7-4508-8B5A-3020FA5EFDC4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BD069BD6-F6D7-4508-8B5A-3020FA5EFDC4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Cocos2dGAFPlayer</string>
+		</dict>
+	</array>
+</dict>
+</plist>
