@@ -9,9 +9,25 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+@interface Source : NSObject
+
+@property (nonatomic, copy) NSString*   source;
+@property (nonatomic, assign) float csf;
+
+@end
+
+
+@interface AtlasInfo : NSObject
+
+@property (nonatomic, strong, readwrite) NSMutableArray* sources; //! array of sources
+@property (nonatomic, assign) NSUInteger idx;
+
+@end
+
 @interface GAFTextureAtlas : NSObject
 
 @property (nonatomic, assign) BOOL loaded;
+@property (nonatomic, assign) float scale;
 
 //@property (nonatomic, strong) UIImage *image;   // returns or sets the first image in .images array
 //@property (nonatomic, strong, readonly) CCTexture2D *texture;   // returns the first image in .textures array
@@ -19,7 +35,9 @@
 @property (nonatomic, strong, readonly) NSMutableArray *images;     ///< UIImage images
 @property (nonatomic, strong, readonly) NSMutableArray *textures;   ///< CCTexture2D textures
 
-@property (nonatomic, strong) NSDictionary *elements;
+@property (nonatomic, strong, readonly) NSMutableArray* atlasInfos;
+
+@property (nonatomic, strong) NSMutableDictionary* elements;
 
 /// Loads texture atlas from config dictionary and textures NSData
 /// @param aTextureAtlasesDictionary dictionary with texture data with Key->Value pairs [AtlasName -> AtlasData]
@@ -47,5 +65,7 @@
 
 /// Releases images that can be kept as temporary data source when creating atlas textures
 - (void)releaseImages;
+- (BOOL)loadImages:(NSString*)aTexturesDirectory keepImagesInAtlas:(BOOL)aKeepImagesInAtlas;
+- (void)pushAtlasInfo:(AtlasInfo*)anAtlasInfo;
 
 @end

@@ -15,6 +15,9 @@
 #import "GAFAssetExtendedDataObject.h"
 
 #import "GAFSprite.h"
+
+#import "GAFLoader.h"
+
 #import "Support/CCFileUtils.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,12 +61,13 @@ static NSString * const kHeightKey                          = @"height";
 @property (nonatomic, assign) CGFloat             usedAtlasContentScaleFactor;
 
 @property (nonatomic, strong) NSDictionary        *objects;
+
+@property (nonatomic, strong) NSMutableDictionary*       animationObjects;
+@property (nonatomic, strong) NSMutableDictionary*       animationMasks;
+
 @property (nonatomic, strong) NSDictionary        *masks;
 
 @property (nonatomic, strong) NSMutableDictionary *extendedDataObjectGroups;
-
-@property (nonatomic, strong) NSArray             *animationFrames;
-@property (nonatomic, strong) NSDictionary        *animationSequences;
 
 @property (nonatomic, assign) CGRect              boundingBox;
 @property (nonatomic, assign) CGPoint             pivotPoint;
@@ -129,6 +133,51 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
             orAtlasTexturesFolder:anAtlasTexturesFolder
         extendedDataObjectClasses:nil
                 keepImagesInAtlas:aKeepImagesInAtlas];
+}
+
+//! Binary GAF initializers here:
+- (id) initWithGAFFile:(NSString *)aGAFFilePath
+ atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
+ orAtlasTexturesFolder:(NSString *)anAtlasTexturesFolder
+extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
+     keepImagesInAtlas:(BOOL)aKeepImagesInAtlas;
+{
+    self = [super init];
+    
+    GAFLoader* loader = new GAFLoader();
+    
+    bool isLoaded = loader->loadFile(aGAFFilePath, self);
+    
+    if (isLoaded)
+    {
+        self.textureAtlas = [self.textureAtlases objectAtIndex:0];
+        float atlasScale = self.textureAtlas.scale;
+        CGFloat currentDeviceScale = CC_CONTENT_SCALE_FACTOR();
+        
+        for (NSUInteger i = 1; i < [self.textureAtlases count]; ++i)
+        {
+            GAFTextureAtlas* atl = [self.textureAtlases objectAtIndex:i];
+            float as = atl.scale;
+            
+            if (fabs(atlasScale - currentDeviceScale) > fabs(as - currentDeviceScale))
+            {
+                self.textureAtlas = atl;
+                atlasScale = as;
+            }
+        }
+        
+        self.usedAtlasContentScaleFactor = atlasScale;
+        
+        if (self.textureAtlas)
+        {
+            [self.textureAtlas loadImages:anAtlasTexturesFolder keepImagesInAtlas:NO];
+        }
+    }
+    
+    if (isLoaded)
+        return  self;
+    else
+        return nil;
 }
 
 - (id)initWithJSONData:(NSData *)aJSONData

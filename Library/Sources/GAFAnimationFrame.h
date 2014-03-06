@@ -11,6 +11,6 @@
 
 @interface GAFAnimationFrame : NSObject
 
-@property (nonatomic, strong) NSArray *objectsStates;
+@property (nonatomic, strong) NSMutableArray *objectsStates;
 
 @end

@@ -31,6 +31,7 @@ static NSString * const kAtlasIDKey = @"atlasID";
 @synthesize pivotPoint;
 @synthesize bounds;
 @synthesize atlasIdx;
+@synthesize elementAtlasIdx;
 
 #pragma mark -
 #pragma mark Initialization & Release
@@ -92,7 +93,7 @@ static NSString * const kAtlasIDKey = @"atlasID";
             return nil;
         }
         
-        NSNumber *atlasId = aDictionary[kAtlasIDKey];
+        /*NSNumber *atlasId = aDictionary[kAtlasIDKey];
         if (atlasId != nil)
         {
             self.atlasIdx = [atlasId integerValue] - 1;
@@ -101,7 +102,7 @@ static NSString * const kAtlasIDKey = @"atlasID";
         {
             self.atlasIdx = 0;
             CCLOGWARN(@"AtlasID is missing, assuming first atlas is used.");
-        }
+        }*/
     }
     return self;
 }

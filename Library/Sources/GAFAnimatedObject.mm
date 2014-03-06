@@ -173,7 +173,7 @@
                             animationMasksDictionary:(NSDictionary *)anAnimationMasks
 {   
     // Adding sub objects
-    for (NSString *objectId in anAnimationObjects)
+   /* for (NSString *objectId in anAnimationObjects)
     {
         NSString *atlasElementId = anAnimationObjects[objectId];
         CCSpriteFrame *spriteFrame = nil;
@@ -182,7 +182,7 @@
         GAFTextureAtlasElement *element = self.asset.textureAtlas.elements[atlasElementId];
         if (nil != element)
         {
-            if ([self.asset.textureAtlas.textures count] > element.atlasIdx)
+            if ([self.asset.textureAtlas.textures count] > [element.atlasIdx integerValue])
             {
                 CCTexture2D *texture = self.asset.textureAtlas.textures[element.atlasIdx];
                 spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
@@ -206,7 +206,7 @@
             
             if (nil != element)
             {
-                if ([externalAtlas.textures count] > element.atlasIdx)
+                if ([externalAtlas.textures count] > [element.atlasIdx integerValue])
                 {
                     CCTexture2D *texture = externalAtlas.textures[element.atlasIdx];
                     spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
@@ -311,7 +311,7 @@
             (self.masks)[maskId] = mask;
             [self addChild:mask];
         }
-    }
+    }*/
 }
 
 - (void)removeAllSubObjects

@@ -25,6 +25,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
 
 @property (nonatomic, strong) NSMutableArray *images;
 @property (nonatomic, strong) NSMutableArray *textures;
+@property (nonatomic, strong) NSMutableArray* atlasInfos;
 
 - (void)loadElementsFromAnimationConfigDictionary:(NSDictionary *)aConfigDictionary;
 
@@ -277,6 +278,13 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
     return self;
 }
 
+
+- (void)pushAtlasInfo:(AtlasInfo *)anAtlasInfo
+{
+    [self.atlasInfos addObject:anAtlasInfo];
+}
+
+
 - (id)initWithImages:(NSArray *)anImagesArray
        atlasElements:(NSDictionary *)anAtlasElements
     generateTextures:(BOOL)aGenerateTextures
@@ -309,6 +317,84 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
 
 #pragma mark -
 #pragma mark Public methods
+
+- (BOOL)loadImages:(NSString *)aTexturesDirectory keepImagesInAtlas:(BOOL)aKeepImagesInAtlas;
+{
+    self.atlasInfos = [NSMutableArray arrayWithArray:[self.atlasInfos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
+                      {
+                          AtlasInfo* ai1 = (AtlasInfo*)obj1;
+                          AtlasInfo* ai2 = (AtlasInfo*)obj2;
+                          return ai1.idx < ai2.idx;
+                      }]];
+    
+    NSUInteger desiredCsf = 1;
+    NSUInteger realCsf = 1;
+    
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+        ([UIScreen mainScreen].scale == 2.0))
+    {
+        desiredCsf = 2;
+    }
+    
+    if (self.atlasInfos && self.atlasInfos.count > 0)
+    {
+        
+        NSString* source = nil;
+        
+        for (NSUInteger i = 0; i < self.atlasInfos.count; ++i)
+        {
+            AtlasInfo* info = [self.atlasInfos objectAtIndex:i];
+
+            for (NSUInteger j = 0; i < info.sources.count; ++i)
+            {
+                Source* aiSource = [info.sources objectAtIndex:j];
+                if (1.f == aiSource.csf)
+                {
+                    source = aiSource.source;
+                }
+                
+                if (aiSource.csf == desiredCsf)
+                {
+                    source = aiSource.source;
+                    realCsf = aiSource.csf;
+                    break;
+                }
+            }
+            
+            if (source == nil)
+            {
+                CCLOGWARN(@"ERROR: initializing sources. 'source' not present");
+                return NO;
+            }
+            
+            NSData *imageData = [NSData dataWithContentsOfFile:[aTexturesDirectory stringByAppendingPathComponent:source]];
+            
+            if (imageData == nil)
+            {
+                CCLOGWARN(@"Cannot load imageData for name(key) - %@", source);
+                return nil;
+            }
+            
+            UIImage *image = [[UIImage alloc] initWithData:imageData scale:realCsf];
+            
+            if (image == nil)
+            {
+                CCLOGWARN(@"Cannot create UIImage for texture for name(key) - %@", source);
+                return nil;
+            }
+            
+            [self.images addObject:image];
+        }
+    }
+    
+    [self generateTexturesFromImages];
+    if (!aKeepImagesInAtlas)
+    {
+        [self releaseImages];
+    }
+    
+    return YES;
+}
 
 - (void)releaseImages
 {

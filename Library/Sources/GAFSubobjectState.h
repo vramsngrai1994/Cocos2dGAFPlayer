@@ -26,12 +26,19 @@ typedef NS_ENUM(NSUInteger, GAFColorTransformIndex)
 @property (nonatomic,   copy) NSString          *atlasElementName;
 @property (nonatomic, assign) CGAffineTransform affineTransform;
 @property (nonatomic, strong) NSDictionary      *filters;
+@property (nonatomic, strong) NSMutableArray*   filtersList;
 
+@property (nonatomic, copy) NSNumber* objectIdRef;
+@property (nonatomic, copy) NSNumber* maskObjectIdRef;
+
+
+- (id)initEmpty:(NSNumber*)anObjectIdRef;
 - (id)initEmptyStateWithObjectId:(NSString *)anObjectId;
 - (id)initWithStateDictionary:(NSDictionary *)aStateDictionary objectId:(NSString *)anObjectId;
 
 - (BOOL)isVisible;
 - (GLfloat *)colorMults;
 - (GLfloat *)colorOffsets;
+- (void)ctxMakeIdentity;
 
 @end

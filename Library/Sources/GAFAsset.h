@@ -7,6 +7,7 @@
 
 @class GAFTextureAtlas;
 @class GAFAnimatedObject;
+@class GAFAnimationFrame;
 @class GAFAnimationSequence;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,6 +28,10 @@
 @property (nonatomic, assign, readonly) CGFloat             usedAtlasContentScaleFactor; // csf of used atlas
 
 @property (nonatomic, strong, readonly) NSDictionary        *objects; // dictionary of objects [ObjectId -> AtlasElementName]
+
+@property (nonatomic, strong, readonly) NSMutableDictionary* animationObjects; // dictionary of objects [ObjectIdRef -> Element atlas id]
+@property (nonatomic, strong, readonly) NSMutableDictionary* animationMasks; // dictionary of objects [ObjectIdRef -> Element atlas id]
+
 @property (nonatomic, strong, readonly) NSDictionary        *masks; // dictionary of masks [MaskId -> AtlasElementName]
 
 /// List of extended data object groups. Key - groupJSONName, Value - group, which is an array of parsed objects.
@@ -34,11 +39,13 @@
 
 #pragma mark Animation related data
 
-@property (nonatomic, strong, readonly) NSArray             *animationFrames; ///< List of GAFAnimationFrame objects
-@property (nonatomic, strong, readonly) NSDictionary        *animationSequences; ///< List of GAFAnimationSequences objects
+@property (nonatomic, strong) NSMutableArray*               animationFrames; ///< List of GAFAnimationFrame objects
+@property (nonatomic, strong) NSMutableDictionary*          animationSequences; ///< List of GAFAnimationSequences objects
 
 @property (nonatomic, assign, readonly) CGRect              boundingBox;
 @property (nonatomic, assign, readonly) CGPoint             pivotPoint;
+@property (nonatomic, strong) NSMutableArray*               textureAtlases;
+@property (nonatomic, strong) NSMutableDictionary*          namedParts;
 
 #pragma mark Methods
 
@@ -65,6 +72,12 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 /// Same initialization as initWithJSONData:atlasesDataDictionary:orAtlasTexturesFolder: but gives an ability
 /// to specify parsing classes for extendedData objects
 - (id)initWithJSONData:(NSData *)aJSONData
+ atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
+ orAtlasTexturesFolder:(NSString *)anAtlasTexturesFolder
+extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
+     keepImagesInAtlas:(BOOL)aKeepImagesInAtlas;
+
+- (id) initWithGAFFile:(NSString*)aGAFFilePath
  atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
  orAtlasTexturesFolder:(NSString *)anAtlasTexturesFolder
 extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses

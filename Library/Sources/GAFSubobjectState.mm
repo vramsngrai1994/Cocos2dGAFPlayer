@@ -38,6 +38,22 @@ static NSString * const kBlurEffectName = @"Fblur";
 #pragma mark -
 #pragma mark Initialization & Release
 
+- (id) initEmpty:(NSNumber *)anObjectIdRef
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        self.objectIdRef = anObjectIdRef;
+        self.zIndex = 0;
+        self.affineTransform = CGAffineTransformMake(1, 0, 0, 1, 0, 0);
+        _colorOffsets[0] = _colorOffsets[1] = _colorOffsets[2] = _colorOffsets[3] = _colorMults[GAFCTI_A] = 0;
+		_colorMults[GAFCTI_R]   = _colorMults[GAFCTI_G]   = _colorMults[GAFCTI_B] = 1;
+    }
+    
+    return self;
+}
+
 - (id)initEmptyStateWithObjectId:(NSString *)anObjectId
 {
     if(anObjectId == nil)
@@ -233,6 +249,12 @@ static NSString * const kBlurEffectName = @"Fblur";
 - (GLfloat *)colorOffsets
 {
 	return (GLfloat *) &_colorOffsets[0];
+}
+
+- (void)ctxMakeIdentity
+{
+    _colorOffsets[0] = _colorOffsets[1] = _colorOffsets[2] = _colorOffsets[3] = 0;
+    _colorMults[GAFCTI_R] = _colorMults[GAFCTI_G] = _colorMults[GAFCTI_B] = 1;
 }
 
 #pragma mark -
