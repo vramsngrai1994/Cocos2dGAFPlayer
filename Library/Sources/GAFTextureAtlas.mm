@@ -19,13 +19,26 @@ static NSString * const kSourceKey       = @"source";
 static NSString * const kCSFKey          = @"csf";
 static NSString * const kTextureAtlasKey = @"textureAtlas";
 
+@implementation AtlasInfo
+
+@synthesize sources;
+@synthesize idx;
+
+@end
+
+@implementation Source
+
+@synthesize source;
+@synthesize csf;
+
+@end
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface GAFTextureAtlas ()
 
 @property (nonatomic, strong) NSMutableArray *images;
 @property (nonatomic, strong) NSMutableArray *textures;
-@property (nonatomic, strong) NSMutableArray* atlasInfos;
 
 - (void)loadElementsFromAnimationConfigDictionary:(NSDictionary *)aConfigDictionary;
 
@@ -435,6 +448,8 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
 
 - (void)loadElementsFromAnimationConfigDictionary:(NSDictionary *)aConfigDictionary
 {
+    
+#if 0
     if (aConfigDictionary == nil)
     {
         CCLOGWARN(@"Error in loadElementsFromAnimationConfigDictionary. aConfigDictionary is nil.");
@@ -474,6 +489,9 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
     }
     
     self.loaded = YES;
+
+#endif
+    
 }
 
 @end

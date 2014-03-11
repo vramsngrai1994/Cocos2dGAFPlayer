@@ -23,36 +23,7 @@ struct Tags
         TagDefineSequences = 6,
     };
     
-    static std::string toString(Enum e)
-    {
-        switch (e)
-        {
-            case Tags::TagEnd:
-                return "TagEnd";
-                break;
-            case Tags::TagDefineAtlas:
-                return "TagDefineAtlas";
-                break;
-            case Tags::TagDefineAnimationMasks:
-                return "TagDefineAnimationMasks";
-                break;
-            case Tags::TagDefineAnimationObjects:
-                return "TagDefineAnimationObjects";
-                break;
-            case Tags::TagDefineAnimationFrames:
-                return "TagDefineAnimationFrames";
-                break;
-            case Tags::TagDefineNamedParts:
-                return "TagDefineNamedParts";
-                break;
-            case Tags::TagDefineSequences:
-                return "TagDefineSequences";
-                break;
-            default:
-                return "";
-                assert(false);
-        }
-    }
+    static std::string toString(Enum e);
 };
 
 

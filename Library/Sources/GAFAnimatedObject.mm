@@ -35,10 +35,10 @@
 - (GAFSprite *)subObjectForInnerObjectId:(NSString *)anInnerObjectId;
 - (NSString *)objectIdByObjectName:(NSString *)aName;
 
-/// Creates subobjects from [ObjectID]->[AtlasSegmentID] pairs
-- (void)addSubObjectsUsingAnimationObjectsDictionary:(NSDictionary *)anAnimationObjects
-                            animationMasksDictionary:(NSDictionary *)anAnimationMasks;
 - (void)removeAllSubObjects;
+
+- (void) instantiateObject:(NSDictionary*)anAnimationObjects
+  animationMasksDictionary:(NSDictionary *)anAnimationMasks;
 
 /// Processes animation frame that was already processed, doesn't move currentFrame pointer
 /// (may be needed in case when subobject parameters were changed and require verification)
@@ -71,6 +71,8 @@
     return [[self alloc] initWithAsset:anAsset];
 }
 
+#if 0
+
 + (GAFAnimatedObject *)animatedObjectWithPath:(NSString *)aJSONPath
 {
     return [[self alloc] initWithPath:aJSONPath];
@@ -80,6 +82,8 @@
 {
     return [[self alloc] initWithPath:aJSONPath runLooped:aLooped];
 }
+
+#endif
 
 - (id)initWithAsset:(GAFAsset *)anAsset
 {
@@ -118,6 +122,8 @@
 	return self;
 }
 
+#if 0
+
 - (id)initWithPath:(NSString *)aJSONPath
 {
     if(aJSONPath == nil)
@@ -151,6 +157,8 @@
     return nil;
 }
 
+#endif
+
 #pragma mark -
 #pragma mark Public methods
 
@@ -169,28 +177,28 @@
     return CGRectApplyAffineTransform(result, [self nodeToParentTransform]);
 }
 
-- (void)addSubObjectsUsingAnimationObjectsDictionary:(NSDictionary *)anAnimationObjects
-                            animationMasksDictionary:(NSDictionary *)anAnimationMasks
-{   
-    // Adding sub objects
-   /* for (NSString *objectId in anAnimationObjects)
+- (void) instantiateObject:(NSDictionary*)anAnimationObjects
+  animationMasksDictionary:(NSDictionary *)anAnimationMasks
+{
+    for (NSNumber* objectIdRef in anAnimationObjects)
     {
-        NSString *atlasElementId = anAnimationObjects[objectId];
         CCSpriteFrame *spriteFrame = nil;
         
-        // Try to search in inner texture atlas
-        GAFTextureAtlasElement *element = self.asset.textureAtlas.elements[atlasElementId];
+        NSNumber* atlasElementIdRef = anAnimationObjects[objectIdRef];
+        
+        GAFTextureAtlasElement* element = self.asset.textureAtlas.elements[atlasElementIdRef];
+        
         if (nil != element)
         {
             if ([self.asset.textureAtlas.textures count] > [element.atlasIdx integerValue])
             {
-                CCTexture2D *texture = self.asset.textureAtlas.textures[element.atlasIdx];
+                CCTexture2D *texture = self.asset.textureAtlas.textures[[element.atlasIdx integerValue]];
                 spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
             }
             else
             {
-                CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.",
-                           atlasElementId, element.atlasIdx);
+//                CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.", atlasElementId, element.atlasIdx);
+                
             }
         }
         // or in external texture atlas
@@ -199,37 +207,39 @@
             GAFTextureAtlas *externalAtlas = nil;
             for (externalAtlas in [self.externalTextureAtlases allValues])
             {
-                element = externalAtlas.elements[atlasElementId];
+                element = externalAtlas.elements[atlasElementIdRef];
                 if (element != nil)
+                {
                     break;
+                }
             }
             
             if (nil != element)
             {
                 if ([externalAtlas.textures count] > [element.atlasIdx integerValue])
                 {
-                    CCTexture2D *texture = externalAtlas.textures[element.atlasIdx];
+                    CCTexture2D *texture = externalAtlas.textures[[element.atlasIdx integerValue]];
                     spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
                 }
                 else
                 {
-                    CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.",
-                              atlasElementId, element.atlasIdx);
+//                    CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.", atlasElementId, element.atlasIdx);
                 }
             }
         }
         
-        if (spriteFrame != nil)
+        if (nil != spriteFrame)
         {
-            GAFSpriteWithAlpha *sprite = [[GAFSpriteWithAlpha alloc] initWithSpriteFrame:spriteFrame];
-            
-            sprite.objectId = objectId;
-            sprite.atlasElementId = atlasElementId;
+            GAFSpriteWithAlpha* sprite = [[GAFSpriteWithAlpha alloc] initWithSpriteFrame:spriteFrame];
+            sprite.objectIdRef = objectIdRef;
+            sprite.atlasElementIdRef = atlasElementIdRef;
             
             sprite.visible = NO;
+            
             sprite.anchorPoint = CGPointMake(element.pivotPoint.x / sprite.contentSize.width,
                                              1 - (element.pivotPoint.y / sprite.contentSize.height));
             sprite.useExternalTransform = YES;
+            
             if (element.scale != 1.0f)
 			{
 				sprite.atlasScale = 1.0f / element.scale;
@@ -237,34 +247,32 @@
             
             sprite.blendFunc = (ccBlendFunc){ GL_ONE, GL_ONE_MINUS_SRC_ALPHA };
             
-            // Add to subobjects
-            (self.subObjects)[objectId] = sprite;
+            (self.subObjects)[objectIdRef] = sprite;
         }
         else
         {
-            CCLOGWARN(@"Cannot add subnode with AtlasElementName: %@, not found in atlas(es). Ignoring.",
-                            atlasElementId);
+//            CCLOGWARN(@"Cannot add subnode with AtlasElementName: %@, not found in atlas(es). Ignoring.", atlasElementId);
         }
     }
     
     // Adding masks
-    for (NSString *maskId in [anAnimationMasks allKeys])
+    for (NSNumber* maskIdRef in [anAnimationMasks allKeys])
     {
-        NSString *atlasElementId = anAnimationMasks[maskId];
+        NSNumber* atlasElementIdRef = anAnimationMasks[maskIdRef];
         CCSpriteFrame *spriteFrame = nil;
         
-        GAFTextureAtlasElement *element = (self.asset.textureAtlas.elements)[atlasElementId];
+        GAFTextureAtlasElement *element = (self.asset.textureAtlas.elements)[atlasElementIdRef];
+        
         if (nil != element)
         {
-            if ([self.asset.textureAtlas.textures count] > element.atlasIdx)
+            if ([self.asset.textureAtlas.textures count] > [element.atlasIdx integerValue])
             {
-                CCTexture2D *texture = self.asset.textureAtlas.textures[element.atlasIdx];
+                CCTexture2D *texture = self.asset.textureAtlas.textures[[element.atlasIdx integerValue]];
                 spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
             }
             else
             {
-                CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.",
-                          atlasElementId, element.atlasIdx);
+//                CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.", atlasElementId, element.atlasIdx);
             }
         }
         else if (self.externalTextureAtlases.count > 0)
@@ -273,45 +281,47 @@
             GAFTextureAtlas *externalAtlas = nil;
             for (externalAtlas in [self.externalTextureAtlases allValues])
             {
-                element = externalAtlas.elements[atlasElementId];
+                element = externalAtlas.elements[atlasElementIdRef];
+                
                 if (element != nil)
+                {
                     break;
+                }
             }
             
             if (nil != element)
             {
-                if ([externalAtlas.textures count] > element.atlasIdx)
+                if ([externalAtlas.textures count] > [element.atlasIdx integerValue])
                 {
-                    CCTexture2D *texture = externalAtlas.textures[element.atlasIdx];
+                    CCTexture2D *texture = externalAtlas.textures[[element.atlasIdx integerValue]];
                     spriteFrame = [CCSpriteFrame frameWithTexture:texture rect:element.bounds];
                 }
                 else
                 {
-                    CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.",
-                              atlasElementId, element.atlasIdx);
+//                    CCLOGWARN(@"Cannot add sub object with Id: %@, atlas with idx: %u not found.", atlasElementId, element.atlasIdx);
                 }
             }
         }
 		else
 		{
-			CCLOGWARN(@"Can not get atlasElementId for key %@. Animation can not work as expected.", maskId);
+			//CCLOGWARN(@"Can not get atlasElementId for key %@. Animation can not work as expected.", maskIdRef);
 		}
         
         if (spriteFrame != nil)
         {
             GAFStencilMaskSprite *mask = [[GAFStencilMaskSprite alloc] initWithSpriteFrame:spriteFrame];
             
-            mask.objectId = maskId;
-            mask.atlasElementId = atlasElementId;
+            mask.objectIdRef = maskIdRef;
+            mask.atlasElementIdRef = atlasElementIdRef;
             mask.anchorPoint = CGPointMake(element.pivotPoint.x / mask.contentSize.width,
                                            1 - (element.pivotPoint.y / mask.contentSize.height));
             mask.useExternalTransform = YES;
             
             // Add to masks
-            (self.masks)[maskId] = mask;
+            (self.masks)[maskIdRef] = mask;
             [self addChild:mask];
         }
-    }*/
+    }
 }
 
 - (void)removeAllSubObjects
@@ -436,9 +446,7 @@
             }
             
             // Adding new subobjects
-            [self addSubObjectsUsingAnimationObjectsDictionary:newObjects
-                                      animationMasksDictionary:newMasks];
-            
+            [self instantiateObject:newObjects animationMasksDictionary:newMasks];
             [self processCurrentAnimationFrameOnceMore];
         }
     }
@@ -740,8 +748,7 @@
 {
     if (!self.isInitialized)
     {
-        [self addSubObjectsUsingAnimationObjectsDictionary:self.asset.objects
-                                  animationMasksDictionary:self.asset.masks];
+        [self instantiateObject:self.asset.animationObjects animationMasksDictionary:self.asset.animationMasks];
         
         self.isInitialized = YES;
         
@@ -891,7 +898,7 @@
     for (NSUInteger i = 0; i < currentFrame.objectsStates.count; ++i)
     {
         GAFSubobjectState *state = (currentFrame.objectsStates)[i];
-        GAFSpriteWithAlpha *subObject = (self.subObjects)[state.objectId];
+        GAFSpriteWithAlpha *subObject = (self.subObjects)[state.objectIdRef];
         CGAffineTransform stateTransform = state.affineTransform;
         stateTransform.ty -= self.contentSize.height; //flash position to cocos2d position
         stateTransform.tx *= self.asset.usedAtlasContentScaleFactor;
@@ -923,7 +930,7 @@
             
             // Determine if object is masked or not
             // Depending on that: add to hierarchy OR add to mask
-            if (state.maskObjectId == nil)
+            if (state.maskObjectIdRef == nil)
             {
                 if (subObject.parent == nil)
                 {
@@ -936,7 +943,7 @@
                 {
                     [self removeChild:subObject cleanup:NO];
                 }
-                GAFStencilMaskSprite *mask = self.masks[state.maskObjectId];
+                GAFStencilMaskSprite *mask = self.masks[state.maskObjectIdRef];
                 if (mask != nil)
                 {
                     [mask addMaskedObject:subObject];
@@ -946,7 +953,7 @@
             // Determine is subobject is captured
             BOOL subobjectCaptured = NO;
             GAFAnimatedObjectControlFlags controlFlags = kGAFAnimatedObjectControl_None;
-            NSNumber *flagsNum = self.capturedObjects[state.objectId];
+            NSNumber *flagsNum = self.capturedObjects[state.objectIdRef];
             if (flagsNum)
             {
                 subobjectCaptured = YES;
@@ -980,7 +987,7 @@
         }
         else
         {
-            GAFSprite *mask = (self.masks)[state.objectId];
+            GAFSprite *mask = (self.masks)[state.objectIdRef];
             if (mask != nil)
             {
                 mask.externalTransform = GAF_CGAffineTransformCocosFormatFromFlashFormat(stateTransform);
@@ -1002,11 +1009,11 @@
     // Notify control delegate about captured subobjects
     for (GAFSubobjectState *state in currentFrame.objectsStates)
     {
-        GAFSpriteWithAlpha *subObject = (self.subObjects)[state.objectId];
+        GAFSpriteWithAlpha *subObject = (self.subObjects)[state.objectIdRef];
         if (subObject != nil)
         {
             // Determine is subobject is captured
-            BOOL subobjectCaptured = (self.capturedObjects[state.objectId] != nil);
+            BOOL subobjectCaptured = (self.capturedObjects[state.objectIdRef] != nil);
             
             // If captured, notify delegate about new frame rendering
             if (subobjectCaptured && self.controlDelegate != nil)

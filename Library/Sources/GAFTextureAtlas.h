@@ -19,7 +19,7 @@
 
 @interface AtlasInfo : NSObject
 
-@property (nonatomic, strong, readwrite) NSMutableArray* sources; //! array of sources
+@property (nonatomic, strong) NSMutableArray* sources; //! array of sources
 @property (nonatomic, assign) NSUInteger idx;
 
 @end
@@ -35,7 +35,7 @@
 @property (nonatomic, strong, readonly) NSMutableArray *images;     ///< UIImage images
 @property (nonatomic, strong, readonly) NSMutableArray *textures;   ///< CCTexture2D textures
 
-@property (nonatomic, strong, readonly) NSMutableArray* atlasInfos;
+@property (nonatomic, strong) NSMutableArray* atlasInfos;
 
 @property (nonatomic, strong) NSMutableDictionary* elements;
 

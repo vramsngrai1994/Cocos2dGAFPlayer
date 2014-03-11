@@ -61,10 +61,7 @@
 		[self addChild:pMenu z:10000];		
 		_anim_index = 0;
         
-        _jsons = @[@"SampleAnimations/blur/blur.json",
-                   @"SampleAnimations/fire/fire.json",
-                   @"SampleAnimations/coin/coin.json",
-                   @"SampleAnimations/food_table/food_table.json"
+        _jsons = @[@"slime/slimeBin.gaf",
                   ];
         
 		[self addObjectsToScene:1];
@@ -214,7 +211,9 @@
 {
 	if (_asset == nil)
 	{
-		_asset = [[GAFAsset alloc] initWithJSONAtPath:_jsons[_anim_index] keepImagesInAtlas:NO];
+		//_asset = [[GAFAsset alloc] initWithJSONAtPath:_jsons[_anim_index] keepImagesInAtlas:NO];
+        
+        _asset = [[GAFAsset alloc] initWithGAFFile:_jsons[_anim_index] atlasesDataDictionary:nil orAtlasTexturesFolder:nil extendedDataObjectClasses:nil keepImagesInAtlas:NO];
         
         [self setAnimationLabelText:_jsons[_anim_index]];
 	}

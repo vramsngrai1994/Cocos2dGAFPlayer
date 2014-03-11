@@ -25,7 +25,11 @@
 @interface GAFStaticObject : GAFAnimatedObject
 
 + (GAFStaticObject *)staticObjectWithAsset:(GAFAsset *)anAsset;
+
+#if 0
 + (GAFStaticObject *)staticObjectWithPath:(NSString *)aJSONPath;
+#endif
+
 + (GAFStaticObject *)staticObjectWithAsset:(GAFAsset *)anAsset
                              externalAtlas:(GAFTextureAtlas *)anAtlas
                                  atlasName:(NSString *)anExternalAtlasName;

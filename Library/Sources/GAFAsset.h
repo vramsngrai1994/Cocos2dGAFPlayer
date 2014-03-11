@@ -29,8 +29,8 @@
 
 @property (nonatomic, strong, readonly) NSDictionary        *objects; // dictionary of objects [ObjectId -> AtlasElementName]
 
-@property (nonatomic, strong, readonly) NSMutableDictionary* animationObjects; // dictionary of objects [ObjectIdRef -> Element atlas id]
-@property (nonatomic, strong, readonly) NSMutableDictionary* animationMasks; // dictionary of objects [ObjectIdRef -> Element atlas id]
+@property (nonatomic, strong) NSMutableDictionary*          animationObjects; // dictionary of objects [ObjectIdRef -> Element atlas id]
+@property (nonatomic, strong) NSMutableDictionary*          animationMasks; // dictionary of objects [ObjectIdRef -> Element atlas id]
 
 @property (nonatomic, strong, readonly) NSDictionary        *masks; // dictionary of masks [MaskId -> AtlasElementName]
 
@@ -50,6 +50,8 @@
 #pragma mark Methods
 
 + (BOOL)isAssetVersionPlayable:(NSString *)version;
+
+#if 0
 
 /// Initializes asset with path to JSON, atlas images should be located at the same level as JSON file (in the same folder)
 /// @param aKeepImagesInAtlas specifies whether GAFTextureAtlas should leave of release images (texture are always present)
@@ -76,6 +78,8 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
  orAtlasTexturesFolder:(NSString *)anAtlasTexturesFolder
 extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
      keepImagesInAtlas:(BOOL)aKeepImagesInAtlas;
+
+#endif
 
 - (id) initWithGAFFile:(NSString*)aGAFFilePath
  atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary

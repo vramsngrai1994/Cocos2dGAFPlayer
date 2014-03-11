@@ -19,6 +19,8 @@
 void TagDefineAtlas::read(GAFStream* in, GAFAsset* ctx)
 {
     GAFTextureAtlas* txAtlas = [GAFTextureAtlas new];
+    txAtlas.atlasInfos = [NSMutableArray array];
+    txAtlas.elements = [NSMutableDictionary dictionary];
     
     txAtlas.scale = in->readFloat();
     
@@ -26,7 +28,8 @@ void TagDefineAtlas::read(GAFStream* in, GAFAsset* ctx)
     
     for (unsigned char i = 0; i < atlasesCount; ++i)
     {
-        AtlasInfo* ai = [AtlasInfo new];
+        AtlasInfo* ai = [[AtlasInfo alloc] init];
+        ai.sources = [NSMutableArray array];
         
         ai.idx = in->readU32();
         
@@ -81,8 +84,8 @@ void TagDefineAtlas::read(GAFStream* in, GAFAsset* ctx)
         
         element.elementAtlasIdx = [NSNumber numberWithUnsignedInteger:in->readU32()];
         
-        element.bounds.origin = origin;
-        element.bounds.size = CGSizeMake(width, height);
+        
+        element.bounds = CGRectMake(origin.x, origin.y, width, height);
         
         [txAtlas.elements setObject:element forKey:element.elementAtlasIdx];
     }

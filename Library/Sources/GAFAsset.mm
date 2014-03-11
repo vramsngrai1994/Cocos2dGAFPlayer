@@ -62,9 +62,6 @@ static NSString * const kHeightKey                          = @"height";
 
 @property (nonatomic, strong) NSDictionary        *objects;
 
-@property (nonatomic, strong) NSMutableDictionary*       animationObjects;
-@property (nonatomic, strong) NSMutableDictionary*       animationMasks;
-
 @property (nonatomic, strong) NSDictionary        *masks;
 
 @property (nonatomic, strong) NSMutableDictionary *extendedDataObjectGroups;
@@ -90,6 +87,8 @@ static NSString * const kHeightKey                          = @"height";
 
 #pragma mark -
 #pragma mark Initialization & Release
+
+#if 0
 
 - (id)initWithJSONAtPath:(NSString *)aJSONPath keepImagesInAtlas:(BOOL)aKeepImagesInAtlas
 {
@@ -135,6 +134,8 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
                 keepImagesInAtlas:aKeepImagesInAtlas];
 }
 
+#endif
+
 //! Binary GAF initializers here:
 - (id) initWithGAFFile:(NSString *)aGAFFilePath
  atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
@@ -144,6 +145,12 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 {
     self = [super init];
     
+    self.textureAtlases = [NSMutableArray array];
+    self.animationObjects = [NSMutableDictionary dictionary];
+    self.animationMasks = [NSMutableDictionary dictionary];
+    self.animationFrames = [NSMutableArray array];
+    self.animationSequences = [NSMutableDictionary dictionary];
+     
     GAFLoader* loader = new GAFLoader();
     
     bool isLoaded = loader->loadFile(aGAFFilePath, self);
@@ -170,7 +177,8 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
         
         if (self.textureAtlas)
         {
-            [self.textureAtlas loadImages:anAtlasTexturesFolder keepImagesInAtlas:NO];
+            NSString *fullFilePath = [[CCFileUtils sharedFileUtils] fullPathForFilenameIgnoringResolutions:aGAFFilePath];
+            [self.textureAtlas loadImages:[fullFilePath stringByDeletingLastPathComponent] keepImagesInAtlas:NO];
         }
     }
     
@@ -179,6 +187,8 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
     else
         return nil;
 }
+
+#if 0
 
 - (id)initWithJSONData:(NSData *)aJSONData
  atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
@@ -393,6 +403,8 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 	return self;
 }
 
+#endif
+
 #pragma mark -
 #pragma mark Overriden methods
 
@@ -440,6 +452,8 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 
 #pragma mark -
 #pragma mark Private methods
+
+#if 0
 
 - (void)loadFramesFromConfigDictionary:(NSDictionary *)aConfigDictionary
 {
@@ -571,5 +585,7 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 	NSNumber *scale = (NSNumber *)anAtlasConfigDictionary[kAtlasScaleKey];
     return (scale != nil) ? [scale floatValue] : 0;
 }
+
+#endif
 
 @end

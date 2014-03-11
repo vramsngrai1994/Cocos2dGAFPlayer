@@ -22,6 +22,38 @@
 #include "TagDefineNamedParts.h"
 #include "TagDefineSequences.h"
 
+
+std::string Tags::toString(Enum e)
+{
+    switch (e)
+    {
+        case Tags::TagEnd:
+            return "TagEnd";
+            break;
+        case Tags::TagDefineAtlas:
+            return "TagDefineAtlas";
+            break;
+        case Tags::TagDefineAnimationMasks:
+            return "TagDefineAnimationMasks";
+            break;
+        case Tags::TagDefineAnimationObjects:
+            return "TagDefineAnimationObjects";
+            break;
+        case Tags::TagDefineAnimationFrames:
+            return "TagDefineAnimationFrames";
+            break;
+        case Tags::TagDefineNamedParts:
+            return "TagDefineNamedParts";
+            break;
+        case Tags::TagDefineSequences:
+            return "TagDefineSequences";
+            break;
+        default:
+            return "";
+            assert(false);
+    }
+}
+
 void GAFLoader::_readHeaderEnd(GAFHeader& header)
 {
     header.framesCount = m_stream->readU16();

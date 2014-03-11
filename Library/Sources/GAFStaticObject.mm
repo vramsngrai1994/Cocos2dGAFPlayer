@@ -39,11 +39,14 @@
     return [[self alloc] initWithAsset:anAsset];
 }
 
+#if 0
+
 + (GAFStaticObject *)staticObjectWithPath:(NSString *)aJSONPath
 {
     return [[self alloc] initWithPath:aJSONPath];
 }
 
+#endif
 + (GAFStaticObject *)staticObjectWithAsset:(GAFAsset *)anAsset
                              externalAtlas:(GAFTextureAtlas *)anAtlas
                                  atlasName:(NSString *)anExternalAtlasName
@@ -63,10 +66,14 @@
     return self;
 }
 
+#if 0
+
 - (id)initWithPath:(NSString *)aJSONPath runLooped:(BOOL)aLooped
 {
     return [self initWithPath:aJSONPath];
 }
+
+#endif
 
 - (id)initWithAsset:(GAFAsset *)anAsset
       externalAtlas:(GAFTextureAtlas *)anAtlas

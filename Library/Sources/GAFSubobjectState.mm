@@ -10,27 +10,14 @@
 #import "GAFFilterData.h"
 #import "ccMacros.h"
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-static NSString * const kStateName      = @"st";
-static NSString * const kColorName      = @"c";
-static NSString * const kMaskName       = @"m";
-static NSString * const kEffectsName    = @"e";
-static NSString * const kEffectTypeName = @"t";
-static NSString * const kXName          = @"x";
-static NSString * const kYName          = @"y";
-static NSString * const kBlurEffectName = @"Fblur";
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 @implementation GAFSubobjectState
 
 #pragma mark -
 #pragma mark Properties
 
-@synthesize objectId;
+@synthesize objectIdRef;
 @synthesize zIndex;
-@synthesize maskObjectId;
+@synthesize maskObjectIdRef;
 @synthesize atlasElementName;
 @synthesize affineTransform;
 @synthesize filters;
@@ -45,6 +32,7 @@ static NSString * const kBlurEffectName = @"Fblur";
     if (nil != self)
     {
         self.objectIdRef = anObjectIdRef;
+        self.maskObjectIdRef = nil;
         self.zIndex = 0;
         self.affineTransform = CGAffineTransformMake(1, 0, 0, 1, 0, 0);
         _colorOffsets[0] = _colorOffsets[1] = _colorOffsets[2] = _colorOffsets[3] = _colorMults[GAFCTI_A] = 0;
@@ -53,155 +41,15 @@ static NSString * const kBlurEffectName = @"Fblur";
     
     return self;
 }
-
-- (id)initEmptyStateWithObjectId:(NSString *)anObjectId
-{
-    if(anObjectId == nil)
-    {
-        NSAssert(NO, @"parameters should not be nil");
-        CCLOGWARN(@"ERROR: initializing GAFSubobjectState. ObjectId is nil.");
-        return nil;
-    }
-    
-    self = [super init];
-    if (nil != self)
-    {
-		self.objectId = anObjectId;
-		self.zIndex = 0;
-		self.affineTransform = CGAffineTransformMake(1,0,0,1,0,0);
-		_colorOffsets[0] = _colorOffsets[1] = _colorOffsets[2] = _colorOffsets[3] = _colorMults[GAFCTI_A] = 0;
-		_colorMults[GAFCTI_R]   = _colorMults[GAFCTI_G]   = _colorMults[GAFCTI_B] = 1;
-	}
-	return self;
-}
-
-- (id)initWithStateDictionary:(NSDictionary *)aStateDictionary objectId:(NSString *)anObjectId
-{
-	self = [super init];
-    if (nil != self)
-    {
-		self.objectId = anObjectId;
-		if (nil == aStateDictionary)
-		{
-			CCLOGWARN(@"Error while creating GAFSubobjectState. Invalid aStateDictionary");
-			return nil;
-		}
-        if (nil == anObjectId)
-		{
-			CCLOGWARN(@"Error while creating GAFSubobjectState. Invalid objectId");
-			return nil;
-		}
-        
-		NSString * state = (NSString*) aStateDictionary[kStateName];
-		if (!state)
-		{
-			CCLOGWARN(@"Error while creating GAFSubobjectState. State is missing");
-			return nil;
-		}
-		NSRange s = [state rangeOfString:@"{"];
-		NSRange e = [state rangeOfString:@"}"];
-		//if (s.length == 0 || e.length == 0 || e.location < s.location)
-        if (s.length == 0 || e.length == 0 || e.location < s.location || s.location < 2 || e.location > [state length] - 3)
-		{
-			CCLOGWARN(@"Error while creating GAFSubobjectState. Invalid state line");
-			return nil;
-		}
-		NSString * temp = [state substringWithRange:NSMakeRange(0, s.location - 1)];
-		self.zIndex = [temp integerValue];
-		NSRange r = NSMakeRange(e.location + 2, [state length] - e.location - 2);
-		temp = [state substringWithRange:r];
-		_colorMults[GAFCTI_A] = [temp floatValue];
-		temp = [state substringWithRange:NSMakeRange(s.location + 1, e.location - s.location - 1)];
-		NSArray * transform = [temp componentsSeparatedByString:@","];
-        if ( [transform count] == 6 )
-        {
-            self.affineTransform = CGAffineTransformMake(
-                                                         [transform[0] floatValue],
-                                                         [transform[1] floatValue],
-                                                         [transform[2] floatValue],
-                                                         [transform[3] floatValue],
-                                                         [transform[4] floatValue],
-                                                         [transform[5] floatValue]
-                                                         );
-        }
-        else
-        {
-            CCLOGWARN(@"Error while creating GAFSubobjectState. wrong affineTransform.");
-			return nil;
-        }
-		
-		NSString * color = (NSString*) aStateDictionary[kColorName];
-		if (color != nil)
-		{
-			NSArray * clrs = [color componentsSeparatedByString:@","];
-			if ([clrs count] < 7)
-			{
-				CCLOGWARN(@"Error while creating GAFSubobjectState. Invalid color data '%@'", state);
-                return nil;
-			}
-			_colorOffsets[GAFCTI_A] = [clrs[0] floatValue];
-			
-			_colorMults[GAFCTI_R]   = [clrs[1] floatValue];
-			_colorOffsets[GAFCTI_R] = [clrs[2] floatValue];
-			
-			_colorMults[GAFCTI_G] =   [clrs[3] floatValue];
-			_colorOffsets[GAFCTI_G] = [clrs[4] floatValue];
-			
-			_colorMults[GAFCTI_B]   = [clrs[5] floatValue];
-			_colorOffsets[GAFCTI_B] = [clrs[6] floatValue];
-		}
-		else
-		{
-			_colorOffsets[0] = _colorOffsets[1] = _colorOffsets[2] = _colorOffsets[3] = 0;
-			_colorMults[GAFCTI_R]   = _colorMults[GAFCTI_G]   = _colorMults[GAFCTI_B] = 1;
-		}
-		NSString * mask = (NSString*) aStateDictionary[kMaskName];
-		if (mask != nil)
-		{
-			self.maskObjectId = mask;
-		}
-		NSArray * effects = (NSArray*) aStateDictionary[kEffectsName];
-		if (effects != nil)
-		{
-			NSMutableDictionary * mutableFilters = [NSMutableDictionary dictionary];
-			for (NSUInteger i = 0; i < [effects count]; ++i)
-			{
-				NSDictionary * dict = (NSDictionary*)effects[i];
-				NSString * type = (NSString*)dict[kEffectTypeName];
-				if (type != nil)
-				{
-					if ([type isEqualToString:kBlurEffectName])
-					{
-						NSString * x = (NSString*)dict[kXName];
-						NSString * y = (NSString*)dict[kYName];
-						if (x != nil && y != nil)
-						{
-							GAFBlurFilterData * blurFilter = [GAFBlurFilterData new];
-							blurFilter.blurSize = CGSizeMake([x floatValue], [y floatValue]);
-							mutableFilters[kGAFBlurFilterName] = blurFilter;
-						}
-					}
-				}
-				else
-				{
-					CCLOGINFO(@"Can not determine effect type, skipping it");
-				}
-			}
-			self.filters = mutableFilters;
-		}
-	}
-	return self;
-}
-
 #pragma mark -
 #pragma mark Overriden methods
 
 - (id)copyWithZone:(NSZone *)zone
 {
     GAFSubobjectState *newState = [[GAFSubobjectState allocWithZone:zone] init];
-    newState.objectId = self.objectId;
+    newState.objectIdRef = self.objectIdRef;
     newState.zIndex = self.zIndex;
-    newState.maskObjectId = self.maskObjectId;
+    newState.maskObjectIdRef = self.maskObjectIdRef;
     newState.atlasElementName = self.atlasElementName;
     newState.affineTransform = self.affineTransform;
     newState.filters = [self.filters copyWithZone:zone];
@@ -217,9 +65,9 @@ static NSString * const kBlurEffectName = @"Fblur";
     
     GAFSubobjectState *state = (GAFSubobjectState *)object;
     
-    return ([state.objectId isEqualToString:self.objectId] &&
+    return ([state.objectIdRef isEqualToNumber:self.objectIdRef] &&
             state.zIndex == self.zIndex &&
-            [state.maskObjectId isEqualToString:self.maskObjectId] &&
+            [state.maskObjectIdRef isEqualToNumber:self.maskObjectIdRef] &&
             [state.atlasElementName isEqualToString:self.atlasElementName] &&
             CGAffineTransformEqualToTransform(state.affineTransform, self.affineTransform) &&
             [state.filters isEqualToDictionary:self.filters]);
@@ -227,8 +75,8 @@ static NSString * const kBlurEffectName = @"Fblur";
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"< ID = %@ | zIndex = %ld | maskID = %@ | atlasElemenName = %@ | transform = (%@) | filters = %@ >",
-            self.objectId, (long)self.zIndex, self.maskObjectId, self.atlasElementName,
+    return [NSString stringWithFormat:@"< ID = %d | zIndex = %ld | maskID = %d | atlasElemenName = %@ | transform = (%@) | filters = %@ >",
+            [self.objectIdRef integerValue], (long)self.zIndex, [self.maskObjectIdRef integerValue], self.atlasElementName,
             NSStringFromCGAffineTransform(self.affineTransform),
             [self.filters description]];
 }

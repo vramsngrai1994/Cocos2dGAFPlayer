@@ -3,5 +3,5 @@
 xcuserdata
 xcuserdatad
 xcuserstate
-.git
-build
+build/
+Examples/build/

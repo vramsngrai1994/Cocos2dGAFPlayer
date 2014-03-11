@@ -75,6 +75,7 @@ void TagDefineAnimationFrames::read(GAFStream* in, GAFAsset* ctx)
         }
         
         GAFAnimationFrame* frame = [GAFAnimationFrame new];
+        frame.objectsStates = [NSMutableArray array];
         
         enm = [currentStates keyEnumerator];
         

@@ -44,6 +44,9 @@ typedef struct _gafBlendFuncSeparate
 @property (nonatomic, copy  ) NSString             *objectId;
 @property (nonatomic, copy  ) NSString             *atlasElementId;
 
+@property (nonatomic, copy) NSNumber*              objectIdRef;
+@property (nonatomic, copy) NSNumber*              atlasElementIdRef;
+
 @property (nonatomic, assign) BOOL                 useSeparateBlendFunc;
 @property (nonatomic, assign) gafBlendFuncSeparate blendFuncSeparate;
 

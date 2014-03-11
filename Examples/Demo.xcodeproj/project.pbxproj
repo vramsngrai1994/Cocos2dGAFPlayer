@@ -31,6 +31,7 @@
 		257FFEE6178450C800D89D29 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 257FFEE5178450C800D89D29 /* Icon.png */; };
 		257FFEE8178450C800D89D29 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 257FFEE7178450C800D89D29 /* Icon@2x.png */; };
 		257FFEEB178450C800D89D29 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 257FFEEA178450C800D89D29 /* iTunesArtwork */; };
+		3999D21118CE0E2100F2D235 /* slime in Resources */ = {isa = PBXBuildFile; fileRef = 3999D21018CE0E2100F2D235 /* slime */; };
 		932A423B1786B0F5007B7EB4 /* CloseSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 932A42391786B0F4007B7EB4 /* CloseSelected@2x.png */; };
 		932A423C1786B0F5007B7EB4 /* CloseNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 932A423A1786B0F4007B7EB4 /* CloseNormal@2x.png */; };
 		936BEA561793FC97005DB560 /* GafFeatures.mm in Sources */ = {isa = PBXBuildFile; fileRef = 936BEA521793FC97005DB560 /* GafFeatures.mm */; };
@@ -214,6 +215,7 @@
 		257FFEE7178450C800D89D29 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
 		257FFEE9178450C800D89D29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		257FFEEA178450C800D89D29 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = text; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
+		3999D21018CE0E2100F2D235 /* slime */ = {isa = PBXFileReference; lastKnownFileType = folder; name = slime; path = Resources/slime; sourceTree = "<group>"; };
 		932A42391786B0F4007B7EB4 /* CloseSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CloseSelected@2x.png"; path = "Resources/CloseSelected@2x.png"; sourceTree = "<group>"; };
 		932A423A1786B0F4007B7EB4 /* CloseNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CloseNormal@2x.png"; path = "Resources/CloseNormal@2x.png"; sourceTree = "<group>"; };
 		936BEA521793FC97005DB560 /* GafFeatures.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GafFeatures.mm; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 		257FFED4178450C800D89D29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3999D21018CE0E2100F2D235 /* slime */,
 				A507B75F185A1EE600F46297 /* Shaders */,
 				257F00731784513600D89D29 /* CloseNormal.png */,
 				932A423A1786B0F4007B7EB4 /* CloseNormal@2x.png */,
@@ -567,6 +570,7 @@
 				257FFEE6178450C800D89D29 /* Icon.png in Resources */,
 				257FFEE8178450C800D89D29 /* Icon@2x.png in Resources */,
 				257FFEEB178450C800D89D29 /* iTunesArtwork in Resources */,
+				3999D21118CE0E2100F2D235 /* slime in Resources */,
 				257F00711784512A00D89D29 /* SampleAnimations in Resources */,
 				257F00751784513600D89D29 /* CloseNormal.png in Resources */,
 				257F00761784513600D89D29 /* CloseSelected.png in Resources */,
@@ -669,6 +673,7 @@
 		257F006D178450CC00D89D29 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -682,6 +687,7 @@
 					../Library/Sources,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Resources/Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lz",
@@ -695,6 +701,7 @@
 		257F006E178450CC00D89D29 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;

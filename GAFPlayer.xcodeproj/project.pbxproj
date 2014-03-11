@@ -675,6 +675,7 @@
 		A55559C2182A53F700420A21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/GAFPlayer.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -698,6 +699,7 @@
 		A55559C3182A53F700420A21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/GAFPlayer.dst;
 				FRAMEWORK_SEARCH_PATHS = (
