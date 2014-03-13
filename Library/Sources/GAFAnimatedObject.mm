@@ -654,7 +654,7 @@
 		return NSNotFound;
 	}
 	GAFAnimationSequence *seq = [self.asset animationSequenceForName:aSequenceName];
-	return (seq != nil) ? seq.framesRange.location : NSNotFound;
+	return (seq != nil) ? seq.frameStart: NSNotFound;
 }
 
 - (NSUInteger)endFrameForSequenceWithName:(NSString *)aSequenceName
@@ -664,7 +664,7 @@
 		return NSNotFound;
 	}
 	GAFAnimationSequence *seq = [self.asset animationSequenceForName:aSequenceName];
-	return (seq != nil) ? (seq.framesRange.location + seq.framesRange.length) : NSNotFound;
+	return (seq != nil) ? seq.frameEnd : NSNotFound;
 }
 
 - (BOOL)playSequenceWithName:(NSString *)aSeqName

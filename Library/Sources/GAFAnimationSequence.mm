@@ -20,7 +20,8 @@
 @interface GAFAnimationSequence ()
 
 @property (nonatomic, copy  ) NSString *name;
-@property (nonatomic, assign) NSRange  framesRange;
+@property (nonatomic, assign) NSUInteger  frameStart;
+@property (nonatomic, assign) NSUInteger  frameEnd;
 
 @end
 
@@ -35,7 +36,7 @@
 #pragma mark -
 #pragma mark Initialization & Release
 
-- (id)initWithName:(NSString *)aName framesRange:(NSRange)aFramesRange
+- (id)initWithName:(NSString *)aName frameStart:(NSUInteger)aFrameStart frameEnd:(NSUInteger)aFrameEnd;
 {
     if(aName == nil)
     {
@@ -47,7 +48,8 @@
     if (nil != self)
     {
         self.name = aName;
-        self.framesRange = aFramesRange;
+        self.frameStart = aFrameStart;
+        self.frameEnd = aFrameEnd;
     }
     return self;
 }

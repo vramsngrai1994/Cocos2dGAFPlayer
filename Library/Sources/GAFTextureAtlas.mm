@@ -385,7 +385,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
             if (imageData == nil)
             {
                 CCLOGWARN(@"Cannot load imageData for name(key) - %@", source);
-                return nil;
+                return NO;
             }
             
             UIImage *image = [[UIImage alloc] initWithData:imageData scale:realCsf];
@@ -393,7 +393,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
             if (image == nil)
             {
                 CCLOGWARN(@"Cannot create UIImage for texture for name(key) - %@", source);
-                return nil;
+                return NO;
             }
             
             [self.images addObject:image];

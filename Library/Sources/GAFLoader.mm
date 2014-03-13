@@ -86,6 +86,55 @@ GAFLoader::~GAFLoader()
     }
 }
 
+bool GAFLoader::_loadFile(GAFFile *file, GAFAsset* context)
+{
+    bool retval = true;
+    
+    m_stream = new GAFStream(file);
+    
+    GAFHeader& header = m_stream->getInput()->getHeader();
+    
+    _readHeaderEnd(header);
+    
+    while (!m_stream->isEndOfStream())
+    {
+        Tags::Enum tag = m_stream->openTag();
+        
+        TagLoaders_t::iterator it = m_tagLoaders.find(tag);
+        
+        if (it != m_tagLoaders.end())
+        {
+            it->second->read(m_stream, context);
+        }
+        else
+        {
+            // TODO: show warning
+        }
+        
+        m_stream->closeTag();
+    }
+    
+    delete m_stream;
+    
+    return retval;
+}
+
+bool GAFLoader::loadFile(NSData* fileData, GAFAsset* context)
+{
+    GAFFile* file = new GAFFile();
+    
+    bool retval = false;
+    
+    if (file->openWithData(fileData))
+    {
+        retval = _loadFile(file, context);
+    }
+    
+    delete file;
+    
+    return retval;
+}
+
 bool GAFLoader::loadFile(NSString* fname, GAFAsset* context)
 {
     GAFFile* file = new GAFFile();
@@ -94,32 +143,7 @@ bool GAFLoader::loadFile(NSString* fname, GAFAsset* context)
     
     if (file->open(fname, "rb"))
     {
-        retval = true;
-        m_stream = new GAFStream(file);
-        
-        GAFHeader& header = m_stream->getInput()->getHeader();
-        
-        _readHeaderEnd(header);
-        
-        while (!m_stream->isEndOfStream())
-        {
-            Tags::Enum tag = m_stream->openTag();
-            
-            TagLoaders_t::iterator it = m_tagLoaders.find(tag);
-            
-            if (it != m_tagLoaders.end())
-            {
-                it->second->read(m_stream, context);
-            }
-            else
-            {
-                // TODO: show warning
-            }
-            
-            m_stream->closeTag();
-        }
-        
-        delete m_stream;
+        retval = _loadFile(file, context);
     }
     
     delete file;

@@ -126,15 +126,9 @@ void GAFFile::close()
     m_dataPosition = 0;
 }
 
-bool GAFFile::open(NSString* filePath, const char* openMode)
+bool GAFFile::openWithData(NSData *gafData)
 {
     close();
-    
-    NSString* nsFilePath =  filePath;// [NSString stringWithCString:filePath.c_str() encoding:[NSString defaultCStringEncoding]];
-    
-    NSString *fullFilePath = [[CCFileUtils sharedFileUtils] fullPathForFilenameIgnoringResolutions:nsFilePath];
-
-    NSData *gafData = [NSData dataWithContentsOfFile:fullFilePath];
     
     if (gafData)
     {
@@ -197,6 +191,20 @@ bool GAFFile::open(NSString* filePath, const char* openMode)
     }
     
     return false;
+
+}
+
+bool GAFFile::open(NSString* filePath, const char* openMode)
+{
+    close();
+    
+    NSString* nsFilePath =  filePath;// [NSString stringWithCString:filePath.c_str() encoding:[NSString defaultCStringEncoding]];
+    
+    NSString *fullFilePath = [[CCFileUtils sharedFileUtils] fullPathForFilenameIgnoringResolutions:nsFilePath];
+
+    NSData *gafData = [NSData dataWithContentsOfFile:fullFilePath];
+    
+    return openWithData(gafData);
 }
 
 bool GAFFile::isOpened() const

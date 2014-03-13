@@ -19,6 +19,7 @@
 class GAFStream;
 class DefinitionTagBase;
 class GAFHeader;
+class GAFFile;
 
 class GAFLoader
 {
@@ -27,6 +28,7 @@ private:
     
     void                 _readHeaderEnd(GAFHeader&);
     void                 _registerTagLoaders();
+    bool                 _loadFile(GAFFile* file, GAFAsset* context);
     
     typedef std::map<Tags::Enum, DefinitionTagBase*> TagLoaders_t;
     
@@ -37,6 +39,7 @@ public:
     ~GAFLoader();
     
     bool                 loadFile(NSString* fname, GAFAsset* context);
+    bool                 loadFile(NSData* fileData, GAFAsset* context);
     bool                 isFileLoaded() const;
     
     GAFStream*           getStream() const;

@@ -136,6 +136,40 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 
 #endif
 
+- (id) initWithGAFFile:(NSString *)aGAFfilePath keepImagesInAtlas:(BOOL)aKeepImagesInAtlas
+{
+    return [self initWithGAFFile:aGAFfilePath atlasesDataDictionary:nil orAtlasTexturesFolder:nil extendedDataObjectClasses:nil keepImagesInAtlas:aKeepImagesInAtlas];
+}
+
+- (id) initWithGAFFileData:(NSData*)aGAFFileData
+     atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
+     orAtlasTexturesFolder:(NSString *)anAtlasTexturesFolder
+ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
+         keepImagesInAtlas:(BOOL)aKeepImagesInAtlas
+{
+    self = [super init];
+    
+    self.textureAtlases = [NSMutableArray array];
+    self.animationObjects = [NSMutableDictionary dictionary];
+    self.animationMasks = [NSMutableDictionary dictionary];
+    self.animationFrames = [NSMutableArray array];
+    self.animationSequences = [NSMutableDictionary dictionary];
+    
+    GAFLoader* loader = new GAFLoader();
+    
+    bool isLoaded = loader->loadFile(aGAFFileData, self);
+    
+    if (isLoaded)
+    {
+        isLoaded &= [self loadTextures:anAtlasTexturesFolder];
+    }
+    
+    if (isLoaded)
+        return  self;
+    else
+        return nil;
+}
+
 //! Binary GAF initializers here:
 - (id) initWithGAFFile:(NSString *)aGAFFilePath
  atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
@@ -157,35 +191,49 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
     
     if (isLoaded)
     {
-        self.textureAtlas = [self.textureAtlases objectAtIndex:0];
-        float atlasScale = self.textureAtlas.scale;
-        CGFloat currentDeviceScale = CC_CONTENT_SCALE_FACTOR();
-        
-        for (NSUInteger i = 1; i < [self.textureAtlases count]; ++i)
+        if (anAtlasTexturesFolder == nil)
         {
-            GAFTextureAtlas* atl = [self.textureAtlases objectAtIndex:i];
-            float as = atl.scale;
-            
-            if (fabs(atlasScale - currentDeviceScale) > fabs(as - currentDeviceScale))
-            {
-                self.textureAtlas = atl;
-                atlasScale = as;
-            }
+            anAtlasTexturesFolder = [[CCFileUtils sharedFileUtils] fullPathForFilenameIgnoringResolutions:aGAFFilePath];
+            anAtlasTexturesFolder = [anAtlasTexturesFolder stringByDeletingLastPathComponent];
         }
         
-        self.usedAtlasContentScaleFactor = atlasScale;
-        
-        if (self.textureAtlas)
-        {
-            NSString *fullFilePath = [[CCFileUtils sharedFileUtils] fullPathForFilenameIgnoringResolutions:aGAFFilePath];
-            [self.textureAtlas loadImages:[fullFilePath stringByDeletingLastPathComponent] keepImagesInAtlas:NO];
-        }
+        isLoaded &= [self loadTextures:anAtlasTexturesFolder];
     }
     
     if (isLoaded)
         return  self;
     else
         return nil;
+}
+
+- (BOOL) loadTextures:(NSString*)anAtlasTexturesFolder
+{
+    self.textureAtlas = [self.textureAtlases objectAtIndex:0];
+    float atlasScale = self.textureAtlas.scale;
+    CGFloat currentDeviceScale = CC_CONTENT_SCALE_FACTOR();
+    
+    for (NSUInteger i = 1; i < [self.textureAtlases count]; ++i)
+    {
+        GAFTextureAtlas* atl = [self.textureAtlases objectAtIndex:i];
+        float as = atl.scale;
+        
+        if (fabs(atlasScale - currentDeviceScale) > fabs(as - currentDeviceScale))
+        {
+            self.textureAtlas = atl;
+            atlasScale = as;
+        }
+    }
+    
+    self.usedAtlasContentScaleFactor = atlasScale;
+    
+    BOOL loadingResult = NO;
+    
+    if (self.textureAtlas)
+    {
+        loadingResult = [self.textureAtlas loadImages:anAtlasTexturesFolder keepImagesInAtlas:NO];
+    }
+    
+    return loadingResult;
 }
 
 #if 0
@@ -442,7 +490,7 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 	for (NSString *key in self.animationSequences)
 	{
 		GAFAnimationSequence *seq = (self.animationSequences)[key];
-		if (aLastFrame == (seq.framesRange.location + seq.framesRange.length))
+		if (aLastFrame == seq.frameEnd)
 		{
 			return seq;
 		}

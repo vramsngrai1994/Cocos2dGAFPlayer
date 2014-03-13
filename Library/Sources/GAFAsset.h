@@ -81,7 +81,15 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 
 #endif
 
+- (id) initWithGAFFile:(NSString*)aGAFfilePath keepImagesInAtlas:(BOOL)aKeepImagesInAtlas;
+
 - (id) initWithGAFFile:(NSString*)aGAFFilePath
+ atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
+ orAtlasTexturesFolder:(NSString *)anAtlasTexturesFolder
+extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
+     keepImagesInAtlas:(BOOL)aKeepImagesInAtlas;
+
+- (id) initWithGAFFileData:(NSData*)aGAFFileData
  atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
  orAtlasTexturesFolder:(NSString *)anAtlasTexturesFolder
 extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses

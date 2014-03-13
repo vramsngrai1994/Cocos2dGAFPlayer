@@ -25,9 +25,7 @@ void TagDefineSequences::read(GAFStream* in, GAFAsset* ctx)
         
         NSString* name = [NSString stringWithCString:ids.c_str() encoding:[NSString defaultCStringEncoding]];
         
-        NSRange range = {start, end};
-        
-        GAFAnimationSequence* seq = [[GAFAnimationSequence alloc] initWithName:name framesRange:range];
+        GAFAnimationSequence* seq = [[GAFAnimationSequence alloc] initWithName:name frameStart:start frameEnd:end];
         
         [ctx.animationSequences setObject:seq forKey:name];
     }

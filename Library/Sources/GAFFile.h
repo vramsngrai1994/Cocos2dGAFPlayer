@@ -44,6 +44,7 @@ public:
     
     // TODO: Provide error codes
     bool                 open(NSString* filename, const char* openMode);
+    bool                 openWithData(NSData* data);
     bool                 isOpened() const;
     
     const GAFHeader&     getHeader() const;
