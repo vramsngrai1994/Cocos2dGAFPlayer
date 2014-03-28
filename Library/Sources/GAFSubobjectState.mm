@@ -20,10 +20,28 @@
 @synthesize maskObjectIdRef;
 @synthesize atlasElementName;
 @synthesize affineTransform;
-@synthesize filters;
+@synthesize filtersList;
 
 #pragma mark -
 #pragma mark Initialization & Release
+
+- (id) init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.objectIdRef = nil;
+        self.maskObjectIdRef = nil;
+        self.zIndex = 0;
+        self.affineTransform = CGAffineTransformMake(1, 0, 0, 1, 0, 0);
+        _colorOffsets[0] = _colorOffsets[1] = _colorOffsets[2] = _colorOffsets[3] = _colorMults[GAFCTI_A] = 0;
+		_colorMults[GAFCTI_R]   = _colorMults[GAFCTI_G]   = _colorMults[GAFCTI_B] = 1;
+        self.filtersList = [NSMutableArray array];
+    }
+    
+    return self;
+}
 
 - (id) initEmpty:(NSNumber *)anObjectIdRef
 {
@@ -37,6 +55,7 @@
         self.affineTransform = CGAffineTransformMake(1, 0, 0, 1, 0, 0);
         _colorOffsets[0] = _colorOffsets[1] = _colorOffsets[2] = _colorOffsets[3] = _colorMults[GAFCTI_A] = 0;
 		_colorMults[GAFCTI_R]   = _colorMults[GAFCTI_G]   = _colorMults[GAFCTI_B] = 1;
+        self.filtersList = [NSMutableArray array];
     }
     
     return self;
@@ -52,7 +71,7 @@
     newState.maskObjectIdRef = self.maskObjectIdRef;
     newState.atlasElementName = self.atlasElementName;
     newState.affineTransform = self.affineTransform;
-    newState.filters = [self.filters copyWithZone:zone];
+    newState.filtersList = [self.filtersList copyWithZone:zone];
     return newState;
 }
 
@@ -70,7 +89,7 @@
             [state.maskObjectIdRef isEqualToNumber:self.maskObjectIdRef] &&
             [state.atlasElementName isEqualToString:self.atlasElementName] &&
             CGAffineTransformEqualToTransform(state.affineTransform, self.affineTransform) &&
-            [state.filters isEqualToDictionary:self.filters]);
+            [state.filtersList isEqualToArray:self.filtersList]);
 }
 
 - (NSString *)description
@@ -78,7 +97,7 @@
     return [NSString stringWithFormat:@"< ID = %d | zIndex = %ld | maskID = %d | atlasElemenName = %@ | transform = (%@) | filters = %@ >",
             [self.objectIdRef integerValue], (long)self.zIndex, [self.maskObjectIdRef integerValue], self.atlasElementName,
             NSStringFromCGAffineTransform(self.affineTransform),
-            [self.filters description]];
+            [self.filtersList description]];
 }
 
 #pragma mark -

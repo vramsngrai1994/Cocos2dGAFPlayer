@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 CatalystApps. All rights reserved.
 //
 
-#define __ENABLE_EFFECT_PREPROCESSING_CACHING__ 1
+//#define __ENABLE_EFFECT_PREPROCESSING_CACHING__
 
 
 static inline bool GAF_CGRectEqualToRect(CGRect rect1, CGRect rect2, CGFloat noise)

@@ -133,7 +133,6 @@ GAFSubobjectState* TagDefineAnimationFrames::extractState(GAFStream* in)
     
     if (hasEffect)
     {
-        assert(false && "Unimplemented");
         unsigned char effectsCount = in->readUByte();
         
         for (unsigned int e = 0; e < effectsCount; ++e)
@@ -144,20 +143,71 @@ GAFSubobjectState* TagDefineAnimationFrames::extractState(GAFStream* in)
             {
                 CGSize p;
                 PrimitiveDeserializer::deserialize(in, &p);
-                GAFBlurFilterData* blutFilter = [[GAFBlurFilterData alloc] init];
+                GAFBlurFilterData* blurFilter = [GAFBlurFilterData new];
+                blurFilter.blurSize = p;
+                
+                [state.filtersList addObject:blurFilter];
                 
             }
-            else if (type == GFT_ColorMatrix)
+            else if(type == GFT_ColorMatrix)
             {
+                GAFColorMatrixFilterData* colorFilter = [[GAFColorMatrixFilterData alloc] init];
+                for (NSUInteger i = 0; i < 4; ++i)
+                {
+                    for (NSUInteger j = 0; j < 4; ++j)
+                    {
+                        colorFilter->matrix[j * 4 + i] = in->readFloat();
+                    }
+                    
+                    colorFilter->matrix2[i] = in->readFloat() / 255.f;
+                }
                 
+                [state.filtersList addObject:colorFilter];
             }
             else if(type == GFT_Glow)
             {
+                GAFGlowFilterData* glowFilter = [GAFGlowFilterData new];
+                ccColor4B clr;
                 
+                PrimitiveDeserializer::deserialize(in, &clr);
+                
+                ccColor4F clrf;
+                
+                _translateColor(clrf, clr);
+                glowFilter.color = clrf;
+                
+                CGSize blurSize;
+                
+                PrimitiveDeserializer::deserialize(in, &blurSize);
+                glowFilter.blurSize = blurSize;
+                
+                glowFilter.strength = in->readFloat();
+                glowFilter.innerGlow = in->readUByte() ? YES : NO;
+                glowFilter.knockout = in->readUByte() ? YES : NO;
+                
+                [state.filtersList addObject:glowFilter];
             }
             else if(type == GFT_DropShadow)
             {
+                GAFDropShadowFilterData* filter = [GAFDropShadowFilterData new];
                 
+                ccColor4B clr;
+                PrimitiveDeserializer::deserialize(in, &clr);
+                
+                ccColor4F clrf;
+                _translateColor(clrf, clr);
+                filter.color = clrf;
+                
+                CGSize blurSize;
+                PrimitiveDeserializer::deserialize(in, &blurSize);
+                
+                filter.angle = in->readFloat();
+                filter.distance = in->readFloat();
+                filter.strength = in->readFloat();
+                filter.innerShadow = in->readUByte() ? true : false;
+                filter.knockout = in->readUByte() ? true : false;
+                
+                [state.filtersList addObject:filter];
             }
         }
     }

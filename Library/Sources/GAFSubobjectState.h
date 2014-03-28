@@ -24,7 +24,6 @@ typedef NS_ENUM(NSUInteger, GAFColorTransformIndex)
 @property (nonatomic, assign) NSInteger         zIndex;
 @property (nonatomic,   copy) NSString          *atlasElementName;
 @property (nonatomic, assign) CGAffineTransform affineTransform;
-@property (nonatomic, strong) NSDictionary      *filters;
 @property (nonatomic, strong) NSMutableArray*   filtersList;
 @property (nonatomic, copy) NSNumber*           objectIdRef;
 @property (nonatomic, copy) NSNumber*           maskObjectIdRef;

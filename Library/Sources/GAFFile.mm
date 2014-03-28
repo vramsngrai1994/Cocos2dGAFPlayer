@@ -9,7 +9,10 @@
 #include "GAFFile.h"
 #import "Support/CCFileUtils.h"
 
-#define USE_ZLIB 0
+#define USE_ZLIB 1
+#if USE_ZLIB
+#import <zlib.h>
+#endif
 
 void GAFFile::_readHeaderBegin(GAFHeader& out)
 {
@@ -156,7 +159,7 @@ bool GAFFile::openWithData(NSData *gafData)
              * But we must subtract a the signature and file size data
              * */
 #if USE_ZLIB
-            unsigned long uncompressedSize = m_header.fileLenght - UncompressedDataSize;
+            unsigned long uncompressedSize = m_header.fileLenght;
             char* uncompressedBuffer = new char[uncompressedSize];
             
             int retStatus = uncompress((Bytef*)uncompressedBuffer, &uncompressedSize, (Bytef*)(m_data + m_dataPosition), m_dataLen - m_dataPosition); // Decompress rest
@@ -166,11 +169,11 @@ bool GAFFile::openWithData(NSData *gafData)
                 return false;
             }
             
-            assert("Paranoid mode" && uncompressedSize == m_header.fileLenght - UncompressedDataSize);
+            assert("Paranoid mode" && uncompressedSize == m_header.fileLenght);
             
             delete[] m_data;
             
-            m_data = new char[uncompressedSize];
+            m_data = new unsigned char[uncompressedSize];
             
             memcpy(m_data, uncompressedBuffer, uncompressedSize);
             m_dataLen = uncompressedSize;

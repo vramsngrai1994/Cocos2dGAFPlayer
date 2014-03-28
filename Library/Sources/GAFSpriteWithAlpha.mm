@@ -9,6 +9,7 @@
 #import "GAFSprite_Protected.h"
 #import "CCGLProgram+GAFExtensions.h"
 #import "GAFEffectPreprocessor.h"
+#import "GAFFilterData.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,6 +46,21 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
 - (GLfloat *)getColorTransform
 {
 	return _colorTransform;
+}
+
+- (void)makeAdjustColorIdentity
+{
+    memset(_colorMatrixIdentity1, 0, sizeof(float) * 16);
+    
+    _colorMatrixIdentity1[0] = 1.f;
+    _colorMatrixIdentity1[5] = 1.f;
+    _colorMatrixIdentity1[10] = 1.f;
+    _colorMatrixIdentity1[15] = 1.f;
+    
+    memset(_colorMatrixIdentity2, 0, sizeof(float) * 4);
+    
+    _colorMatrixLocation = -1;
+    _colorMatrixLocation2 = -1;
 }
 
 - (void)setColorTransformMult:(const GLfloat *) mults offsets:(const GLfloat *) offsets
@@ -90,13 +106,17 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
         _preprocessedFrame = _initialTextureRect;
         _postprocessedFrame = _initialTextureRect;
         
+        [self makeAdjustColorIdentity];
+        
 		for (int i = 0; i < 4; ++i)
 		{
 			_colorTransform[i]     = 1.0f;
+            
 			_colorTransform[i + 4] = 0;
 		}
         [self setBlendingFunc];
         self.shaderProgram = [self programForShader];
+        
     }
     return self;
 }
@@ -107,6 +127,20 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
 - (void)setUniformsForFragmentShader
 {
 	glUniform4fv(_colorTrasformLocation, 2, _colorTransform);
+    
+    if (_colorMatrixLocation > -1 && _colorMatrixLocation2 > -1)
+    {
+        if (!_colorMatrixFilterData)
+        {
+            glUniformMatrix4fv(_colorMatrixLocation, 1, false, _colorMatrixIdentity1);
+            glUniform4fv(_colorMatrixLocation2, 1, _colorMatrixIdentity2);
+        }
+        else
+        {
+            glUniformMatrix4fv(_colorMatrixLocation, 1, false, _colorMatrixFilterData->matrix);
+            glUniform4fv(_colorMatrixLocation2, 1, _colorMatrixFilterData->matrix2);
+        }
+    }
 }
 
 #pragma mark -
@@ -115,9 +149,32 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
 #pragma mark -
 #pragma mark Private methods
 
+- (void)setGlowFilterData:(GAFGlowFilterData *)glowFilterData
+{
+    if (_glowFilterData != glowFilterData)
+    {
+        _glowFilterData = glowFilterData;
+        [self updateTextureWithEffects];
+    }
+}
+
+- (void)setColorMatrixFilterData:(GAFColorMatrixFilterData *)colorMatrixFilterData
+{
+    _colorMatrixFilterData = colorMatrixFilterData;
+}
+
+- (void)setBlurFiterData:(GAFBlurFilterData *)blurFiterData
+{
+    if (_blurFiterData != blurFiterData)
+    {
+        _blurFiterData = blurFiterData;
+        [self updateTextureWithEffects];
+    }
+}
+
 - (void)updateTextureWithEffects
 {
-    if (self.blurRadius.width == 0 && self.blurRadius.height == 0)
+    if (!self.blurFiterData && !self.glowFilterData)
     {
         [self setTexture:self.initialTexture];
         [self setTextureRect:self.initialTextureRect rotated:NO untrimmedSize:self.initialTextureRect.size];
@@ -125,9 +182,24 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
     }
     else
     {
-        GAFPreprocessedTexture* texture = [[GAFEffectPreprocessor sharedInstance] gaussianBlurredTextureFromTexture:self.initialTexture
+        GAFEffectPreprocessor* converter = [GAFEffectPreprocessor sharedInstance];
+       /* GAFPreprocessedTexture* texture = [[GAFEffectPreprocessor sharedInstance] gaussianBlurredTextureFromTexture:self.initialTexture
                                                                                                               frame:self.initialTextureRect
-                                                                                                        blurredSize:CGSizeMake(self.blurRadius.width, self.blurRadius.height)];
+                                                                                                        blurredSize:CGSizeMake(self.blurRadius.width, self.blurRadius.height)];*/
+
+        GAFPreprocessedTexture* texture = nil;
+        
+        if (self.blurFiterData)
+        {
+            texture = [converter gaussianBlurredTextureFromTexture:self.initialTexture
+                                                               frame:self.initialTextureRect
+                                                    blurFilterData:self.blurFiterData];
+        }
+        else if (self.glowFilterData)
+        {
+            texture = [converter glowTextureFromTexture:self.initialTexture frame:self.initialTextureRect glowData:self.glowFilterData];
+        }
+        
         if (texture != nil)
         {
             [self setTexture:texture.texture];
@@ -170,6 +242,8 @@ static NSString * const kGAFSpriteWithAlphaShaderProgramCacheKey = @"kGAFSpriteW
     [program use];
     
     _colorTrasformLocation = (GLuint)glGetUniformLocation(program->_program, "colorTransform");
+    _colorMatrixLocation = glGetUniformLocation(program->_program, "colorMatrix");
+    _colorMatrixLocation2 = glGetUniformLocation(program->_program, "colorMatrix2");
     
     if (_colorTrasformLocation <= 0)
     {

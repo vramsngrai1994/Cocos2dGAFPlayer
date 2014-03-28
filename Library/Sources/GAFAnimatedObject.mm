@@ -22,7 +22,7 @@
 #import "NSString+GAFExtensions.h"
 #import "CCDirector.h"
 #import "GAFCommon.h"
-
+#import "GAFFilterData.h"
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface GAFAnimatedObject ()
@@ -907,19 +907,37 @@
         if (subObject != nil)
         {
             // Validate sprite type (w/ or w/o filter)
-            GAFBlurFilterData *blurFilter = (state.filters)[kGAFBlurFilterName];
+            //GAFBlurFilterData *blurFilter = (state.filters)[kGAFBlurFilterName];
+            
+            id<GAFFilterData> filter = nil;
+            
+            if (state.filtersList.count > 0)
+            {
+                filter = state.filtersList[0];
+                [filter apply:subObject];
+            }
             
             CGPoint prevAP = subObject.anchorPoint;
             CGSize prevCS = subObject.contentSize;
             
-            if (blurFilter != nil)
+            if (filter == nil || filter.type != GFT_ColorMatrix)
             {
-                // TODO: don't use 9 sample kernel constant, make it variable and computable (4 = floor(9 / 2))
-                subObject.blurRadius = CGSizeMake(blurFilter.blurSize.width / 4, blurFilter.blurSize.height / 4);
+                [subObject setColorMatrixFilterData:nil];
             }
-            else
+            
+            if (filter == nil || filter.type != GFT_Blur)
             {
-                subObject.blurRadius = CGSizeMake(0, 0);
+                [subObject setBlurFiterData:nil];
+            }
+            
+            if (filter == nil || filter.type != GFT_Glow)
+            {
+                [subObject setGlowFilterData:nil];
+            }
+            
+            if (filter == nil || filter.type != GFT_DropShadow)
+            {
+                [GAFDropShadowFilterData reset:subObject];
             }
             
             // Handle initial object in one position

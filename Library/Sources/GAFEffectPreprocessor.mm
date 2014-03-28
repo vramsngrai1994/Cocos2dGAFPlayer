@@ -11,6 +11,8 @@
 #import "GAFEffectPreprocessor.h"
 #import "GAFCustomAtlasPreprocessor.h"
 
+#import "GAFFilterData.h"
+
 @interface GAFCachedBlurredTexture : NSObject
 
 @property(nonatomic, assign) CGRect precomputedFrame;
@@ -90,8 +92,10 @@
 @property(nonatomic, strong) GAFCustomAtlasPreprocessor* customAtlasPreprocessor;
 @property(nonatomic, strong) CCRenderTexture* frameBuffer;
 @property(nonatomic, strong) NSMutableArray* cachedBlurredTextures;
-@property(nonatomic, strong) CCGLProgram* shader;
+@property(nonatomic, strong) CCGLProgram* gaussianBlurShader;
+@property(nonatomic, strong) CCGLProgram* glowShader;
 @property(nonatomic, assign) GLint shaderUniformTexelWidthOffset;
+@property(nonatomic, assign) int   shaderUniformGlowColor;
 @property(nonatomic, assign) GLint shaderUniformTexelHeightOffset;
 
 @end
@@ -126,10 +130,32 @@
     return self;
 }
 
+- (GAFPreprocessedTexture*) glowTextureFromTexture:(CCTexture2D *)sourceTexture frame:(CGRect)sourceFrame glowData:(GAFGlowFilterData *)glowFilterData
+{
+
+    return [self gaussianBlurredTextureFromTextureCustom:sourceTexture
+                                                   frame:sourceFrame
+                                             blurSize:glowFilterData.blurSize
+                                             usingShader:self.glowShader glowFilterData:glowFilterData dropShadowFilterData:nil];
+}
+
 - (GAFPreprocessedTexture*)gaussianBlurredTextureFromTexture:(CCTexture2D *)sourceTexture
                                                        frame:(CGRect)sourceFrame
-                                                    blurredSize:(CGSize)blurredSize;
+                                                    blurFilterData:(GAFBlurFilterData*)blurFilterData;
 {
+    return [self gaussianBlurredTextureFromTextureCustom:sourceTexture frame:sourceFrame blurSize:blurFilterData.blurSize usingShader:self.gaussianBlurShader glowFilterData:nil dropShadowFilterData:nil];
+}
+
+- (GAFPreprocessedTexture*) dropShadowTextureFromTexture:(CCTexture2D*) sourceTexture frame:(CGRect)sourceFrame dsData:(GAFDropShadowFilterData*)dropShadowFilter
+{
+    return [self gaussianBlurredTextureFromTextureCustom:sourceTexture frame:sourceFrame blurSize:dropShadowFilter.blurSize usingShader:self.glowShader glowFilterData:nil dropShadowFilterData:dropShadowFilter];
+}
+
+- (GAFPreprocessedTexture*) gaussianBlurredTextureFromTextureCustom:(CCTexture2D*)sourceTexture frame:(CGRect)sourceFrame blurSize:(CGSize)blurSize usingShader:(CCGLProgram*)usingShader glowFilterData:(GAFGlowFilterData*)glowFiterData dropShadowFilterData:(GAFDropShadowFilterData*)dropShadowFilterData
+{
+    
+    CGSize blurredSize = CGSizeMake(blurSize.width / 4, blurSize.height / 4);
+    
 #if defined(__ENABLE_EFFECT_PREPROCESSING_CACHING__)
     
     NSArray* cachedBlurredTextures = [self.cachedBlurredTextures filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
@@ -193,11 +219,29 @@
         accessoryFrameBuffer_01.sprite.position = CGPointMake(blurredTextureSize.width / 2,
                                                                  blurredTextureSize.height / 2);
         
-        accessoryFrameBuffer_01.sprite.shaderProgram = self.shader;
+        accessoryFrameBuffer_01.sprite.shaderProgram = usingShader;
         
-        [self.shader use];
-        [self.shader setUniformLocation:self.shaderUniformTexelWidthOffset withF1:texelWidthValue];
-        [self.shader setUniformLocation:self.shaderUniformTexelHeightOffset withF1:texelHeightValue];
+        [usingShader use];
+        [usingShader setUniformLocation:self.shaderUniformTexelWidthOffset withF1:texelWidthValue];
+        [usingShader setUniformLocation:self.shaderUniformTexelHeightOffset withF1:texelHeightValue];
+        
+        if (glowFiterData)
+        {
+            [usingShader setUniformLocation:self.shaderUniformGlowColor
+                                     withF1:glowFiterData.color.r
+                                         f2:glowFiterData.color.g
+                                         f3:glowFiterData.color.b
+                                         f4:glowFiterData.color.a];
+        }
+        
+        if (dropShadowFilterData)
+        {
+            [usingShader setUniformLocation:self.shaderUniformGlowColor
+                                     withF1:dropShadowFilterData.color.r
+                                         f2:dropShadowFilterData.color.g
+                                         f3:dropShadowFilterData.color.b
+                                         f4:dropShadowFilterData.color.a];
+        }
         
         [accessoryFrameBuffer_01.sprite setBlendFunc:(ccBlendFunc){ GL_ONE, GL_ZERO }];
         
@@ -214,11 +258,29 @@
         accessoryFrameBuffer_02.sprite.position = CGPointMake(blurredTextureSize.width / 2,
                                                                           blurredTextureSize.height / 2);
         
-        accessoryFrameBuffer_02.sprite.shaderProgram = self.shader;
+        accessoryFrameBuffer_02.sprite.shaderProgram = usingShader;
         
-        [self.shader use];
-        [self.shader setUniformLocation:self.shaderUniformTexelWidthOffset withF1:texelWidthValue];
-        [self.shader setUniformLocation:self.shaderUniformTexelHeightOffset withF1:texelHeightValue];
+        [usingShader use];
+        [usingShader setUniformLocation:self.shaderUniformTexelWidthOffset withF1:texelWidthValue];
+        [usingShader setUniformLocation:self.shaderUniformTexelHeightOffset withF1:texelHeightValue];
+        
+        if (glowFiterData)
+        {
+            [usingShader setUniformLocation:self.shaderUniformGlowColor
+                                     withF1:glowFiterData.color.r
+                                         f2:glowFiterData.color.g
+                                         f3:glowFiterData.color.b
+                                         f4:glowFiterData.color.a];
+        }
+        
+        if (dropShadowFilterData)
+        {
+            [usingShader setUniformLocation:self.shaderUniformGlowColor
+                                     withF1:dropShadowFilterData.color.r
+                                         f2:dropShadowFilterData.color.g
+                                         f3:dropShadowFilterData.color.b
+                                         f4:dropShadowFilterData.color.a];
+        }
         
         [accessoryFrameBuffer_02.sprite setBlendFunc:(ccBlendFunc){ GL_ONE, GL_ZERO }];
         
@@ -226,8 +288,21 @@
         [accessoryFrameBuffer_02.sprite visit];
         [accessoryFrameBuffer_01 end];
     }
-    CHECK_GL_ERROR_DEBUG();
     
+    if (glowFiterData)
+    {
+        CHECK_GL_ERROR_DEBUG();
+        
+        {
+            CCSprite* sprite = [[CCSprite alloc]initWithTexture:sourceTexture rect:sourceFrame];
+            
+            [sprite setPosition:CGPointMake(blurredTextureSize.width / 2, blurredTextureSize.height / 2)];
+            [accessoryFrameBuffer_01 begin];
+            [sprite visit];
+            [accessoryFrameBuffer_01 end];
+        }
+        CHECK_GL_ERROR_DEBUG();
+    }
 #if defined(__ENABLE_EFFECT_PREPROCESSING_CACHING__)
     
     CGRect frame = [self.customAtlasPreprocessor frameForTextureWithFrame:CGRectMake(0, 0, blurredTextureSize.width, blurredTextureSize.height)];
@@ -245,7 +320,7 @@
     }
     
     for(GAFCachedBlurredTexture* texture in self.cachedBlurredTextures)
-    {
+    {	
         CGRect precomputedFrame = texture.precomputedFrame;
         NSAssert(!CGRectIntersectsRect(frame, precomputedFrame), @"Error; calculated frames intersected");
     }
@@ -284,7 +359,39 @@
 #endif
 }
 
-- (CCGLProgram *)shader
+- (CCGLProgram*) glowShader
+{
+    CCGLProgram *program = [[CCShaderCache sharedShaderCache] programForKey:kGAFgaussianBlurCacheKey];
+    if (program == nil)
+    {
+        program = [[CCGLProgram alloc] initWithVertexShaderFilename:kGAFGlowVSName
+                                             fragmentShaderFilename:kGAFGlowFSName];
+        
+        if (program != nil)
+        {
+            [program addAttribute:kCCAttributeNamePosition index:kCCVertexAttrib_Position];
+            [program addAttribute:kCCAttributeNameTexCoord index:kCCVertexAttrib_TexCoords];
+            
+            [program link];
+            [program updateUniforms];
+            
+            self.shaderUniformGlowColor = glGetUniformLocation(program->_program, [kGAFGlowColorUniName UTF8String]);
+            self.shaderUniformTexelWidthOffset = glGetUniformLocation(program->_program, [kGAFgaussianBlurShaderUniformTexelWidthOffset UTF8String]);
+            self.shaderUniformTexelHeightOffset = glGetUniformLocation(program->_program, [kGAFgaussianBlurShaderUniformTexelHeightOffset UTF8String]);
+            
+            CHECK_GL_ERROR_DEBUG();
+            [[CCShaderCache sharedShaderCache] addProgram:program forKey:kGAFGlowCacheKey];
+        }
+        else
+        {
+            CCLOGWARN(@"Cannot load program for %@.", kGAFGlowCacheKey);
+            return nil;
+        }
+    }
+    return program;
+}
+
+- (CCGLProgram *)gaussianBlurShader
 {
     CCGLProgram *program = [[CCShaderCache sharedShaderCache] programForKey:kGAFgaussianBlurCacheKey];
     if (program == nil)

@@ -8,6 +8,10 @@
 
 #import "cocos2d.h"
 
+@class GAFGlowFilterData;
+@class GAFBlurFilterData;
+@class GAFDropShadowFilterData;
+
 @interface GAFPreprocessedTexture : NSObject
 
 @property(nonatomic, strong) CCTexture2D* texture;
@@ -20,8 +24,12 @@
 @interface GAFEffectPreprocessor : NSObject
 
 + (GAFEffectPreprocessor *)sharedInstance;
-- (GAFPreprocessedTexture*)gaussianBlurredTextureFromTexture:(CCTexture2D *)sourceTexture
+- (GAFPreprocessedTexture*) gaussianBlurredTextureFromTexture:(CCTexture2D *)sourceTexture
                                                        frame:(CGRect)sourceFrame
-                                                    blurredSize:(CGSize)blurredSize;
+                                               blurFilterData:(GAFBlurFilterData*)blurFilterData;
+
+- (GAFPreprocessedTexture*) glowTextureFromTexture:(CCTexture2D*) sourceTexture frame:(CGRect)sourceFrame  glowData:(GAFGlowFilterData*)glowFilterData;
+
+- (GAFPreprocessedTexture*) dropShadowTextureFromTexture:(CCTexture2D*) sourceTexture frame:(CGRect)sourceFrame dsData:(GAFDropShadowFilterData*)dropShadowFilterData;
 
 @end
