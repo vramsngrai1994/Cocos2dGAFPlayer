@@ -319,7 +319,7 @@
             
             // Add to masks
             (self.masks)[maskIdRef] = mask;
-            [self addChild:mask];
+            //[self addChild:mask];
         }
     }
 }
@@ -965,6 +965,11 @@
                 if (mask != nil)
                 {
                     [mask addMaskedObject:subObject];
+                    
+                    if (mask.parent != self)
+                    {
+                        [self addChild:mask];
+                    }
                 }
             }
             
