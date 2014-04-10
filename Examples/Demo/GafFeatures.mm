@@ -62,7 +62,9 @@
 		_anim_index = 0;
         
         _jsons = @[@"slime/slimeBin.gaf",
-                   @"jester/jesterBin.gaf"
+                   @"jester/jesterBin.gaf",
+                   @"skeleton/skeletonBin.gaf",
+                   @"ufo/ufoBin.gaf"
                   ];
         
 		[self addObjectsToScene:1];

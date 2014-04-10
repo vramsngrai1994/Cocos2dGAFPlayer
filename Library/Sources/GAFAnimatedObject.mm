@@ -406,7 +406,7 @@
 
 - (void)linkExternalAtlas:(GAFTextureAtlas *)aTextureAtlas forName:(NSString *)anAtlasName
 {
-    NSAssert(anAtlasName != nil, @"");
+    NSParameterAssert(anAtlasName != nil);
     if (anAtlasName == nil)
         return;
     
@@ -455,7 +455,7 @@
 
 - (void)removeLinkedAtlasForName:(NSString *)anAtlasName
 {
-    NSAssert(anAtlasName != nil, @"");
+    NSParameterAssert(anAtlasName != nil);
     if (anAtlasName == nil)
         return;
     
