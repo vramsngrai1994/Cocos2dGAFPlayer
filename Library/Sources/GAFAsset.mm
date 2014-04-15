@@ -20,36 +20,6 @@
 
 #import "Support/CCFileUtils.h"
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Constants
-
-static NSString * const kAnimationFrameCountKey             = @"animationFrameCount";
-static NSString * const kAnimationConfigFramesKey           = @"animationConfigFrames";
-static NSString * const kAnimationObjectsKey                = @"animationObjects";
-static NSString * const kAnimationMasksKey                  = @"animationMasks";
-//static NSString * const kAnimationNamedPartsKey             = @"namedParts";
-static NSString * const kTextureAtlasKey                    = @"textureAtlas";
-static NSString * const kAnimationSequencesKey              = @"animationSequences";
-static NSString * const kVersionKey                         = @"version";
-
-static NSString * const kFrameNumberKey                     = @"frameNumber";
-static NSString * const kFrameStateKey                      = @"state";
-
-static NSString * const kPCAnimationSequenceIdKey           = @"id";
-static NSString * const kPCAnimationSequenceStartFrameNoKey = @"startFrameNo";
-static NSString * const kPCAnimationSequenceEndFrameNoKey   = @"endFrameNo";
-
-static NSString * const kAtlasScaleKey                      = @"scale";
-static NSString * const kAtlasInfoKey                       = @"atlases";
-static NSString * const kBoundingBoxKey                     = @"boundingBox";
-static NSString * const kPivotPointKey                      = @"pivotPoint";
-
-static NSString * const kXKey                               = @"x";
-static NSString * const kYKey                               = @"y";
-static NSString * const kWidthKey                           = @"width";
-static NSString * const kHeightKey                          = @"height";
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private interface
 
 @interface GAFAsset ()
@@ -88,53 +58,6 @@ static NSString * const kHeightKey                          = @"height";
 #pragma mark -
 #pragma mark Initialization & Release
 
-#if 0
-
-- (id)initWithJSONAtPath:(NSString *)aJSONPath keepImagesInAtlas:(BOOL)aKeepImagesInAtlas
-{
-    return [self initWithJSONAtPath:aJSONPath extendedDataObjectClasses:nil keepImagesInAtlas:aKeepImagesInAtlas];
-}
-
-- (id)initWithJSONAtPath:(NSString *)aJSONPath
-extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
-       keepImagesInAtlas:(BOOL)aKeepImagesInAtlas
-{
-    NSAssert(aJSONPath != nil || [aJSONPath length] == 0, @"ERROR: initializing JSON. aJSONPath data should not be nil");
-	if (aJSONPath == nil || [aJSONPath length] == 0)
-	{
-		CCLOGWARN(@"ERROR: initializing JSON. Empty json path");
-		return nil;
-	}
-    
-    // Retrieve JSON data from filePath
-	NSString *filePath = [[CCFileUtils sharedFileUtils] fullPathForFilenameIgnoringResolutions:aJSONPath];
-    NSData *JSONData = [NSData dataWithContentsOfFile:filePath];
-    if (JSONData == nil)
-    {
-        CCLOGWARN(@"ERROR: initializing JSON. Cannot load JSON file at path: %@", aJSONPath);
-        return nil;
-    }
-    
-    return [self initWithJSONData:JSONData
-            atlasesDataDictionary:nil
-            orAtlasTexturesFolder:[filePath stringByDeletingLastPathComponent]
-        extendedDataObjectClasses:anExtendedDataObjectClasses
-                keepImagesInAtlas:aKeepImagesInAtlas];
-}
-
-- (id)initWithJSONData:(NSData *)aJSONData
- atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
- orAtlasTexturesFolder:(NSString *)anAtlasTexturesFolder
-     keepImagesInAtlas:(BOOL)aKeepImagesInAtlas
-{
-    return [self initWithJSONData:aJSONData
-            atlasesDataDictionary:anAtlasesDataDictionary
-            orAtlasTexturesFolder:anAtlasTexturesFolder
-        extendedDataObjectClasses:nil
-                keepImagesInAtlas:aKeepImagesInAtlas];
-}
-
-#endif
 
 - (id) initWithGAFFile:(NSString *)aGAFfilePath keepImagesInAtlas:(BOOL)aKeepImagesInAtlas
 {
@@ -163,6 +86,8 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
     {
         isLoaded &= [self loadTextures:anAtlasTexturesFolder];
     }
+    
+    delete loader;
     
     if (isLoaded)
         return  self;
@@ -200,6 +125,8 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
         isLoaded &= [self loadTextures:anAtlasTexturesFolder];
     }
     
+    delete loader;
+    
     if (isLoaded)
         return  self;
     else
@@ -235,223 +162,6 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
     
     return loadingResult;
 }
-
-#if 0
-
-- (id)initWithJSONData:(NSData *)aJSONData
- atlasesDataDictionary:(NSDictionary *)anAtlasesDataDictionary
- orAtlasTexturesFolder:(NSString *)anAtlasTexturesFolder
-extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
-     keepImagesInAtlas:(BOOL)aKeepImagesInAtlas
-{
-	self = [super init];
-	
-    NSAssert(aJSONData != nil, @"parameters should not be nil");
-    if (aJSONData == nil || [aJSONData length] == 0)
-    {
-		CCLOGWARN(@"ERROR: initializing JSON. JSONData and/or atlasDictionary are empty");
-		return nil;
-	}
-    
-	NSError *error = nil;
-	id configDataObject = [NSJSONSerialization JSONObjectWithData:aJSONData options:(NSJSONReadingOptions)0 error:&error];
-	if (configDataObject == nil && error != nil && [configDataObject isKindOfClass:[NSDictionary class]])
-	{
-		CCLOGWARN(@"ERROR: initializing JSON. ConfigData cannot be parsed.");
-		return nil;
-	}
-	
-	NSDictionary *configDictionary = (NSDictionary *)configDataObject;
-    
-	NSArray *animationConfigFrames  = configDictionary[kAnimationConfigFramesKey];
-	NSArray *textureAtlasNode       = configDictionary[kTextureAtlasKey];
-	NSArray *animationSequences     = configDictionary[kAnimationSequencesKey];
-	
-	NSDictionary *objectNodes       = configDictionary[kAnimationObjectsKey];
-	NSDictionary *masksNodes        = configDictionary[kAnimationMasksKey];
-    
-	NSString *versionNode           = configDictionary[kVersionKey];
-    NSDictionary *boundingBox       = configDictionary[kBoundingBoxKey];
-    NSDictionary *pivotPoint        = configDictionary[kPivotPointKey];
-    
-
-    if (animationConfigFrames == nil)
-    {
-        CCLOGWARN(@"ERROR: initializing GAFAsset. 'animationFrameCount' not present");
-        return nil;
-    }
-    
-    if (textureAtlasNode == nil || ![textureAtlasNode count])
-    {
-        CCLOGWARN(@"ERROR: initializing GAFAsset. 'textureAtlas' not present");
-        return nil;
-    }
-    
-    if (objectNodes == nil)
-    {
-        CCLOGWARN(@"ERROR: initializing GAFAsset. 'animationObjects' not present");
-        return nil;
-    }
-	
-	if (![[self class] isAssetVersionPlayable:versionNode])
-	{
-        CCLOGWARN(@"ERROR: initializing GAFAsset. Source config version is not supported.");
-        return nil;
-    }
-    
-    // Determining best available atlas content scale factor compatible with current device
-    CGFloat currentDeviceScale = CC_CONTENT_SCALE_FACTOR();
-    
-    NSDictionary *atlasDictionary = textureAtlasNode[0];
-    CGFloat atlasScale = 1.0;
-    for (NSInteger i = 0; i < [textureAtlasNode count]; ++i)
-    {
-        NSDictionary *newAtlasDictionary = textureAtlasNode[i];
-        CGFloat newAtlasScale = [self atlasScaleFromAtlasConfig:atlasDictionary];
-        
-        if (newAtlasScale > 0)
-        {
-            if (fabs(atlasScale - currentDeviceScale) > fabs(newAtlasScale - currentDeviceScale))
-            {
-                atlasDictionary = newAtlasDictionary;
-                atlasScale = newAtlasScale;
-            }
-        }
-    }
-    self.usedAtlasContentScaleFactor = atlasScale;
-    
-    NSArray *atlasesInfo = (NSArray *)atlasDictionary[kAtlasInfoKey];
-    if (!atlasesInfo)
-    {
-        CCLOGWARN(@"Error while creating GAFAsset. 'atlases' subnode is missing.");
-        return nil;
-    }
-    
-    if (boundingBox != nil)
-    {
-        CGFloat x = [boundingBox[kXKey] floatValue];
-        CGFloat y = [boundingBox[kYKey] floatValue];
-        CGFloat width = [boundingBox[kWidthKey] floatValue];
-        CGFloat height = [boundingBox[kHeightKey] floatValue];
-        
-        self.boundingBox = CGRectMake(x, y, width, height);
-    }
-    else
-    {
-        self.boundingBox = CGRectZero;
-    }
-    
-    if (pivotPoint != nil)
-    {
-        CGFloat x = [pivotPoint[kXKey] floatValue];
-        CGFloat y = [pivotPoint[kYKey] floatValue];
-        
-        y = self.boundingBox.size.height - y;
-        
-        self.pivotPoint = CGPointMake(x / self.boundingBox.size.width, y / self.boundingBox.size.height);
-    }
-    else
-    {
-        self.pivotPoint = CGPointZero;
-    }
-    
-    GAFTextureAtlas *atlasData = nil;
-    if (anAtlasesDataDictionary != nil)
-    {
-        atlasData = [[GAFTextureAtlas alloc] initWithTextureAtlasesDictionary:anAtlasesDataDictionary
-                                                 textureAtlasConfigDictionary:atlasDictionary
-                                                            keepImagesInAtlas:aKeepImagesInAtlas];
-    }
-    else if (anAtlasTexturesFolder != nil && anAtlasTexturesFolder.length > 0)
-    {
-        atlasData = [[GAFTextureAtlas alloc] initWithTexturesDirectory:anAtlasTexturesFolder
-                                          textureAtlasConfigDictionary:atlasDictionary
-                                                     keepImagesInAtlas:aKeepImagesInAtlas];
-    }
-    
-    if (atlasData == nil)
-    {
-        CCLOGWARN(@"Failed to initialize PCAnimationData. GAFTextureAtlas could not be created.");
-        return nil;
-    }
-    
-    self.textureAtlas = atlasData;
-    
-    // Animation objects & masks
-    // Nodes are accurately the same as we need [ObjectId] -> [AtlasTextureId]
-    self.objects = objectNodes;
-    self.masks = masksNodes;
-    
-    // Extended objects
-    if (anExtendedDataObjectClasses != nil)
-    {
-        @autoreleasepool
-        {
-            for (NSString *groupName in anExtendedDataObjectClasses)
-            {
-                Class objectClass = anExtendedDataObjectClasses[groupName];
-                NSArray *jsonObjects = configDictionary[groupName];
-                
-                if (jsonObjects != nil && jsonObjects.count > 0 &&
-                    [objectClass isSubclassOfClass:[GAFAssetExtendedDataObject class]])
-                {
-                    NSMutableArray *parsedObjects = [[NSMutableArray alloc] initWithCapacity:jsonObjects.count];
-                    for (NSDictionary *jsonObject in jsonObjects)
-                    {
-                        GAFAssetExtendedDataObject *newObject = [[objectClass alloc] initWithDictionary:jsonObject];
-                        if (newObject != nil)
-                        {
-                            [parsedObjects addObject:newObject];
-                        }
-                    }
-                    
-                    // Save objects
-                    if (self.extendedDataObjectGroups == nil)
-                    {
-                        self.extendedDataObjectGroups = [[NSMutableDictionary alloc] init];
-                    }
-                    self.extendedDataObjectGroups[groupName] = parsedObjects;
-                }
-            }
-        }
-    }
-    
-    // Frames
-    [self loadFramesFromConfigDictionary:configDictionary];
-    
-    // Sequences
-    if (animationSequences != nil)
-    {
-        [self loadAnimationSequences:animationSequences];
-    }
-    
-    // Version
-    if (versionNode == nil && [versionNode isEmpty])
-    {
-        self.majorVersion = self.minorVersion = NSNotFound;
-    }
-    else
-    {
-        NSArray *comps = [versionNode componentsSeparatedByString:@"."];
-        if ([comps count] == 1)
-        {
-            self.majorVersion = [comps[0] integerValue];
-            self.minorVersion = 0;
-        }
-        else if ([comps count] == 2)
-        {
-            self.majorVersion = [comps[0] integerValue];
-            self.minorVersion = [comps[1] integerValue];
-        }
-        else
-        {
-            self.majorVersion = self.minorVersion = NSNotFound;
-        }
-    }
-	return self;
-}
-
-#endif
 
 #pragma mark -
 #pragma mark Overriden methods

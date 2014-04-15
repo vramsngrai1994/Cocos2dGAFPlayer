@@ -71,19 +71,6 @@
     return [[self alloc] initWithAsset:anAsset];
 }
 
-#if 0
-
-+ (GAFAnimatedObject *)animatedObjectWithPath:(NSString *)aJSONPath
-{
-    return [[self alloc] initWithPath:aJSONPath];
-}
-
-+ (GAFAnimatedObject *)animatedObjectWithPath:(NSString *)aJSONPath runLooped:(BOOL)aLooped
-{
-    return [[self alloc] initWithPath:aJSONPath runLooped:aLooped];
-}
-
-#endif
 
 - (id)initWithAsset:(GAFAsset *)anAsset
 {
@@ -121,43 +108,6 @@
 	}
 	return self;
 }
-
-#if 0
-
-- (id)initWithPath:(NSString *)aJSONPath
-{
-    if(aJSONPath == nil)
-    {
-        CCLOGWARN(@"ERROR: initializing GAFAnimatedObject.  aJSONPath not present");
-        return nil;
-    }
-    
-	GAFAsset *assetData = [[GAFAsset alloc] initWithJSONAtPath:aJSONPath keepImagesInAtlas:NO];
-    if (assetData != nil)
-    {
-        return [self initWithAsset:assetData];
-    }
-    else
-    {
-        CCLOGWARN(@"ERROR: initializing GAFAnimatedObject.  assetData is nil");
-        return nil;
-    }
-}
-
-- (id)initWithPath:(NSString *)aJSONPath runLooped:(BOOL)aLooped
-{
-    if ( (self = [self initWithPath:aJSONPath]) )
-    {
-        self.isLooped = aLooped;
-        [self start];
-        
-        return self;
-    }
-	
-    return nil;
-}
-
-#endif
 
 #pragma mark -
 #pragma mark Public methods
