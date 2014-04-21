@@ -337,7 +337,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
                       {
                           AtlasInfo* ai1 = (AtlasInfo*)obj1;
                           AtlasInfo* ai2 = (AtlasInfo*)obj2;
-                          return ai1.idx < ai2.idx;
+                          return ai1.idx > ai2.idx;
                       }]];
     
     NSUInteger desiredCsf = 1;
@@ -358,7 +358,7 @@ static NSString * const kTextureAtlasKey = @"textureAtlas";
         {
             AtlasInfo* info = [self.atlasInfos objectAtIndex:i];
 
-            for (NSUInteger j = 0; i < info.sources.count; ++i)
+            for (NSUInteger j = 0; j < info.sources.count; ++j)
             {
                 Source* aiSource = [info.sources objectAtIndex:j];
                 if (1.f == aiSource.csf)
