@@ -17,9 +17,4 @@ Download from Github
 --------------------
 
     $ git clone git://github.com/CatalystApps/Cocos2dGAFPlayer.git
-    $ cd Cocos2dGAFPlayer
-    $ git checkout master
-    $ git submodule update --init
-    $ cd Externals/cocos2d
-    $ git checkout release-2.1
     $ git submodule update --init
