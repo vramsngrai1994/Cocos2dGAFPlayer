@@ -61,10 +61,16 @@
 		[self addChild:pMenu z:10000];		
 		_anim_index = 0;
         
-        _jsons = @[@"slime/slimeBin.gaf",
-                   @"jester/jesterBin.gaf",
-                   @"skeleton/skeletonBin.gaf",
-                   @"ufo/ufoBin.gaf"
+        _jsons = @[@"biggreen/biggreen.gaf",
+                   @"bird_bezneba/bird_bezneba.gaf",
+                   @"christmas2013_julia2/christmas2013_julia2.gaf",
+                   @"cut_the_hope/cut_the_hope.gaf",
+                   @"fairy2/fairy2.gaf",
+                   @"firemen/firemen.gaf",
+                   @"impiretank_05_oneplace/impiretank_05_oneplace.gaf",
+                   @"myshopsgame4/myshopsgame4.gaf",
+                   @"peacock_feb3_natasha/peacock_feb3_natasha.gaf",
+                   @"tiger/tiger.gaf"
                   ];
         
 		[self addObjectsToScene:1];

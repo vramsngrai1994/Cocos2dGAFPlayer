@@ -169,7 +169,7 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"< %@ - 0x%x | version - %lu.%lu | objects - %lu | masks - %lu | frames - %lu >",
-            NSStringFromClass(self.class), (unsigned int)self,
+            NSStringFromClass(self.class), (unsigned long)self,
             (unsigned long)self.majorVersion, (unsigned long)self.minorVersion,
             (unsigned long)self.objects.count, (unsigned long)self.masks.count, (unsigned long)self.animationFrames.count];
 }

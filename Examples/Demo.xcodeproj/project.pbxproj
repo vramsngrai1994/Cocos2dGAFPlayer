@@ -7,9 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AF16F56190580A900CA1725 /* biggreen in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F4C190580A900CA1725 /* biggreen */; };
+		1AF16F57190580A900CA1725 /* bird_bezneba in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F4D190580A900CA1725 /* bird_bezneba */; };
+		1AF16F58190580A900CA1725 /* christmas2013_julia2 in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F4E190580A900CA1725 /* christmas2013_julia2 */; };
+		1AF16F59190580A900CA1725 /* cut_the_hope in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F4F190580A900CA1725 /* cut_the_hope */; };
+		1AF16F5A190580A900CA1725 /* fairy2 in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F50190580A900CA1725 /* fairy2 */; };
+		1AF16F5B190580A900CA1725 /* firemen in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F51190580A900CA1725 /* firemen */; };
+		1AF16F5C190580A900CA1725 /* impiretank_05_oneplace in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F52190580A900CA1725 /* impiretank_05_oneplace */; };
+		1AF16F5D190580A900CA1725 /* myshopsgame4 in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F53190580A900CA1725 /* myshopsgame4 */; };
+		1AF16F5E190580A900CA1725 /* peacock_feb3_natasha in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F54190580A900CA1725 /* peacock_feb3_natasha */; };
+		1AF16F5F190580A900CA1725 /* tiger in Resources */ = {isa = PBXBuildFile; fileRef = 1AF16F55190580A900CA1725 /* tiger */; };
 		2151C75418BBADEF00A33707 /* libGAFPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A507B739185A1C0100F46297 /* libGAFPlayer.a */; };
 		257F0060178450CC00D89D29 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 257F005F178450CC00D89D29 /* main.m */; };
-		257F00711784512A00D89D29 /* SampleAnimations in Resources */ = {isa = PBXBuildFile; fileRef = 257F006F1784512A00D89D29 /* SampleAnimations */; };
 		257F00751784513600D89D29 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 257F00731784513600D89D29 /* CloseNormal.png */; };
 		257F00761784513600D89D29 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 257F00741784513600D89D29 /* CloseSelected.png */; };
 		257FFEC2178450C800D89D29 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 257FFEC1178450C800D89D29 /* QuartzCore.framework */; };
@@ -31,10 +40,6 @@
 		257FFEE6178450C800D89D29 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 257FFEE5178450C800D89D29 /* Icon.png */; };
 		257FFEE8178450C800D89D29 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 257FFEE7178450C800D89D29 /* Icon@2x.png */; };
 		257FFEEB178450C800D89D29 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 257FFEEA178450C800D89D29 /* iTunesArtwork */; };
-		393021E118D1EFD3006633E9 /* jester in Resources */ = {isa = PBXBuildFile; fileRef = 393021E018D1EFD3006633E9 /* jester */; };
-		3999D21118CE0E2100F2D235 /* slime in Resources */ = {isa = PBXBuildFile; fileRef = 3999D21018CE0E2100F2D235 /* slime */; };
-		39A3D45018F69CB5002520CA /* skeleton in Resources */ = {isa = PBXBuildFile; fileRef = 39A3D44E18F69CB5002520CA /* skeleton */; };
-		39A3D45118F69CB5002520CA /* ufo in Resources */ = {isa = PBXBuildFile; fileRef = 39A3D44F18F69CB5002520CA /* ufo */; };
 		39AEDB1218E09F1700F70505 /* gaf_ShaderGlow.fs in Copy Shaders */ = {isa = PBXBuildFile; fileRef = 39AEDB1018E09F1700F70505 /* gaf_ShaderGlow.fs */; };
 		39AEDB1318E09F1700F70505 /* gaf_ShaderGlow.vs in Copy Shaders */ = {isa = PBXBuildFile; fileRef = 39AEDB1118E09F1700F70505 /* gaf_ShaderGlow.vs */; };
 		932A423B1786B0F5007B7EB4 /* CloseSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 932A42391786B0F4007B7EB4 /* CloseSelected@2x.png */; };
@@ -196,9 +201,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1AF16F4C190580A900CA1725 /* biggreen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = biggreen; path = Resources/biggreen; sourceTree = "<group>"; };
+		1AF16F4D190580A900CA1725 /* bird_bezneba */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bird_bezneba; path = Resources/bird_bezneba; sourceTree = "<group>"; };
+		1AF16F4E190580A900CA1725 /* christmas2013_julia2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = christmas2013_julia2; path = Resources/christmas2013_julia2; sourceTree = "<group>"; };
+		1AF16F4F190580A900CA1725 /* cut_the_hope */ = {isa = PBXFileReference; lastKnownFileType = folder; name = cut_the_hope; path = Resources/cut_the_hope; sourceTree = "<group>"; };
+		1AF16F50190580A900CA1725 /* fairy2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fairy2; path = Resources/fairy2; sourceTree = "<group>"; };
+		1AF16F51190580A900CA1725 /* firemen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = firemen; path = Resources/firemen; sourceTree = "<group>"; };
+		1AF16F52190580A900CA1725 /* impiretank_05_oneplace */ = {isa = PBXFileReference; lastKnownFileType = folder; name = impiretank_05_oneplace; path = Resources/impiretank_05_oneplace; sourceTree = "<group>"; };
+		1AF16F53190580A900CA1725 /* myshopsgame4 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = myshopsgame4; path = Resources/myshopsgame4; sourceTree = "<group>"; };
+		1AF16F54190580A900CA1725 /* peacock_feb3_natasha */ = {isa = PBXFileReference; lastKnownFileType = folder; name = peacock_feb3_natasha; path = Resources/peacock_feb3_natasha; sourceTree = "<group>"; };
+		1AF16F55190580A900CA1725 /* tiger */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tiger; path = Resources/tiger; sourceTree = "<group>"; };
 		257F005E178450CC00D89D29 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		257F005F178450CC00D89D29 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		257F006F1784512A00D89D29 /* SampleAnimations */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SampleAnimations; path = Resources/SampleAnimations; sourceTree = "<group>"; };
 		257F00731784513600D89D29 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseNormal.png; path = Resources/CloseNormal.png; sourceTree = "<group>"; };
 		257F00741784513600D89D29 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseSelected.png; path = Resources/CloseSelected.png; sourceTree = "<group>"; };
 		257FFEBE178450C800D89D29 /* Demo_develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_develop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,10 +236,6 @@
 		257FFEE7178450C800D89D29 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
 		257FFEE9178450C800D89D29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		257FFEEA178450C800D89D29 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = text; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
-		393021E018D1EFD3006633E9 /* jester */ = {isa = PBXFileReference; lastKnownFileType = folder; name = jester; path = Resources/jester; sourceTree = "<group>"; };
-		3999D21018CE0E2100F2D235 /* slime */ = {isa = PBXFileReference; lastKnownFileType = folder; name = slime; path = Resources/slime; sourceTree = "<group>"; };
-		39A3D44E18F69CB5002520CA /* skeleton */ = {isa = PBXFileReference; lastKnownFileType = folder; name = skeleton; path = Resources/skeleton; sourceTree = "<group>"; };
-		39A3D44F18F69CB5002520CA /* ufo */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ufo; path = Resources/ufo; sourceTree = "<group>"; };
 		39AEDB1018E09F1700F70505 /* gaf_ShaderGlow.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = gaf_ShaderGlow.fs; path = ../Library/Resources/Shaders/gaf_ShaderGlow.fs; sourceTree = "<group>"; };
 		39AEDB1118E09F1700F70505 /* gaf_ShaderGlow.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = gaf_ShaderGlow.vs; path = ../Library/Resources/Shaders/gaf_ShaderGlow.vs; sourceTree = "<group>"; };
 		932A42391786B0F4007B7EB4 /* CloseSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CloseSelected@2x.png"; path = "Resources/CloseSelected@2x.png"; sourceTree = "<group>"; };
@@ -337,16 +347,21 @@
 		257FFED4178450C800D89D29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				39A3D44E18F69CB5002520CA /* skeleton */,
-				39A3D44F18F69CB5002520CA /* ufo */,
-				393021E018D1EFD3006633E9 /* jester */,
-				3999D21018CE0E2100F2D235 /* slime */,
+				1AF16F4C190580A900CA1725 /* biggreen */,
+				1AF16F4D190580A900CA1725 /* bird_bezneba */,
+				1AF16F4E190580A900CA1725 /* christmas2013_julia2 */,
+				1AF16F4F190580A900CA1725 /* cut_the_hope */,
+				1AF16F50190580A900CA1725 /* fairy2 */,
+				1AF16F51190580A900CA1725 /* firemen */,
+				1AF16F52190580A900CA1725 /* impiretank_05_oneplace */,
+				1AF16F53190580A900CA1725 /* myshopsgame4 */,
+				1AF16F54190580A900CA1725 /* peacock_feb3_natasha */,
+				1AF16F55190580A900CA1725 /* tiger */,
 				A507B75F185A1EE600F46297 /* Shaders */,
 				257F00731784513600D89D29 /* CloseNormal.png */,
 				932A423A1786B0F4007B7EB4 /* CloseNormal@2x.png */,
 				257F00741784513600D89D29 /* CloseSelected.png */,
 				932A42391786B0F4007B7EB4 /* CloseSelected@2x.png */,
-				257F006F1784512A00D89D29 /* SampleAnimations */,
 				257FFED5178450C800D89D29 /* Default.png */,
 				257FFED7178450C800D89D29 /* Default@2x.png */,
 				257FFED9178450C800D89D29 /* Default-568h@2x.png */,
@@ -576,25 +591,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AF16F5E190580A900CA1725 /* peacock_feb3_natasha in Resources */,
 				257FFED6178450C800D89D29 /* Default.png in Resources */,
 				257FFED8178450C800D89D29 /* Default@2x.png in Resources */,
 				257FFEDA178450C800D89D29 /* Default-568h@2x.png in Resources */,
-				393021E118D1EFD3006633E9 /* jester in Resources */,
 				257FFEDC178450C800D89D29 /* Default-Landscape~ipad.png in Resources */,
+				1AF16F58190580A900CA1725 /* christmas2013_julia2 in Resources */,
 				257FFEDE178450C800D89D29 /* Icon-72.png in Resources */,
 				257FFEE0178450C800D89D29 /* Icon-Small-50.png in Resources */,
+				1AF16F57190580A900CA1725 /* bird_bezneba in Resources */,
 				257FFEE2178450C800D89D29 /* Icon-Small.png in Resources */,
 				257FFEE4178450C800D89D29 /* Icon-Small@2x.png in Resources */,
-				39A3D45018F69CB5002520CA /* skeleton in Resources */,
 				257FFEE6178450C800D89D29 /* Icon.png in Resources */,
 				257FFEE8178450C800D89D29 /* Icon@2x.png in Resources */,
 				257FFEEB178450C800D89D29 /* iTunesArtwork in Resources */,
-				39A3D45118F69CB5002520CA /* ufo in Resources */,
-				3999D21118CE0E2100F2D235 /* slime in Resources */,
-				257F00711784512A00D89D29 /* SampleAnimations in Resources */,
+				1AF16F56190580A900CA1725 /* biggreen in Resources */,
 				257F00751784513600D89D29 /* CloseNormal.png in Resources */,
+				1AF16F5A190580A900CA1725 /* fairy2 in Resources */,
+				1AF16F5F190580A900CA1725 /* tiger in Resources */,
 				257F00761784513600D89D29 /* CloseSelected.png in Resources */,
 				932A423B1786B0F5007B7EB4 /* CloseSelected@2x.png in Resources */,
+				1AF16F5C190580A900CA1725 /* impiretank_05_oneplace in Resources */,
+				1AF16F5B190580A900CA1725 /* firemen in Resources */,
+				1AF16F59190580A900CA1725 /* cut_the_hope in Resources */,
+				1AF16F5D190580A900CA1725 /* myshopsgame4 in Resources */,
 				932A423C1786B0F5007B7EB4 /* CloseNormal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -693,9 +713,11 @@
 		257F006D178450CC00D89D29 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -708,13 +730,14 @@
 					../Library/Sources,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)_develop";
-				PROVISIONING_PROFILE = "4026F885-45E3-4978-BF31-962A1B65E48E";
+				PROVISIONING_PROFILE = "51CDD7F7-9B38-4B9D-9C97-F42DD41FAE1A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -722,9 +745,11 @@
 		257F006E178450CC00D89D29 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Prefix.pch";
@@ -735,12 +760,13 @@
 					../Library/Sources,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)_develop";
-				PROVISIONING_PROFILE = "4026F885-45E3-4978-BF31-962A1B65E48E";
+				PROVISIONING_PROFILE = "51CDD7F7-9B38-4B9D-9C97-F42DD41FAE1A";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

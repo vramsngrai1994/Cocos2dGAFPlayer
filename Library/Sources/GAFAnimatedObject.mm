@@ -90,7 +90,7 @@
 		self.subObjects = [NSMutableDictionary dictionary];
 		self.masks = [NSMutableDictionary dictionary];
 		_animationsSelectorScheduled = NO;
-		self.FPSType = kGAFAnimationFPSType_30;
+		self.FPSType = kGAFAnimationFPSType_60;
 		self.extraFramesCounter = 0;
 		self.currentSequenceStart = self.currentFrameIndex = GAF_FIRST_FRAME_INDEX;
         self.totalFrameCount = [self.asset.animationFrames count];

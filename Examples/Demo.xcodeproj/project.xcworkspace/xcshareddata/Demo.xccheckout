@@ -5,74 +5,38 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>85A7AF50-C755-4ADD-911D-F3C9C3F04A36</string>
+	<string>6B0B4215-F700-40AD-BDDC-F81BE6F75B07</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Demo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>108A9AC3-9885-42B4-9524-D1E291CCA36C</key>
-		<string>git://github.com/cocos2d/cocos2d-iphone.git</string>
-		<key>1F08C5BF-27EE-4BCD-A936-39D06DF51C07</key>
-		<string>git://github.com/ricardoquesada/jsbindings_support.git</string>
-		<key>40A5668B-0D29-4BF5-A6BC-455C169E65B1</key>
-		<string>git://github.com/slembcke/Chipmunk-Physics.git</string>
-		<key>4468D1F6-D23B-4D17-A74A-4D4B6CA75D59</key>
-		<string>git://github.com/zynga/jsbindings.git</string>
-		<key>4DBE3908-2798-4C86-B304-5A5AB7E47B99</key>
-		<string>git://github.com/ricardoquesada/jrswizzle.git</string>
-		<key>A1E2F240-063C-4FCB-879B-F9FF6369C3E4</key>
-		<string>https://github.com/CatalystApps/Cocos2dGAFPlayer.git</string>
-		<key>E3D014EE-C042-410B-B5F4-46C249FDDE27</key>
-		<string>git://github.com/cocos2d/CCBReader.git</string>
+		<key>93BD3401-2BF4-4C43-A36C-712D5E46E749</key>
+		<string>https://github.com/cocos2d/cocos2d-iphone-classic.git</string>
+		<key>AD7CD63A-4414-4DB4-A01B-39FBD6164EC7</key>
+		<string>https://github.com/Teivaz/Cocos2dGAFPlayer.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Examples/Demo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>108A9AC3-9885-42B4-9524-D1E291CCA36C</key>
+		<key>93BD3401-2BF4-4C43-A36C-712D5E46E749</key>
 		<string>../../../Externals/cocos2d</string>
-		<key>1F08C5BF-27EE-4BCD-A936-39D06DF51C07</key>
-		<string>../../../Externals/cocos2d/external/JavaScript/jsbindings_support</string>
-		<key>40A5668B-0D29-4BF5-A6BC-455C169E65B1</key>
-		<string>../../../Externals/cocos2d/external/Chipmunk</string>
-		<key>4468D1F6-D23B-4D17-A74A-4D4B6CA75D59</key>
-		<string>../../../Externals/cocos2d/external/JavaScript/jsbindings</string>
-		<key>4DBE3908-2798-4C86-B304-5A5AB7E47B99</key>
-		<string>../../../Externals/cocos2d/external/JavaScript/JRSwizzle</string>
-		<key>A1E2F240-063C-4FCB-879B-F9FF6369C3E4</key>
+		<key>AD7CD63A-4414-4DB4-A01B-39FBD6164EC7</key>
 		<string>../../..</string>
-		<key>E3D014EE-C042-410B-B5F4-46C249FDDE27</key>
-		<string>../../../Externals/cocos2d/external/CCBReader</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/CatalystApps/Cocos2dGAFPlayer.git</string>
+	<string>https://github.com/Teivaz/Cocos2dGAFPlayer.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>A1E2F240-063C-4FCB-879B-F9FF6369C3E4</string>
+	<string>AD7CD63A-4414-4DB4-A01B-39FBD6164EC7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E3D014EE-C042-410B-B5F4-46C249FDDE27</string>
-			<key>IDESourceControlWCCName</key>
-			<string>CCBReader</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>40A5668B-0D29-4BF5-A6BC-455C169E65B1</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Chipmunk</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>108A9AC3-9885-42B4-9524-D1E291CCA36C</string>
+			<string>93BD3401-2BF4-4C43-A36C-712D5E46E749</string>
 			<key>IDESourceControlWCCName</key>
 			<string>cocos2d</string>
 		</dict>
@@ -80,33 +44,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>A1E2F240-063C-4FCB-879B-F9FF6369C3E4</string>
+			<string>AD7CD63A-4414-4DB4-A01B-39FBD6164EC7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Cocos2dGAFPlayer</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4DBE3908-2798-4C86-B304-5A5AB7E47B99</string>
-			<key>IDESourceControlWCCName</key>
-			<string>JRSwizzle</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4468D1F6-D23B-4D17-A74A-4D4B6CA75D59</string>
-			<key>IDESourceControlWCCName</key>
-			<string>jsbindings</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1F08C5BF-27EE-4BCD-A936-39D06DF51C07</string>
-			<key>IDESourceControlWCCName</key>
-			<string>jsbindings_support</string>
 		</dict>
 	</array>
 </dict>

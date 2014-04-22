@@ -291,7 +291,7 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"%@ = 0x%x | Transform = (%@) | visible = %d",
-            NSStringFromClass([self class]), (unsigned int)self,
+            NSStringFromClass([self class]), (unsigned long)self,
             NSStringFromCGAffineTransform(self.externalTransform),
             self.visible];
 }
