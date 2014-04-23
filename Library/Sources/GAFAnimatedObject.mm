@@ -790,14 +790,14 @@
 {
     if (self.isLooped)
     {
-        if (self.currentFrameIndex > self.currentSequenceEnd)
+        if (self.currentFrameIndex >= self.currentSequenceEnd)
         {
             self.currentFrameIndex = self.currentSequenceStart;
         }
     }
     else
     {
-        if (self.currentFrameIndex > self.currentSequenceEnd)
+        if (self.currentFrameIndex >= self.currentSequenceEnd)
         {
             self.isRunning = NO;
             return;
