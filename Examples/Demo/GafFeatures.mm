@@ -14,7 +14,19 @@
 
 @end
 
+
+
+
 @implementation GafFeatures
+
++(CGPoint) centerScreenPosition:(GAFAsset*)asset
+                               :(CGSize)screenSize
+{
+    const GAFHeader& headInfo = [asset header];
+    
+    return CGPointMake(-headInfo.frameSize.origin.x + (screenSize.width - headInfo.frameSize.size.width) / 2,
+                       headInfo.frameSize.origin.y + (screenSize.height + headInfo.frameSize.size.height) / 2);
+}
 
 + (CCScene *) scene
 {
@@ -243,18 +255,8 @@
 			[self addChild:object z:i + 100];
 			CGSize winSize = [[CCDirector sharedDirector] winSize];
             
-            if (initialCount == 0)
-            {
-                object.position = ccp(10.f, winSize.height * 0.5);
-            }
-            else
-            {
-                const int rightOffset = 300;
-                const int border = 100;
-                object.position = ccp(arc4random()%(int)(winSize.width - 2 * border - rightOffset) + border,
-                                      arc4random()%(int)(winSize.height - 2 * border) + border);
-            }
-            
+            object.position = [GafFeatures centerScreenPosition: _asset:winSize];
+
 			[_objects addObject:object];
 			// will work only if animation has sequence
 			[object playSequenceWithName:@"walk" looped:YES];

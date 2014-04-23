@@ -9,6 +9,7 @@
 @class GAFAnimatedObject;
 @class GAFAnimationFrame;
 @class GAFAnimationSequence;
+#import "GAFHeader.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,6 +47,7 @@
 @property (nonatomic, assign, readonly) CGPoint             pivotPoint;
 @property (nonatomic, strong) NSMutableArray*               textureAtlases;
 @property (nonatomic, strong) NSMutableDictionary*          namedParts;
+@property (nonatomic, assign) GAFHeader                     header;
 
 #pragma mark Methods
 

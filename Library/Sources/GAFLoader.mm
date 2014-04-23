@@ -95,6 +95,8 @@ bool GAFLoader::_loadFile(GAFFile *file, GAFAsset* context)
     
     _readHeaderEnd(header);
     
+    [context setHeader:header];
+    
     while (!m_stream->isEndOfStream())
     {
         Tags::Enum tag = m_stream->openTag();
