@@ -18,3 +18,11 @@ Download from Github
 
     $ git clone git://github.com/CatalystApps/Cocos2dGAFPlayer.git
     $ git submodule update --init
+
+Note fore pure Objective-C projects
+-----------------------------------
+
+  As GAFPlayer uses standard C++ library and by default Objective-C progect does not link it, one should link it manually. To do this follow these steps:
+  * Select your project in project navigator;
+  * Go to 'Build Phases';
+  * In 'Link Binary With Libraries' section press '+' and add 'libstdc++.dylib'.
