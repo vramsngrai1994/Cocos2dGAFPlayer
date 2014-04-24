@@ -799,6 +799,7 @@
     {
         if (self.currentFrameIndex >= self.currentSequenceEnd)
         {
+            self.currentFrameIndex = self.currentSequenceStart;
             self.isRunning = NO;
             return;
         }
