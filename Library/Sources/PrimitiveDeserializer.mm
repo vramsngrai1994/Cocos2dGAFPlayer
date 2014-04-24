@@ -10,6 +10,11 @@
 
 #include "GAFStream.h"
 
+struct __CGAffineTransform
+{
+    float a, b, c, d;
+    float tx, ty;
+};
 
 void PrimitiveDeserializer::deserialize(GAFStream* in, CGPoint* out)
 {
@@ -25,7 +30,15 @@ void PrimitiveDeserializer::deserialize(GAFStream* in, CGRect* out)
 
 void PrimitiveDeserializer::deserialize(GAFStream* in, CGAffineTransform* out)
 {
-    in->readNBytesOfT(out, sizeof(CGAffineTransform));
+    __CGAffineTransform _out;
+    in->readNBytesOfT(&_out, sizeof(__CGAffineTransform));
+    
+    out->a = _out.a;
+    out->b = _out.b;
+    out->c = _out.c;
+    out->d = _out.d;
+    out->tx = _out.tx;
+    out->ty = _out.ty;
 }
 
 void PrimitiveDeserializer::deserialize(GAFStream* in, CGSize* out)

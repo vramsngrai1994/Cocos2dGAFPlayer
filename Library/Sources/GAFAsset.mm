@@ -36,7 +36,6 @@
 
 @property (nonatomic, strong) NSMutableDictionary *extendedDataObjectGroups;
 
-@property (nonatomic, assign) CGRect              boundingBox;
 @property (nonatomic, assign) CGPoint             pivotPoint;
 
 @end

@@ -22,10 +22,8 @@
 +(CGPoint) centerScreenPosition:(GAFAsset*)asset
                                :(CGSize)screenSize
 {
-    const GAFHeader& headInfo = [asset header];
-    
-    return CGPointMake(-headInfo.frameSize.origin.x + (screenSize.width - headInfo.frameSize.size.width) / 2,
-                       headInfo.frameSize.origin.y + (screenSize.height + headInfo.frameSize.size.height) / 2);
+    return CGPointMake(-[asset boundingBox].origin.x + (screenSize.width - [asset boundingBox].size.width) / 2,
+                      [asset boundingBox].origin.y + (screenSize.height - [asset boundingBox].size.height) / 2);
 }
 
 + (CCScene *) scene

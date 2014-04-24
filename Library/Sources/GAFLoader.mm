@@ -95,7 +95,11 @@ bool GAFLoader::_loadFile(GAFFile *file, GAFAsset* context)
     
     _readHeaderEnd(header);
     
-    [context setHeader:header];
+    CGRect boundingBox;
+    boundingBox.origin = CGPointMake(header.frameSize.origin.x, header.frameSize.origin.y);
+    boundingBox.size = CGSizeMake(header.frameSize.size.width, header.frameSize.size.height);
+    
+    [context setBoundingBox:boundingBox];
     
     while (!m_stream->isEndOfStream())
     {
