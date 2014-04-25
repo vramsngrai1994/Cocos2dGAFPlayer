@@ -17,8 +17,8 @@ typedef NS_ENUM(NSUInteger, GAFColorTransformIndex)
 
 @interface GAFSubobjectState : NSObject <NSCopying>
 {
-	CGFloat _colorMults[4];
-	CGFloat _colorOffsets[4];
+	float _colorMults[4];
+	float _colorOffsets[4];
 }
 
 @property (nonatomic, assign) NSInteger         zIndex;

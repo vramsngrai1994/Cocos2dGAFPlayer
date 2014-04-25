@@ -109,7 +109,7 @@ unsigned int GAFFile::readString(std::string* str)
     
     delete[] data;
     
-    return str->length() + sizeof(unsigned short);
+    return static_cast<unsigned int>(str->length() + sizeof(unsigned short));
 }
 
 void GAFFile::readBytes(void* dst, unsigned int len)
