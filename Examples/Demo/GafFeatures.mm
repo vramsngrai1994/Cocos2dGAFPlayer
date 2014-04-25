@@ -50,7 +50,8 @@
 		NSMutableArray * items = [[NSMutableArray alloc] init];
 
 		[items addObject: [self addBtn:@"Play/Pause" px:0.95 py:0.95 handler:@selector(playpause) k:s]];
-		[items addObject: [self addBtn:@"Restart" px:0.95 py:0.95-dp handler:@selector(restart) k:s]];
+		[items addObject: [self addBtn:@"Reverse" px:0.8 py:0.95 - dp handler:@selector(toggleReverse) k:s]];
+		[items addObject: [self addBtn:@"Restart" px:0.95 py:0.95 - dp handler:@selector(restart) k:s]];
 		[items addObject: [self addBtn:@"B" px:0.75 py:0.95- dp* 2 handler:@selector(black) k:s]];
 		[items addObject: [self addBtn:@"W" px:0.85 py:0.95- dp* 2 handler:@selector(white) k:s]];
 		[items addObject: [self addBtn:@"G" px:0.95 py:0.95- dp* 2 handler:@selector(gray) k:s]];
@@ -58,7 +59,7 @@
 		[items addObject: [self addBtn:@"+" px:0.95 py:0.95- dp* 3 handler:@selector(addOne) k:s]];
 		[items addObject: [self addBtn:@"1" px:0.75 py:0.95- dp* 4 handler:@selector(set1) k:s]];
 		[items addObject: [self addBtn:@"5" px:0.85 py:0.95- dp* 4 handler:@selector(set5) k:s]];
-		[items addObject: [self addBtn:@"10" px:0.95 py:0.95- dp* 4 handler:@selector(set10) k:s]];
+		[items addObject: [self addBtn:@"10"px:0.95 py:0.95- dp* 4 handler:@selector(set10) k:s]];
 		[items addObject: [self addBtn:@"fr. -" px:0.85 py:0.95- dp* 5 handler:@selector(prevFrame) k:s]];
 		[items addObject: [self addBtn:@"fr. +" px:0.95 py:0.95- dp* 5 handler:@selector(nextFrame) k:s]];
 		[items addObject: [self addBtn:@"Full cleanup" px:0.95 py:0.95- dp* 6 handler:@selector(cleanup) k:s]];
@@ -296,7 +297,17 @@
 
 - (void) set10
 {
-	[self set:10];
+    [self set:10];
+}
+
+- (void) toggleReverse
+{
+	if (_objects == nil || 0 == [_objects count])
+	{
+		return;
+	}
+	GAFAnimatedObject *object = (GAFAnimatedObject *)_objects[0];
+    [object setIsReversed:![object isReversed]];
 }
 
 - (void) restart

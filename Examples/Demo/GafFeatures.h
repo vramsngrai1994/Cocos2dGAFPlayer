@@ -28,6 +28,7 @@
 - (void) set1;
 - (void) set5;
 - (void) set10;
+- (void) toggleReverse;
 - (void) set:(int)n;
 - (void) addObjectsToScene:(int) aCount;
 - (void) removeFromScene:(int) aCount;

@@ -70,5 +70,6 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 - (NSArray *)animationSequenceNames;
 - (GAFAnimationSequence *)animationSequenceForName:(NSString *)aName;
 - (GAFAnimationSequence *)animationSequenceByLastFrame:(NSUInteger)aLastFrame;
+- (GAFAnimationSequence *)animationSequenceByFirstFrame:(NSUInteger)aFirstFrame;
 
 @end

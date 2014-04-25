@@ -75,10 +75,10 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 @property (nonatomic, strong) GAFAsset            *asset;
 @property (nonatomic, strong) NSMutableDictionary *subObjects;
 @property (nonatomic, strong) NSMutableDictionary *masks; ///< stores all masks (not displayed)
-@property (nonatomic, assign) NSUInteger          currentFrameIndex;
+@property (nonatomic, assign) NSInteger           currentFrameIndex;
 @property (nonatomic, assign) NSUInteger          totalFrameCount;
-@property (nonatomic, assign) NSUInteger          currentSequenceStart;
-@property (nonatomic, assign) NSUInteger          currentSequenceEnd;
+@property (nonatomic, assign) NSInteger           currentSequenceStart;
+@property (nonatomic, assign) NSInteger           currentSequenceEnd;
 @property (nonatomic, assign) GAFAnimationFPSType FPSType;
 @property (nonatomic, assign) NSUInteger          extraFramesCounter;
 @property (nonatomic, strong) NSMutableDictionary *externalTextureAtlases; ///< Value is of GAFTextureAtlas class
@@ -87,6 +87,7 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 @property (nonatomic, assign, readonly) BOOL    isInitialized;
 @property (nonatomic, assign, readonly) BOOL    isRunning;
 @property (nonatomic, assign          ) BOOL    isLooped;
+@property (nonatomic, assign          ) BOOL    isReversed;
 
 // do not forget clear delegates if you use them
 @property (nonatomic, assign) id <GAFFramePlayedDelegate          > framePlayedDelegate;

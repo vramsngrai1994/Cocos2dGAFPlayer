@@ -703,6 +703,8 @@
         self.isInitialized = YES;
         
         self.currentFrameIndex = GAF_FIRST_FRAME_INDEX;
+        
+        self.isReversed = NO;
     }
 }
 
@@ -788,35 +790,76 @@
 
 - (void)step
 {
-    if (self.isLooped)
+    if(!self.isReversed)
     {
-        if (self.currentFrameIndex >= self.currentSequenceEnd)
+        if (self.isLooped)
         {
-            self.currentFrameIndex = self.currentSequenceStart;
+            if (self.currentFrameIndex >= self.currentSequenceEnd)
+            {
+                self.currentFrameIndex = self.currentSequenceStart;
+            }
         }
+        else
+        {
+            if (self.currentFrameIndex >= self.currentSequenceEnd)
+            {
+                self.currentFrameIndex = self.currentSequenceStart;
+                self.isRunning = NO;
+                return;
+            }
+        }
+    
+        [self processAnimation];
+    
+        if (self.sequenceDelegate != nil && self.asset != nil)
+        {
+            GAFAnimationSequence *seq = [asset animationSequenceByLastFrame:self.currentFrameIndex];
+            if (seq != nil)
+            {
+                [self.sequenceDelegate onFinishSequence:self sequenceName:seq.name];
+            }
+        }
+    
+        ++self.currentFrameIndex;
     }
     else
     {
-        if (self.currentFrameIndex >= self.currentSequenceEnd)
+        // If switched to reverse after final frame played
+        if (self.currentFrameIndex == self.currentSequenceEnd)
         {
-            self.currentFrameIndex = self.currentSequenceStart;
-            self.isRunning = NO;
-            return;
+            --self.currentFrameIndex;
         }
+        
+        if (self.isLooped)
+        {
+            if (self.currentFrameIndex < self.currentSequenceStart)
+            {
+                self.currentFrameIndex = self.currentSequenceEnd - 1;
+            }
+        }
+        else
+        {
+            if (self.currentFrameIndex < self.currentSequenceStart)
+            {
+                self.currentFrameIndex = self.currentSequenceStart;
+                self.isRunning = NO;
+                return;
+            }
+        }
+        
+        [self processAnimation];
+        
+        
+        if (self.sequenceDelegate != nil && self.asset != nil)
+        {
+            GAFAnimationSequence *seq = [asset animationSequenceByFirstFrame:self.currentFrameIndex + 1];
+            if (seq != nil)
+            {
+                [self.sequenceDelegate onFinishSequence:self sequenceName:seq.name];
+            }
+        }
+        --self.currentFrameIndex;
     }
-    
-    [self processAnimation];
-    
-	if (self.sequenceDelegate != nil && self.asset != nil)
-	{
-		GAFAnimationSequence *seq = [asset animationSequenceByLastFrame:self.currentFrameIndex];
-		if (seq != nil)
-		{
-			[self.sequenceDelegate onFinishSequence:self sequenceName:seq.name];
-		}
-	}
-    
-    ++self.currentFrameIndex;
 }
 
 - (void)processCurrentAnimationFrameOnceMore

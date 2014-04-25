@@ -207,6 +207,23 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
 	return nil;
 }
 
+- (GAFAnimationSequence *)animationSequenceByFirstFrame:(NSUInteger)aFirstFrame
+{
+	if (self.animationSequences == nil)
+	{
+		return nil;
+	}
+	for (NSString *key in self.animationSequences)
+	{
+		GAFAnimationSequence *seq = (self.animationSequences)[key];
+		if (aFirstFrame == seq.frameStart)
+		{
+			return seq;
+		}
+	}
+	return nil;
+}
+
 #pragma mark -
 #pragma mark Private methods
 
