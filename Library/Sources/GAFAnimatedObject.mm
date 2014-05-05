@@ -94,7 +94,7 @@
 		self.extraFramesCounter = 0;
 		self.currentSequenceStart = self.currentFrameIndex = GAF_FIRST_FRAME_INDEX;
         self.totalFrameCount = [self.asset.animationFrames count];
-		self.currentSequenceEnd = self.totalFrameCount - 1;
+		self.currentSequenceEnd = self.totalFrameCount;
 		self.isRunning = NO;
         
         self.isInitialized = NO;
@@ -500,7 +500,14 @@
     }
     else
     {
-        return (self.currentFrameIndex >= self.totalFrameCount);
+        if (!_isReversed)
+        {
+            return self.currentFrameIndex > self.totalFrameCount;
+        }
+        else
+        {
+            return self.currentFrameIndex < GAF_FIRST_FRAME_INDEX - 1;
+        }
     }
 }
 
@@ -517,6 +524,7 @@
         _animationsSelectorScheduled = YES;
     }
     
+    self.currentFrameIndex = GAF_FIRST_FRAME_INDEX;
     self.isRunning = YES;
     
     [self step];
@@ -688,7 +696,7 @@
 - (void)clearSequence
 {
 	self.currentSequenceStart = GAF_FIRST_FRAME_INDEX;
-	self.currentSequenceEnd = self.totalFrameCount - 1;
+	self.currentSequenceEnd = self.totalFrameCount;
 }
 
 #pragma mark -
@@ -792,18 +800,19 @@
 {
     if(!self.isReversed)
     {
-        if (self.isLooped)
+        if (self.currentFrameIndex < self.currentSequenceStart)
         {
-            if (self.currentFrameIndex >= self.currentSequenceEnd)
+            self.currentFrameIndex = self.currentSequenceStart;
+        }
+        
+        if (self.currentFrameIndex >= self.currentSequenceEnd)
+        {
+            if (self.isLooped)
             {
                 self.currentFrameIndex = self.currentSequenceStart;
             }
-        }
-        else
-        {
-            if (self.currentFrameIndex >= self.currentSequenceEnd)
+            else
             {
-                self.currentFrameIndex = self.currentSequenceStart;
                 self.isRunning = NO;
                 return;
             }
@@ -825,28 +834,25 @@
     else
     {
         // If switched to reverse after final frame played
-        if (self.currentFrameIndex == self.currentSequenceEnd)
+        if (self.currentFrameIndex >= self.currentSequenceEnd)
         {
-            --self.currentFrameIndex;
+            self.currentFrameIndex = self.currentSequenceEnd - 1;
         }
         
-        if (self.isLooped)
+        if (self.currentFrameIndex < self.currentSequenceStart)
         {
-            if (self.currentFrameIndex < self.currentSequenceStart)
+            if (self.isLooped)
             {
                 self.currentFrameIndex = self.currentSequenceEnd - 1;
             }
-        }
-        else
-        {
-            if (self.currentFrameIndex < self.currentSequenceStart)
+            else
             {
-                self.currentFrameIndex = self.currentSequenceStart;
                 self.isRunning = NO;
                 return;
             }
+            
         }
-        
+
         [self processAnimation];
         
         

@@ -76,7 +76,7 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 @property (nonatomic, strong) NSMutableDictionary *subObjects;
 @property (nonatomic, strong) NSMutableDictionary *masks; ///< stores all masks (not displayed)
 @property (nonatomic, assign) NSInteger           currentFrameIndex;
-@property (nonatomic, assign) NSUInteger          totalFrameCount;
+@property (nonatomic, assign) NSInteger           totalFrameCount;
 @property (nonatomic, assign) NSInteger           currentSequenceStart;
 @property (nonatomic, assign) NSInteger           currentSequenceEnd;
 @property (nonatomic, assign) GAFAnimationFPSType FPSType;
