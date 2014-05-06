@@ -71,6 +71,20 @@
     return [[self alloc] initWithAsset:anAsset];
 }
 
++ (GAFAnimatedObject *)animatedObjectWithPath:(NSString *)aGAFPath
+{
+    return [[self alloc] initWithPath:aGAFPath];
+}
+
++ (GAFAnimatedObject *)animatedObjectWithPath:(NSString *)aGAFPath looped:(BOOL)isLooped
+{
+    return [[self alloc] initWithPath:aGAFPath looped:isLooped];
+}
+
++ (id)animatedObjectWithPath:(NSString *)aGAFPath looped:(BOOL)isLooped andRun:(BOOL)run
+{
+    return [[self alloc] initWithPath:aGAFPath looped:isLooped andRun:run];
+}
 
 - (id)initWithAsset:(GAFAsset *)anAsset
 {
@@ -107,6 +121,46 @@
         self.ignoreAnchorPointForPosition = YES;
 	}
 	return self;
+}
+
+- (id)initWithPath:(NSString *)aGAFPath
+{
+    return [self initWithPath:aGAFPath looped:NO andRun:NO];
+}
+
+- (id)initWithPath:(NSString *)aGAFPath looped:(BOOL)isLooped
+{
+    return [self initWithPath:aGAFPath looped:isLooped andRun:NO];
+}
+
+- (id)initWithPath:(NSString *)aGAFPath looped:(BOOL)isLooped andRun:(BOOL)run
+{
+    if(aGAFPath == nil)
+    {
+        CCLOGWARN(@"ERROR: initializing GAFAnimatedObject. aGAFPath not present.");
+        return nil;
+    }
+    
+    GAFAsset* assetData = [[GAFAsset alloc] initWithGAFFile:aGAFPath keepImagesInAtlas:NO];
+    if(assetData !=nil)
+    {
+        if([self initWithAsset:assetData])
+        {
+            [self setIsLooped:isLooped];
+            if(run)
+                [self start];
+            return self;
+        }
+        else
+        {
+            return nil;
+        }
+    }
+    else
+    {
+        CCLOGWARN(@"ERROR: initializing GAFAnimatedObject. assetData is nil");
+        return nil;
+    }
 }
 
 #pragma mark -

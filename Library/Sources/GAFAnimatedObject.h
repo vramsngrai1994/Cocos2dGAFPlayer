@@ -97,21 +97,16 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 
 + (id)animatedObjectWithAsset:(GAFAsset *)anAsset;
 
-#if 0
-+ (id)animatedObjectWithPath:(NSString *)aJSONPath;
-+ (id)animatedObjectWithPath:(NSString *)aJSONPath runLooped:(BOOL)aLooped;
-
-#endif
++ (id)animatedObjectWithPath:(NSString *)aGAFPath;
++ (id)animatedObjectWithPath:(NSString *)aGAFPath looped:(BOOL)isLooped;
++ (id)animatedObjectWithPath:(NSString *)aGAFPath looped:(BOOL)isLooped andRun:(BOOL)run;
 
 /// Designated initializer
 - (id)initWithAsset:(GAFAsset *)anAsset;
 
-#if 0
-
-- (id)initWithPath:(NSString *)aJSONPath;
-- (id)initWithPath:(NSString *)aJSONPath runLooped:(BOOL)aLooped;
-
-#endif
+- (id)initWithPath:(NSString *)aGAFPath;
+- (id)initWithPath:(NSString *)aGAFPath looped:(BOOL)isLooped;
+- (id)initWithPath:(NSString *)aGAFPath looped:(BOOL)isLooped andRun:(BOOL)run;
 
 #pragma mark Dimensions
 
