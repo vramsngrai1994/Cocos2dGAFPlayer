@@ -10,6 +10,8 @@
 @class GAFAnimationFrame;
 @class GAFAnimationSequence;
 
+#import <ccTypes.h>
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //extern NSString * const kGAFAssetRootObjectName;
@@ -46,6 +48,11 @@
 @property (nonatomic, assign, readonly) CGPoint             pivotPoint;
 @property (nonatomic, strong) NSMutableArray*               textureAtlases;
 @property (nonatomic, strong) NSMutableDictionary*          namedParts;
+
+@property (nonatomic) NSUInteger                            sceneFps;
+@property (nonatomic) NSUInteger                            sceneWidth;
+@property (nonatomic) NSUInteger                            sceneHeight;
+@property (nonatomic) ccColor4B                             sceneColor;
 
 #pragma mark Methods
 

@@ -21,7 +21,7 @@
 #include "TagDefineAnimationFrames.h"
 #include "TagDefineNamedParts.h"
 #include "TagDefineSequences.h"
-
+#include "TagDefineStage.h"
 
 std::string Tags::toString(Enum e)
 {
@@ -48,6 +48,9 @@ std::string Tags::toString(Enum e)
         case Tags::TagDefineSequences:
             return "TagDefineSequences";
             break;
+        case Tags::TagDefineStage:
+            return "TagDefineStage";
+            break;
         default:
             return "";
             assert(false);
@@ -69,6 +72,7 @@ void GAFLoader::_registerTagLoaders()
     m_tagLoaders[Tags::TagDefineAnimationFrames] = new TagDefineAnimationFrames();
     m_tagLoaders[Tags::TagDefineNamedParts] = new TagDefineNamedParts();
     m_tagLoaders[Tags::TagDefineSequences] = new TagDefineSequences();
+    m_tagLoaders[Tags::TagDefineStage] = new TagDefineStage();
 }
 
 GAFLoader::GAFLoader():

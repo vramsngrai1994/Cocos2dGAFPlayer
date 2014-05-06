@@ -76,6 +76,9 @@
     self.animationMasks = [NSMutableDictionary dictionary];
     self.animationFrames = [NSMutableArray array];
     self.animationSequences = [NSMutableDictionary dictionary];
+    self.sceneFps = 60;
+    self.sceneWidth = 0;
+    self.sceneHeight = 0;
     
     GAFLoader* loader = new GAFLoader();
     
@@ -108,6 +111,9 @@ extendedDataObjectClasses:(NSDictionary *)anExtendedDataObjectClasses
     self.animationMasks = [NSMutableDictionary dictionary];
     self.animationFrames = [NSMutableArray array];
     self.animationSequences = [NSMutableDictionary dictionary];
+    self.sceneFps = 60;
+    self.sceneWidth = 0;
+    self.sceneHeight = 0;
      
     GAFLoader* loader = new GAFLoader();
     

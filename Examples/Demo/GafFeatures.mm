@@ -260,6 +260,8 @@
 			// will work only if animation has sequence
 			[object playSequenceWithName:@"walk" looped:YES];
 		}
+        double interval = 1./_asset.sceneFps;
+        [[CCDirector sharedDirector] setAnimationInterval:interval];
 	}
     
     [self setObjectCountTo:_objects.count];

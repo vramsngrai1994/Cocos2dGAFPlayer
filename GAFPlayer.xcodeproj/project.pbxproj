@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AADE09819191B24007F1E9D /* TagDefineStage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE09719191B24007F1E9D /* TagDefineStage.mm */; };
 		39691E4718BE4DEA00D225DB /* PrimitiveDeserializer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 39691E4518BE4DEA00D225DB /* PrimitiveDeserializer.mm */; };
 		3983DE4818C60E770017B449 /* TagDefineAnimationFrames.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3983DE4618C60E770017B449 /* TagDefineAnimationFrames.mm */; };
 		3983DE4B18C62B230017B449 /* TagDefineAnimationObjects.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3983DE4918C62B230017B449 /* TagDefineAnimationObjects.mm */; };
@@ -111,6 +112,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1AADE09619191B24007F1E9D /* TagDefineStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineStage.h; sourceTree = "<group>"; };
+		1AADE09719191B24007F1E9D /* TagDefineStage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TagDefineStage.mm; sourceTree = "<group>"; };
 		3926398C18BE00DC002C79EA /* DefinitionTagBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinitionTagBase.h; sourceTree = "<group>"; };
 		3926398D18BE029C002C79EA /* TagDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TagDefines.h; sourceTree = "<group>"; };
 		39691E4518BE4DEA00D225DB /* PrimitiveDeserializer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PrimitiveDeserializer.mm; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 		3926398B18BE008D002C79EA /* Tags */ = {
 			isa = PBXGroup;
 			children = (
+				1AADE09619191B24007F1E9D /* TagDefineStage.h */,
+				1AADE09719191B24007F1E9D /* TagDefineStage.mm */,
 				3926398C18BE00DC002C79EA /* DefinitionTagBase.h */,
 				3926398D18BE029C002C79EA /* TagDefines.h */,
 				3983DE4618C60E770017B449 /* TagDefineAnimationFrames.mm */,
@@ -537,6 +542,7 @@
 				A5555A14182A545600420A21 /* GAFSubobjectState.mm in Sources */,
 				3983DE4E18C630F20017B449 /* TagDefineAnimationMasks.mm in Sources */,
 				A5555A0E182A545600420A21 /* GAFNode.mm in Sources */,
+				1AADE09819191B24007F1E9D /* TagDefineStage.mm in Sources */,
 				A499946118609DAC003DA222 /* GAFCustomAtlasPreprocessor.mm in Sources */,
 				A499946218609DAC003DA222 /* GAFEffectPreprocessor.mm in Sources */,
 				A5555A16182A545600420A21 /* GAFTextureAtlasElement.mm in Sources */,

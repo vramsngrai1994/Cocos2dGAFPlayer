@@ -21,6 +21,8 @@ struct Tags
         TagDefineAnimationFrames = 4,
         TagDefineNamedParts = 5,
         TagDefineSequences = 6,
+        TagDefineStage = 9,
+        
     };
     
     static std::string toString(Enum e);
