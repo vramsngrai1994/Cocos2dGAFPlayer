@@ -565,12 +565,19 @@
     }
 }
 
-- (void)start
+-(void)start
+{
+    [self start:NO];
+}
+
+- (void)start:(BOOL)isReversed
 {
     if (!self.isInitialized)
     {
         [self initialize];
     }
+    
+    [self setIsReversed:isReversed];
     
     if (!_animationsSelectorScheduled)
     {
@@ -578,7 +585,10 @@
         _animationsSelectorScheduled = YES;
     }
     
-    self.currentFrameIndex = GAF_FIRST_FRAME_INDEX;
+    if(!self.isReversed)
+        [self rewind:RW_BEGIN];
+    else
+        [self rewind:RW_END];
     self.isRunning = YES;
     
     [self step];
@@ -594,6 +604,12 @@
 
 - (void)resume
 {
+    if (!_animationsSelectorScheduled)
+    {
+        [self schedule:@selector(processAnimations:)];
+        _animationsSelectorScheduled = YES;
+    }
+    
     if (!self.isRunning)
     {
         self.isRunning = YES;
@@ -611,8 +627,25 @@
 	_animationsSelectorScheduled = NO;
 }
 
+- (void)rewind:(RewindType)rwt
+{
+    if (rwt == RW_END)
+    {
+        [self setFrame:self.currentSequenceEnd - 1];
+    }
+    else if (rwt == RW_BEGIN)
+    {
+        [self setFrame:self.currentSequenceStart];
+    }
+}
+
 - (BOOL)setFrame:(NSUInteger)aFrameIndex
 {
+    if (!self.isInitialized)
+    {
+        [self initialize];
+    }
+    
     if (aFrameIndex < self.totalFrameCount)
     {
         self.currentFrameIndex = aFrameIndex;

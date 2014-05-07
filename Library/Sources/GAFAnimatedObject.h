@@ -30,6 +30,12 @@ typedef NS_ENUM(NSUInteger, AnimSetSequenceHint)
 	ASSH_RESTART
 };
 
+typedef NS_ENUM(NSUInteger, RewindType)
+{
+    RW_END,
+    RW_BEGIN
+};
+
 typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 {
     kGAFAnimatedObjectControl_None = 0,
@@ -151,6 +157,7 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 /// Initializes animation for first use, won't run animation
 - (void)initialize;
 
+- (void)start:(BOOL)isReversed;
 - (void)start;
 - (void)pause;
 - (void)resume;
@@ -158,6 +165,8 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 - (void)stop;
 /// Sets currentFrame and applies specified frame state to animation objects
 - (BOOL)setFrame:(NSUInteger)aFrameIndex;
+
+- (void) rewind:(RewindType) rwt;
 
 /// Plays only first frame of specified animation and then stops
 - (BOOL)gotoSequenceWithNameAndStop:(NSString *)aSequenceName;
