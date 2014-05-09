@@ -60,7 +60,8 @@
 @synthesize currentFrameIndex;
 @synthesize totalFrameCount;
 @synthesize isRunning;
-@synthesize FPSType;
+@synthesize FPSType; // Obsolete. Will be removed
+@synthesize Fps;
 @synthesize extraFramesCounter;
 
 #pragma mark -
@@ -105,6 +106,7 @@
 		self.masks = [NSMutableDictionary dictionary];
 		_animationsSelectorScheduled = NO;
 		self.FPSType = kGAFAnimationFPSType_60;
+        self.Fps = anAsset.sceneFps;
 		self.extraFramesCounter = 0;
 		self.currentSequenceStart = self.currentFrameIndex = GAF_FIRST_FRAME_INDEX;
         self.totalFrameCount = [self.asset.animationFrames count];
@@ -856,9 +858,9 @@
 {
     CGFloat globalFPS = roundf(1.0 / [[CCDirector sharedDirector] animationInterval]);
     
-    if (globalFPS > (CGFloat)self.FPSType - FLT_EPSILON)
+    if (globalFPS > (CGFloat)self.Fps - FLT_EPSILON)
     {
-        return (NSInteger)roundf(globalFPS / (CGFloat)self.FPSType);
+        return (NSInteger)roundf(globalFPS / (CGFloat)self.Fps);
     }
     else
     {

@@ -17,7 +17,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-typedef NS_ENUM(NSUInteger, GAFAnimationFPSType)
+typedef NS_ENUM(NSUInteger, GAFAnimationFPSType) // Obsolete. Will be removed
 {
     kGAFAnimationFPSType_15 = 15,
     kGAFAnimationFPSType_30 = 30,
@@ -85,7 +85,8 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 @property (nonatomic, assign) NSInteger           totalFrameCount;
 @property (nonatomic, assign) NSInteger           currentSequenceStart;
 @property (nonatomic, assign) NSInteger           currentSequenceEnd;
-@property (nonatomic, assign) GAFAnimationFPSType FPSType;
+@property (nonatomic, assign) GAFAnimationFPSType FPSType; // Obsolete. Will be removed
+@property (nonatomic, assign) NSInteger           Fps;
 @property (nonatomic, assign) NSUInteger          extraFramesCounter;
 @property (nonatomic, strong) NSMutableDictionary *externalTextureAtlases; ///< Value is of GAFTextureAtlas class
 @property (nonatomic, strong) NSMutableArray      *hiddenSubobjectIds;
