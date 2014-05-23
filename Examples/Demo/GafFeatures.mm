@@ -12,6 +12,9 @@
 @property (nonatomic, strong) CCLabelTTF *objectCountLabel;
 @property (nonatomic, strong) CCLabelTTF *animationNameLabel;
 
+@property (nonatomic) NSInteger loopCount;
+@property (nonatomic, strong) CCLabelTTF *loopCountLabel;
+
 @end
 
 
@@ -46,6 +49,7 @@
 		
         [self addObjectCountLabel];
         [self addAnimationNameLabel];
+        [self addLoopCountLabel];
         
 		NSMutableArray * items = [[NSMutableArray alloc] init];
 
@@ -110,6 +114,20 @@
 	[self addChild:pLabel z:100000];
 	
 	return res;
+}
+
+- (void)addLoopCountLabel
+{
+	self.loopCountLabel = [CCLabelTTF labelWithString:@"Loop Count: 0" fontName:@"Thonburi" fontSize:20];
+	self.loopCountLabel.color = ccc3(0, 0, 0);
+	self.loopCountLabel.anchorPoint = ccp(0, 0);
+    self.loopCountLabel.position = ccp(20, 768 - 80);
+	[self addChild:self.loopCountLabel z:100000];
+}
+
+- (void)setLoopCountTo:(NSInteger)count
+{
+    self.loopCountLabel.string = [NSString stringWithFormat:@"Loop Count: %d", count];
 }
 
 - (void)addObjectCountLabel
@@ -255,6 +273,8 @@
 			CGSize winSize = [[CCDirector sharedDirector] winSize];
             
             object.position = [GafFeatures centerScreenPosition: _asset:winSize];
+            object.playbackDelegate = self;
+            [self setLoopCountTo:0];
 
 			[_objects addObject:object];
 			// will work only if animation has sequence
@@ -409,6 +429,18 @@
 		_anim_index = [_jsons count] - 1;
 	}
 	[self addObjectsToScene:1];
+}
+
+
+- (void)onAnimationFinishedPlayDelegate: (GAFAnimatedObject *)object
+{
+    
+}
+
+- (void)onAnimationStartedNextLoopDelegate: (GAFAnimatedObject *)object
+{
+    self.loopCount += 1;
+    [self setLoopCountTo:self.loopCount];
 }
 
 @end

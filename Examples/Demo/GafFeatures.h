@@ -1,11 +1,12 @@
 
 #include "CCLayer.h"
+#import "GAFAnimatedobject.h"
 
 @class GAFAsset;
 @class CCMenuItemImage;
 @class CCScene;
 
-@interface GafFeatures : CCLayer
+@interface GafFeatures : CCLayer <GAFAnimatedObjectPlaybackDelegate>
 {
 	@private
 	GAFAsset		* _asset;
