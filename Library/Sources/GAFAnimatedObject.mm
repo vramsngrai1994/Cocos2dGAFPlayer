@@ -899,10 +899,20 @@
             if (self.isLooped)
             {
                 self.currentFrameIndex = self.currentSequenceStart;
+                
+                if(self.playbackDelegate != nil)
+                {
+                    [self.playbackDelegate onAnimationStartedNextLoopDelegate:self];
+                }
             }
             else
             {
                 self.isRunning = NO;
+                
+                if(self.playbackDelegate != nil)
+                {
+                    [self.playbackDelegate onAnimationFinishedPlayDelegate:self];
+                }
                 return;
             }
         }
@@ -933,10 +943,20 @@
             if (self.isLooped)
             {
                 self.currentFrameIndex = self.currentSequenceEnd - 1;
+                
+                if(self.playbackDelegate != nil)
+                {
+                    [self.playbackDelegate onAnimationStartedNextLoopDelegate:self];
+                }
             }
             else
             {
                 self.isRunning = NO;
+                
+                if(self.playbackDelegate != nil)
+                {
+                    [self.playbackDelegate onAnimationFinishedPlayDelegate:self];
+                }
                 return;
             }
             

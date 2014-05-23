@@ -69,6 +69,14 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 
 @end
 
+@protocol GAFAnimatedObjectPlaybackDelegate
+
+@required
+- (void)onAnimationFinishedPlayDelegate: (GAFAnimatedObject *)object;
+- (void)onAnimationStartedNextLoopDelegate: (GAFAnimatedObject *)object;
+
+@end
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Graphic object which consists of set of different graphic objects and single texture atlas.
@@ -97,9 +105,10 @@ typedef NS_ENUM(NSUInteger, GAFAnimatedObjectControlFlags)
 @property (nonatomic, assign          ) BOOL    isReversed;
 
 // do not forget clear delegates if you use them
-@property (nonatomic, assign) id <GAFFramePlayedDelegate          > framePlayedDelegate;
-@property (nonatomic, assign) id <GAFSequenceDelegate             > sequenceDelegate;
-@property (nonatomic, assign) id <GAFAnimatedObjectControlDelegate> controlDelegate;
+@property (nonatomic, assign) id <GAFFramePlayedDelegate          >  framePlayedDelegate;
+@property (nonatomic, assign) id <GAFSequenceDelegate             >  sequenceDelegate;
+@property (nonatomic, assign) id <GAFAnimatedObjectControlDelegate>  controlDelegate;
+@property (nonatomic, assign) id <GAFAnimatedObjectPlaybackDelegate> playbackDelegate;
 
 
 + (id)animatedObjectWithAsset:(GAFAsset *)anAsset;
