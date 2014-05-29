@@ -1009,7 +1009,6 @@
         GAFSubobjectState *state = (currentFrame.objectsStates)[i];
         GAFSpriteWithAlpha *subObject = (self.subObjects)[state.objectIdRef];
         CGAffineTransform stateTransform = state.affineTransform;
-        stateTransform.ty -= self.contentSize.height; //flash position to cocos2d position
         stateTransform.tx *= self.asset.usedAtlasContentScaleFactor;
         stateTransform.ty *= self.asset.usedAtlasContentScaleFactor;
         

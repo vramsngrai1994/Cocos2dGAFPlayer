@@ -26,7 +26,7 @@
                                :(CGSize)screenSize
 {
     return CGPointMake(-[asset boundingBox].origin.x + (screenSize.width - [asset boundingBox].size.width) / 2,
-                      [asset boundingBox].origin.y + (screenSize.height - [asset boundingBox].size.height) / 2);
+                      [asset boundingBox].origin.y + (screenSize.height + [asset boundingBox].size.height) / 2);
 }
 
 + (CCScene *) scene
