@@ -30,6 +30,8 @@
 @property (nonatomic, assign) BOOL isInitialized;
 @property (nonatomic, assign) BOOL isRunning;
 
+@property (nonatomic, assign) double timeDelta;
+
 @property (nonatomic, strong) NSMutableDictionary *capturedObjects;    // [Key]:inner ids of captured objects [Value]:controlFlags
 
 - (GAFSprite *)subObjectForInnerObjectId:(NSString *)anInnerObjectId;
@@ -802,6 +804,8 @@
         self.currentFrameIndex = GAF_FIRST_FRAME_INDEX;
         
         self.isReversed = NO;
+        
+        self.timeDelta = 0.0;
     }
 }
 
@@ -870,18 +874,20 @@
 
 - (void)processAnimations:(ccTime)dt
 {
-    if (++self.extraFramesCounter >= [self numberOfGlobalFramesForOneAnimationFrame])
+    if (self.isDone || !self.isRunning)
+        return;
+    
+    self.timeDelta += dt;
+    double frameTime = 1.0 / self.Fps;
+    while(self.timeDelta >= frameTime)
     {
-        self.extraFramesCounter = 0;
-		if (!self.isDone && self.isRunning)
-		{
-			[self step];
-			
-			if (framePlayedDelegate != nil)
-			{
-				[framePlayedDelegate onFramePlayed:self didPlayFrameNo:[self currentFrameIndex]];
-			}
-		}
+        self.timeDelta -= frameTime;
+        [self step];
+        
+        if (framePlayedDelegate != nil)
+        {
+            [framePlayedDelegate onFramePlayed:self didPlayFrameNo:[self currentFrameIndex]];
+        }
     }
 }
 
