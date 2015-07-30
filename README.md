@@ -13,6 +13,13 @@ Howto:
    
 Please see a demo from Examples/Demo.xcodeproj
    
+Converter limitations:
+-----------------------
+  Following converter's options are NOT supported:
+   * Conversion mode: nesting
+   * Add custom images into a Texture Atlas
+   * Allow region rotation
+
 Download from Github
 --------------------
 
