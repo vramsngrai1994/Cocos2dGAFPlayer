@@ -17,11 +17,11 @@ uniform sampler2D u_texture;
 
 void main()
 {
-    //const float kMinimalAlphaAllowed = 0.01;
+    const float kMinimalAlphaAllowed = 0.0001;
 
     vec4 texColor = texture2D(u_texture, v_texCoord);
     
-    //texColor.a = max(texColor.a, kMinimalAlphaAllowed);   // to avoid division by 0
+    texColor.a = clamp(texColor.a, kMinimalAlphaAllowed, 1.0);   // to avoid division by 0
     texColor = vec4(texColor.x / texColor.a, texColor.y / texColor.a, texColor.z / texColor.a, texColor.a);
 
 	vec4 ctxColor = texColor * colorTransform[0] + colorTransform[1];
